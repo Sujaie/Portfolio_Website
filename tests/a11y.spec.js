@@ -41,16 +41,17 @@ test.describe('WCAG 2.2 Accessibility & Contrast Audit Suite', () => {
       };
     });
 
-    // Ink 950 canvas (#04070b = rgb(4, 7, 11))
-    const canvasRgb = [4, 7, 11];
+    // Palette V2: Ambient Technical Noir
+    // Ink canvas (#050810 = rgb(5, 8, 16))
+    const canvasRgb = [5, 8, 16];
     // Paper 50 primary text (#f6f3ee = rgb(246, 243, 238))
     const primaryRgb = [246, 243, 238];
     // Grey 300 secondary text (#b5bcc6 = rgb(181, 188, 198))
     const secondaryRgb = [181, 188, 198];
-    // Gold 500 accent (#e8a823 = rgb(232, 168, 35))
-    const goldRgb = [232, 168, 35];
-    // Teal 400 data (#1fc2c9 = rgb(31, 194, 201))
-    const tealRgb = [31, 194, 201];
+    // Champagne Gold accent (#f0bd58 = rgb(240, 189, 88))
+    const goldRgb = [240, 189, 88];
+    // Electric Teal data (#35d6df = rgb(53, 214, 223))
+    const tealRgb = [53, 214, 223];
 
     const primaryContrast = getContrastRatio(primaryRgb, canvasRgb);
     const secondaryContrast = getContrastRatio(secondaryRgb, canvasRgb);

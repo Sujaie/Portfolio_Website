@@ -1,44 +1,61 @@
 /* src/styles/tokens.css
-   AUTHORITATIVE DESIGN TOKENS — SUJAIE / DEV "CORE LOOK"
-   Single source of truth for colors, depth planes, typography, spacing, layout, and motion.
+   AUTHORITATIVE DESIGN TOKENS — SUJAIE / DEV "PALETTE V2: AMBIENT TECHNICAL NOIR"
+   Single source of truth for foundation inks, atmospheric accents, depth planes,
+   typography, spacing, layout, ambient lighting, and motion physics.
 */
 
 :root {
   /* ==========================================================================
-     1. COLOR PRIMITIVES (Look Bible Specification)
+     1. PALETTE V2 PRIMITIVES — AMBIENT TECHNICAL NOIR
      ========================================================================== */
 
-  /* Inks (Canvas, Surfaces & Elevation) */
-  --ink-950: #04070b;  /* Base canvas */
-  --ink-900: #070c12;  /* Plane 1: elevated cards */
-  --ink-850: #091018;  /* Plane 1.5: telemetry beds */
-  --ink-800: #0c131b;  /* Plane 2: nested cards & modals */
-  --ink-700: #121b25;  /* Plane 3: popovers, floating menus */
-  --ink-600: #1b2633;  /* Plane 4: preview containers */
-  --ink-500: #263545;  /* Plane 5: highest surface elevation */
-  --ink-scrollbar: #121b25;
-  --ink-scrollbar-hover: #1b2633;
+  /* Foundation & Elevation Inks (Deep Midnight/Navy Foundation) */
+  --ink-canvas:      #050810;  /* Base Canvas: deep midnight foundation */
+  --ink-deep-canvas: #030509;  /* Deep Canvas: vignette and foundation floor */
+  --ink-surface-1:   #0b1420;  /* Surface 1: substrate, recessed areas, cards */
+  --ink-surface-2:   #111c2b;  /* Surface 2: standard cards, telemetry beds */
+  --ink-surface-3:   #1a283a;  /* Surface 3: active cards, hovered items, terminal */
+  --ink-surface-4:   #223348;  /* Surface 4: popovers, floating menus */
+  --ink-surface-5:   #2c405a;  /* Surface 5: highest surface elevation, modal dialogs */
 
-  /* Teals & Cyans (Telemetry, Data Accents & Technical Signal) */
-  --teal-300: #4ee2e8;
-  --teal-400: #1fc2c9;  /* Primary technical accent */
-  --teal-500: #159ea4;
+  /* Backward-Compatible Inks (Mapped to Palette V2) */
+  --ink-950: var(--ink-canvas);
+  --ink-900: var(--ink-surface-1);
+  --ink-850: #0e1724;
+  --ink-800: var(--ink-surface-2);
+  --ink-700: var(--ink-surface-3);
+  --ink-600: var(--ink-surface-4);
+  --ink-500: var(--ink-surface-5);
+  --ink-scrollbar: #111c2b;
+  --ink-scrollbar-hover: #1a283a;
+
+  /* Accent Colors */
+  --teal-electric:   #35d6df;  /* Primary Accent: high-frequency electric teal */
+  --teal-original:   #1fc2c9;  /* Secondary Technical Teal: telemetry & data */
+  --gold-champagne:  #f0bd58;  /* Secondary Accent: champagne warmth */
+  --indigo-soft:     #7588ff;  /* Soft Indigo: EXCLUSIVELY atmospheric lighting */
+  --blue-deep:       #0d1e36;  /* Deep atmospheric navy */
+  --cyan-deep:       #082830;  /* Deep atmospheric cyan */
+
+  /* Legacy Accent Aliases */
+  --teal-300: #5fe5ec;
+  --teal-400: var(--teal-electric);
+  --teal-500: var(--teal-original);
   --teal-600: #0d787d;
   --teal-900: #063133;
 
-  /* Golds & Ambers (Warm Focal Accent, Badges & Interactive Highlights) */
-  --gold-300: #fad47e;
-  --gold-400: #f4be54;  /* Hover state */
-  --gold-500: #e8a823;  /* Primary warm architectural accent */
-  --gold-600: #b88114;
+  --gold-300: #fce2a8;
+  --gold-400: #f7ce7a;
+  --gold-500: var(--gold-champagne);
+  --gold-600: #c28e21;
 
-  /* Papers & Greys (Typography & Metadata) */
+  /* Papers & Greys (Editorial Typography & Metadata) */
   --paper-50:  #f6f3ee;  /* Primary editorial white */
   --paper-100: #ffffff;  /* High contrast emphasis */
-  --grey-300:  #b5bcc6;  /* Secondary text (≥ 7:1 against base canvas) */
-  --grey-400:  #949ea9;  /* Muted metadata (≥ 5:1 against base canvas) */
-  --grey-500:  #7d8793;  /* Borders, muted labels */
-  --grey-700:  #3d4752;  /* Deep muted dividers */
+  --grey-300:  #b5bcc6;  /* Secondary text (≥ 10:1 against base canvas) */
+  --grey-400:  #7d8793;  /* Muted text (≥ 4.5:1 against base canvas) */
+  --grey-500:  #5c6673;  /* Subdued metadata, borders */
+  --grey-700:  #2d3744;  /* Deep muted dividers */
 
   /* Status Colors */
   --status-success: #34d399;
@@ -53,12 +70,12 @@
   /* ==========================================================================
      2. THE SIX DEPTH PLANES (Surface Architecture)
      ========================================================================== */
-  --plane-0: var(--ink-950);  /* Canvas: base layer under all content */
-  --plane-1: var(--ink-900);  /* Substrate: sections, recessed areas, cards */
-  --plane-2: var(--ink-800);  /* Panel: standard cards, carousel, timeline beds */
-  --plane-3: var(--ink-700);  /* Raised: active cards, hovered items, terminal */
-  --plane-4: var(--ink-600);  /* Popover: dropdowns, tooltips, toasts */
-  --plane-5: var(--ink-500);  /* Overlay: modal dialogs, lightbox */
+  --plane-0: var(--ink-canvas);     /* Canvas: base midnight layer under all content */
+  --plane-1: var(--ink-surface-1);  /* Substrate: sections, recessed areas, cards */
+  --plane-2: var(--ink-surface-2);  /* Panel: standard cards, carousel, timeline beds */
+  --plane-3: var(--ink-surface-3);  /* Raised: active cards, hovered items, terminal */
+  --plane-4: var(--ink-surface-4);  /* Popover: dropdowns, tooltips, toasts */
+  --plane-5: var(--ink-surface-5);  /* Overlay: modal dialogs, lightbox */
 
   /* ==========================================================================
      3. SEMANTIC TOKENS
@@ -68,11 +85,11 @@
   --surface-1:      var(--plane-1);
   --surface-2:      var(--plane-2);
   --surface-3:      var(--plane-3);
-  --surface-navy:   var(--ink-800);
-  --surface-card-start: var(--ink-800);
-  --surface-card-end:   var(--ink-900);
-  --surface-preview-start: var(--ink-800);
-  --surface-preview-end:   var(--ink-900);
+  --surface-navy:   var(--ink-surface-2);
+  --surface-card-start: var(--ink-surface-2);
+  --surface-card-end:   var(--ink-surface-1);
+  --surface-preview-start: var(--ink-surface-2);
+  --surface-preview-end:   var(--ink-surface-1);
 
   /* Typography Roles */
   --text-primary:   var(--paper-50);
@@ -81,33 +98,47 @@
   --text-emphasis:  var(--paper-100);
 
   /* Interactive Accents & Focus */
-  --color-accent:         var(--gold-500);
+  --color-accent:         var(--gold-champagne);
   --color-accent-hover:   var(--gold-400);
-  --color-data:           var(--teal-400);
-  --color-highlight:      var(--teal-400);
-  --color-focus:          var(--teal-400);
+  --color-data:           var(--teal-electric);
+  --color-highlight:      var(--teal-electric);
+  --color-focus:          var(--teal-electric);
   --color-status-success: var(--status-success);
 
-  /* Borders & Dividers */
-  --border-subtle:   rgba(255, 255, 255, 0.06);
-  --border-default:  rgba(255, 255, 255, 0.10);
-  --border-strong:   rgba(255, 255, 255, 0.16);
-  --border-elevated: rgba(255, 255, 255, 0.22);
-  --border-accent:   var(--gold-500);
-  --border-highlight: var(--teal-400);
+  /* Borders & Dividers (White @ 8%, 12%, 20%, 26%) */
+  --border-subtle:   rgba(255, 255, 255, 0.08);  /* Subtle border (~8%) */
+  --border-default:  rgba(255, 255, 255, 0.12);  /* Default border (~12%) */
+  --border-strong:   rgba(255, 255, 255, 0.20);  /* Active / Strong border (~20%) */
+  --border-elevated: rgba(255, 255, 255, 0.26);  /* Elevated surface border (~26%) */
+  --border-accent:   var(--gold-champagne);
+  --border-highlight: var(--teal-electric);
+
+  /* Ambient Lighting & Atmosphere Tokens */
+  --ambient-teal-electric:   #35d6df;
+  --ambient-teal-tech:       #1fc2c9;
+  --ambient-gold-champagne:  #f0bd58;
+  --ambient-indigo-soft:     #7588ff;
+  --ambient-navy:            #0b1420;
+  --ambient-blue:            #0d1e36;
+  --ambient-cyan:            #082830;
+
+  --vignette-intensity: 0.58;
+  --grain-opacity:      0.032;
+  --grid-opacity:       0.035;
+  --grid-size:          64px;
 
   /* Luminous Glows */
-  --glow-gold-sm: 0 0 8px rgba(232, 168, 35, 0.40);
-  --glow-gold-md: 0 0 16px rgba(232, 168, 35, 0.35);
-  --glow-gold-lg: 0 0 32px rgba(232, 168, 35, 0.25);
-  --glow-cyan-sm: 0 0 8px rgba(31, 194, 201, 0.40);
-  --glow-cyan-md: 0 0 18px rgba(31, 194, 201, 0.30);
-  --glow-cyan-lg: 0 20px 50px rgba(31, 194, 201, 0.15);
+  --glow-gold-sm: 0 0 8px rgba(240, 189, 88, 0.40);
+  --glow-gold-md: 0 0 16px rgba(240, 189, 88, 0.35);
+  --glow-gold-lg: 0 0 32px rgba(240, 189, 88, 0.25);
+  --glow-cyan-sm: 0 0 8px rgba(53, 214, 223, 0.40);
+  --glow-cyan-md: 0 0 18px rgba(53, 214, 223, 0.30);
+  --glow-cyan-lg: 0 20px 50px rgba(53, 214, 223, 0.15);
 
   /* Elevation Shadows */
-  --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.50);
-  --shadow-card:   0 20px 50px -10px rgba(0, 0, 0, 0.80);
-  --shadow-modal:  0 25px 50px -12px rgba(0, 0, 0, 0.85);
+  --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.55);
+  --shadow-card:   0 20px 50px -10px rgba(0, 0, 0, 0.82);
+  --shadow-modal:  0 25px 50px -12px rgba(0, 0, 0, 0.88);
 
   /* Radius Primitives */
   --radius-sm:   4px;
@@ -226,18 +257,30 @@
   --transition-transform: transform var(--dur-fast) var(--ease-standard);
   --transition-all:       all var(--dur-slow) var(--ease-standard);
 
-  /* Ambient Wells */
-  --ambient-navy: var(--ink-800);
-  --ambient-blue: #123258;
-  --ambient-cyan: rgba(31, 194, 201, 0.12);
-  --hero-ambient-navy: var(--ink-800);
-  --hero-ambient-blue: #123258;
-  --hero-ambient-cyan: var(--teal-400);
-  --work-ambient-blue: #123258;
-  --work-ambient-navy: var(--ink-800);
-  --work-card-sheen:   rgba(31, 194, 201, 0.16);
-  --contact-spotlight-cyan: var(--teal-400);
-  --contact-spotlight-blue: #123258;
+  /* Ambient Section Wells & Profiles (Palette V2: Ambient Technical Noir) */
+  --ambient-hero-primary:     var(--teal-electric);
+  --ambient-hero-secondary:   var(--teal-original);
+  --ambient-hero-undertone:   var(--indigo-soft);
+
+  --ambient-about-primary:    var(--gold-champagne);
+  --ambient-about-secondary:  var(--teal-original);
+  --ambient-about-base:       var(--blue-deep);
+
+  --ambient-work-primary:     var(--teal-electric);
+  --ambient-work-secondary:   var(--cyan-deep);
+
+  --ambient-skills-primary:   var(--blue-deep);
+  --ambient-skills-secondary: var(--indigo-soft);
+
+  --ambient-exp-primary:      var(--gold-champagne);
+  --ambient-exp-secondary:    var(--teal-original);
+
+  --ambient-contact-teal:     var(--teal-electric);
+  --ambient-contact-gold:     var(--gold-champagne);
+
+  --work-card-sheen:          rgba(53, 214, 223, 0.16);
+  --contact-spotlight-cyan:   var(--teal-electric);
+  --contact-spotlight-gold:   var(--gold-champagne);
 
   /* About section harmonized with depth planes (chromatic gradients removed) */
   --about-card-bg:       var(--plane-2);

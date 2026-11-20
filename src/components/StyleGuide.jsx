@@ -13,64 +13,60 @@ export default function StyleGuide({ onBack }) {
     setMotionActive((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  // 1. Primitive Palette (Look Bible Values)
+  // 1. Primitive Palette (Palette V2: Ambient Technical Noir)
   const primitiveColors = [
-    { group: 'Inks (Canvas, Depth Planes & Elevation)', items: [
-      { token: '--ink-950', val: '#04070b', desc: 'Base Canvas (Plane 0)' },
-      { token: '--ink-900', val: '#070c12', desc: 'Substrate & Recessed (Plane 1)' },
-      { token: '--ink-850', val: '#091018', desc: 'Telemetry Bed (Plane 1.5)' },
-      { token: '--ink-800', val: '#0c131b', desc: 'Standard Panels (Plane 2)' },
-      { token: '--ink-700', val: '#121b25', desc: 'Raised / Active Cards (Plane 3)' },
-      { token: '--ink-600', val: '#1b2633', desc: 'Popovers & Tooltips (Plane 4)' },
-      { token: '--ink-500', val: '#263545', desc: 'Overlays & Dialogs (Plane 5)' },
+    { group: 'Palette V2 Foundation Inks', items: [
+      { token: '--ink-canvas', val: '#050810', desc: 'Base Canvas (Deep Midnight Floor, Plane 0)' },
+      { token: '--ink-deep-canvas', val: '#030509', desc: 'Deep Foundation Canvas & Vignette Core' },
+      { token: '--ink-surface-1', val: '#0b1420', desc: 'Surface 1: Substrate & Base Panels (Plane 1)' },
+      { token: '--ink-surface-2', val: '#111c2b', desc: 'Surface 2: Standard Cards & Beds (Plane 2)' },
+      { token: '--ink-surface-3', val: '#1a283a', desc: 'Surface 3: Raised / Active Cards (Plane 3)' },
+      { token: '--ink-surface-4', val: '#223348', desc: 'Surface 4: Popovers & Floating Menus (Plane 4)' },
+      { token: '--ink-surface-5', val: '#2c405a', desc: 'Surface 5: Overlays & Modal Dialogs (Plane 5)' },
     ]},
-    { group: 'Papers & Greys (Typography & Hierarchy)', items: [
-      { token: '--paper-50', val: '#f6f3ee', desc: 'Primary Text (Bone White, 18.2:1)' },
-      { token: '--paper-100', val: '#ffffff', desc: 'Pure White (Emphasis)' },
-      { token: '--grey-300', val: '#b5bcc6', desc: 'Secondary Metadata (10.6:1)' },
-      { token: '--grey-400', val: '#949ea9', desc: 'Muted Labels (7.2:1)' },
-      { token: '--grey-500', val: '#7d8793', desc: 'Borders & Rules (5.1:1)' },
+    { group: 'Papers & Greys (Editorial Typography & Metadata)', items: [
+      { token: '--paper-50', val: '#f6f3ee', desc: 'Primary Editorial Text (Bone White, 17.7:1 AAA)' },
+      { token: '--paper-100', val: '#ffffff', desc: 'Pure White (High Contrast Emphasis)' },
+      { token: '--grey-300', val: '#b5bcc6', desc: 'Secondary Text & Metadata (10.3:1 AA)' },
+      { token: '--grey-400', val: '#7d8793', desc: 'Muted Text & Labels (4.8:1 AA)' },
+      { token: '--grey-500', val: '#5c6673', desc: 'Subdued Technical Rules & Metadata' },
     ]},
-    { group: 'Golds & Ambers (Warm Accents & Ignition)', items: [
-      { token: '--gold-300', val: '#fad47e', desc: 'Ambient Gold Stop' },
-      { token: '--gold-400', val: '#f4be54', desc: 'Luminous Gold Hover' },
-      { token: '--gold-500', val: '#e8a823', desc: 'Architectural Gold Focal Accent' },
-      { token: '--gold-600', val: '#b88114', desc: 'Deep Gold Border Accent' },
-    ]},
-    { group: 'Teals & Cyans (Telemetry & Technical Signal)', items: [
-      { token: '--teal-300', val: '#4ee2e8', desc: 'Bright Data Glow' },
-      { token: '--teal-400', val: '#1fc2c9', desc: 'Electric Cyan Technical Signal' },
-      { token: '--teal-500', val: '#159ea4', desc: 'Deep Cyan Border Accent' },
-      { token: '--teal-900', val: '#063133', desc: 'Atmospheric Well Cyan' },
+    { group: 'Accents & Atmospheric Lighting (Palette V2)', items: [
+      { token: '--teal-electric', val: '#35d6df', desc: 'Primary Accent: Electric Teal Signal (11.8:1)' },
+      { token: '--teal-original', val: '#1fc2c9', desc: 'Technical Data Accent: Telemetry & Radar' },
+      { token: '--gold-champagne', val: '#f0bd58', desc: 'Secondary Accent: Champagne Gold (10.9:1)' },
+      { token: '--indigo-soft', val: '#7588ff', desc: 'Soft Indigo: EXCLUSIVELY Ambient Atmospheric Lighting' },
+      { token: '--blue-deep', val: '#0d1e36', desc: 'Deep Atmospheric Navy Foundation Well' },
+      { token: '--cyan-deep', val: '#082830', desc: 'Deep Atmospheric Cyan Technical Well' },
     ]},
   ];
 
-  // 2. The Six Depth Planes
+  // 2. The Six Depth Planes (Palette V2 Architecture)
   const depthPlanes = [
-    { plane: 'Plane 0', token: '--plane-0', ref: 'var(--ink-950)', desc: 'Base canvas underneath all content', bg: '#04070b' },
-    { plane: 'Plane 1', token: '--plane-1', ref: 'var(--ink-900)', desc: 'Substrate: sections, recessed areas, cards', bg: '#070c12' },
-    { plane: 'Plane 2', token: '--plane-2', ref: 'var(--ink-800)', desc: 'Panel: standard cards, showcase, timeline beds', bg: '#0c131b' },
-    { plane: 'Plane 3', token: '--plane-3', ref: 'var(--ink-700)', desc: 'Raised: active cards, terminal, hovered items', bg: '#121b25' },
-    { plane: 'Plane 4', token: '--plane-4', ref: 'var(--ink-600)', desc: 'Popover: dropdowns, tooltips, toasts', bg: '#1b2633' },
-    { plane: 'Plane 5', token: '--plane-5', ref: 'var(--ink-500)', desc: 'Overlay: modal dialogs, lightbox', bg: '#263545' },
+    { plane: 'Plane 0', token: '--plane-0', ref: 'var(--ink-canvas)', desc: 'Base deep midnight canvas underneath all content', bg: '#050810' },
+    { plane: 'Plane 1', token: '--plane-1', ref: 'var(--ink-surface-1)', desc: 'Substrate: sections, recessed areas, cards', bg: '#0b1420' },
+    { plane: 'Plane 2', token: '--plane-2', ref: 'var(--ink-surface-2)', desc: 'Panel: standard cards, carousel, timeline beds', bg: '#111c2b' },
+    { plane: 'Plane 3', token: '--plane-3', ref: 'var(--ink-surface-3)', desc: 'Raised: active cards, terminal, hovered items', bg: '#1a283a' },
+    { plane: 'Plane 4', token: '--plane-4', ref: 'var(--ink-surface-4)', desc: 'Popover: dropdowns, tooltips, toasts', bg: '#223348' },
+    { plane: 'Plane 5', token: '--plane-5', ref: 'var(--ink-surface-5)', desc: 'Overlay: modal dialogs, lightbox', bg: '#2c405a' },
   ];
 
   // 3. Semantic Tokens
   const semanticTokens = [
-    { token: '--bg-base', ref: 'var(--plane-0)', desc: 'Main canvas background' },
-    { token: '--bg-raised', ref: 'var(--plane-1)', desc: 'Primary cards & panels' },
-    { token: '--surface-1', ref: 'var(--plane-1)', desc: 'Surface tier 1' },
-    { token: '--surface-2', ref: 'var(--plane-2)', desc: 'Surface tier 2 (nested data)' },
-    { token: '--surface-3', ref: 'var(--plane-3)', desc: 'Surface tier 3 (elevated active)' },
-    { token: '--text-primary', ref: 'var(--paper-50)', desc: 'Primary headings & body' },
-    { token: '--text-secondary', ref: 'var(--grey-300)', desc: 'Metadata, labels & captions' },
-    { token: '--text-muted', ref: 'var(--grey-400)', desc: 'Subdued telemetry chips' },
-    { token: '--color-accent', ref: 'var(--gold-500)', desc: 'Interactive gold & badges' },
-    { token: '--color-data', ref: 'var(--teal-400)', desc: 'Electric cyan telemetry' },
-    { token: '--border-subtle', ref: 'rgba(255, 255, 255, 0.06)', desc: 'Dividers & soft borders' },
-    { token: '--border-default', ref: 'rgba(255, 255, 255, 0.10)', desc: 'Standard card outlines' },
-    { token: '--border-strong', ref: 'rgba(255, 255, 255, 0.16)', desc: 'Emphasized containers' },
-    { token: '--border-elevated', ref: 'rgba(255, 255, 255, 0.22)', desc: 'Interactive outlines' },
+    { token: '--bg-base', ref: 'var(--plane-0)', desc: 'Main canvas background (#050810)' },
+    { token: '--bg-raised', ref: 'var(--plane-1)', desc: 'Primary cards & panels (#0b1420)' },
+    { token: '--surface-1', ref: 'var(--plane-1)', desc: 'Surface tier 1 (#0b1420)' },
+    { token: '--surface-2', ref: 'var(--plane-2)', desc: 'Surface tier 2: nested data (#111c2b)' },
+    { token: '--surface-3', ref: 'var(--plane-3)', desc: 'Surface tier 3: elevated active (#1a283a)' },
+    { token: '--text-primary', ref: 'var(--paper-50)', desc: 'Primary headings & editorial body (#f6f3ee)' },
+    { token: '--text-secondary', ref: 'var(--grey-300)', desc: 'Metadata, labels & captions (#b5bcc6)' },
+    { token: '--text-muted', ref: 'var(--grey-400)', desc: 'Subdued telemetry chips (#7d8793)' },
+    { token: '--color-accent', ref: 'var(--gold-champagne)', desc: 'Interactive champagne gold & focal badges (#f0bd58)' },
+    { token: '--color-data', ref: 'var(--teal-electric)', desc: 'Electric teal technical signal (#35d6df)' },
+    { token: '--border-subtle', ref: 'rgba(255, 255, 255, 0.08)', desc: 'Dividers & soft borders (White @ 8%)' },
+    { token: '--border-default', ref: 'rgba(255, 255, 255, 0.12)', desc: 'Standard card outlines (White @ 12%)' },
+    { token: '--border-strong', ref: 'rgba(255, 255, 255, 0.20)', desc: 'Emphasized containers (White @ 20%)' },
+    { token: '--border-elevated', ref: 'rgba(255, 255, 255, 0.26)', desc: 'Elevated surface outlines (White @ 26%)' },
   ];
 
   // 4. Spacing Scale

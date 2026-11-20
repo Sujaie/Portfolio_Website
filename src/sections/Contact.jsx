@@ -131,25 +131,6 @@ export default function Contact() {
       id="contact"
       className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] bg-transparent border-t border-[var(--border-subtle)] overflow-hidden"
     >
-      {/* Contact "Handshake" Signature: Converging Teal and Gold Atmospheric Spotlights */}
-      <div
-        className="absolute bottom-10 left-1/4 w-[500px] md:w-[750px] h-[450px] md:h-[650px] rounded-full blur-[140px] opacity-20 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, var(--color-data) 0%, transparent 70%)',
-          transform: 'translateZ(0)',
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-4 right-1/4 w-[550px] md:w-[800px] h-[500px] md:h-[700px] rounded-full blur-[150px] opacity-15 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, var(--color-accent) 0%, transparent 70%)',
-          transform: 'translateZ(0)',
-        }}
-        aria-hidden="true"
-      />
-      <div className="absolute inset-0 bg-noise opacity-25 pointer-events-none" aria-hidden="true" />
-
       <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto">
         
         {/* Label */}

@@ -16,9 +16,9 @@ test.describe('Gate 4 Signatures Suite: Hero Ignition & About Transmission', () 
     await expect(line2).toBeVisible();
     await expect(accent).toBeVisible();
 
-    // Verify gold italic serif accent styling
+    // Verify gold italic serif accent styling (Palette V2 Champagne Gold #f0bd58)
     const color = await accent.evaluate((el) => getComputedStyle(el).color);
-    expect(color).toBe('rgb(232, 168, 35)'); // #e8a823
+    expect(color).toBe('rgb(240, 189, 88)'); // #f0bd58
 
     // Verify metadata items rendered
     const metaItems = page.locator('.hero-meta-item');
