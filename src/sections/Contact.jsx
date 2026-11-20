@@ -35,7 +35,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative w-full min-h-[90svh] py-[var(--section-py)] px-[var(--page-gutter)] bg-[var(--bg-base)] border-t border-[var(--border-subtle)] overflow-hidden flex flex-col justify-between"
+      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] bg-[var(--bg-base)] border-t border-[var(--border-subtle)] overflow-hidden"
     >
       {/* Background Soft Blue/Cyan Spotlight (GPU isolated) */}
       <div
@@ -47,10 +47,10 @@ export default function Contact() {
       />
       <div className="absolute inset-0 bg-noise opacity-30 pointer-events-none" />
 
-      <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto my-auto py-12">
+      <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto">
         
         {/* Label */}
-        <div className="flex items-center gap-3 text-xs tracking-mono-lg font-mono font-semibold text-[var(--color-accent)] uppercase mb-8">
+        <div className="flex items-center gap-3 text-xs tracking-mono-lg font-mono font-semibold text-[var(--color-accent)] uppercase mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[var(--glow-gold-sm)]" />
           <span>INITIATE DIALOGUE</span>
         </div>

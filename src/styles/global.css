@@ -159,3 +159,26 @@ a:focus-visible, button:focus-visible {
   transition: none !important;
   animation: none !important;
 }
+
+/* Reusable layout primitives */
+.layout-container {
+  position: relative;
+  z-index: 10;
+  max-width: var(--content-max-width);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.layout-section {
+  position: relative;
+  width: 100%;
+  padding-top: var(--section-py);
+  padding-bottom: var(--section-py);
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+  background-color: var(--bg-base);
+  border-top: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+

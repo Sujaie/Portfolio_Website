@@ -271,7 +271,7 @@ export default function Projects() {
   return (
     <section
       id="work"
-      className="relative w-full min-h-[100svh] py-[var(--section-py)] px-[var(--page-gutter)] bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
+      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
     >
       <div
         className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full blur-[130px] opacity-20 pointer-events-none"

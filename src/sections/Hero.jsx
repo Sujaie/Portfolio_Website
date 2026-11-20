@@ -37,7 +37,7 @@ export default function Hero() {
       {/* TOP CONTENT: INTRO METADATA LABEL */}
       <div className="relative z-20 max-w-[var(--content-max-width)] w-full mx-auto">
         <div className="inline-flex items-center gap-3 text-xs tracking-mono-lg font-mono text-[var(--text-secondary)] uppercase">
-          <span className="w-2 h-2 rounded-full bg-[var(--color-highlight)] shadow-[var(--glow-cyan-sm)] animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-highlight)] shadow-[var(--glow-cyan-sm)] animate-pulse" />
           <span>{hero.introLabel}</span>
         </div>
       </div>

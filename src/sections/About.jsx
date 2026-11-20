@@ -52,7 +52,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative w-full min-h-[100svh] py-[var(--section-py)] px-[var(--page-gutter)] overflow-hidden flex items-center bg-[var(--bg-base)]"
+      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] overflow-hidden bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
     >
       {/* VIBRANT MESH GRADIENT ATMOSPHERE (Preserving Section-Specific Identity) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ transform: 'translateZ(0)' }}>
@@ -86,7 +86,7 @@ export default function About() {
         <div className="lg:col-span-5 flex flex-col justify-center">
           
           {/* Badge */}
-          <div className="inline-flex items-center gap-3 text-xs tracking-mono-lg font-mono text-[var(--color-accent)] uppercase mb-6">
+          <div className="inline-flex items-center gap-3 text-xs tracking-mono-lg font-mono text-[var(--color-accent)] uppercase mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[var(--glow-gold-sm)]" />
             <span>{about.badge}</span>
           </div>
