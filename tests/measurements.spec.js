@@ -65,8 +65,8 @@ test('measure-nav-height-and-computed-colors', async ({ page }) => {
   expect(measurements.hasOverflow).toBe(false);
 });
 
-// Screenshot captures for docs/qa/gate-4
-test('capture-gate-4-screenshots', async ({ page }) => {
+// Screenshot captures for docs/qa/gate-5
+test('capture-gate-5-screenshots', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/', { waitUntil: 'networkidle' });
   await page.waitForTimeout(2000);
@@ -82,7 +82,7 @@ test('capture-gate-4-screenshots', async ({ page }) => {
     }
 
     await page.screenshot({
-      path: `docs/qa/gate-4/${section}-1440.png`,
+      path: `docs/qa/gate-5/${section}-1440.png`,
       fullPage: false,
     });
   }
@@ -100,7 +100,7 @@ test('capture-gate-4-screenshots', async ({ page }) => {
       await page.waitForTimeout(500);
     }
     await page.screenshot({
-      path: `docs/qa/gate-4/${section}-768.png`,
+      path: `docs/qa/gate-5/${section}-768.png`,
       fullPage: false,
     });
   }
@@ -118,7 +118,7 @@ test('capture-gate-4-screenshots', async ({ page }) => {
       await page.waitForTimeout(500);
     }
     await page.screenshot({
-      path: `docs/qa/gate-4/${section}-390.png`,
+      path: `docs/qa/gate-5/${section}-390.png`,
       fullPage: false,
     });
   }
