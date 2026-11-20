@@ -59,7 +59,7 @@ export default function App() {
           <Navbar />
 
           {/* Main Scrollable Content */}
-          <main className="relative z-10 w-full">
+          <main data-magnifier-source className="relative z-10 w-full">
             <Hero />
             <About />
             <Projects />
