@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative w-full min-h-[100svh] bg-[var(--bg-base)] overflow-hidden flex flex-col justify-between pt-28 md:pt-36 pb-10 px-6 md:px-12 lg:px-16"
+      className="relative w-full min-h-[100svh] bg-[var(--bg-base)] overflow-hidden flex flex-col justify-between pt-28 md:pt-36 pb-10 px-[var(--page-gutter)]"
     >
       {/* ATMOSPHERIC BACKGROUND LAYERS */}
       <div className="absolute inset-0 bg-noise pointer-events-none z-10 opacity-35" />
@@ -35,15 +35,15 @@ export default function Hero() {
       </div>
 
       {/* TOP CONTENT: INTRO METADATA LABEL */}
-      <div className="relative z-20 max-w-[1600px] w-full mx-auto">
+      <div className="relative z-20 max-w-[var(--content-max-width)] w-full mx-auto">
         <div className="inline-flex items-center gap-3 text-xs tracking-mono-lg font-mono text-[var(--text-secondary)] uppercase">
-          <span className="w-2 h-2 rounded-full bg-[var(--color-highlight)] shadow-[0_0_10px_var(--color-highlight)] animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-[var(--color-highlight)] shadow-[var(--glow-cyan-sm)] animate-pulse" />
           <span>{hero.introLabel}</span>
         </div>
       </div>
 
       {/* MIDDLE: ASYMMETRICAL EDITORIAL HEADLINE */}
-      <div className="relative z-20 max-w-[1600px] w-full mx-auto my-auto py-6 md:py-10 select-text">
+      <div className="relative z-20 max-w-[var(--content-max-width)] w-full mx-auto my-auto py-6 md:py-10 select-text">
         {/* Row 1: "CREATIVE" offset left */}
         <div className="overflow-hidden py-1">
           <h1 className="text-hero-display font-light leading-hero tracking-hero text-[var(--text-primary)] font-sans">
@@ -53,7 +53,7 @@ export default function Hero() {
 
         {/* Row 2: "SOFTWARE" italic serif accent offset right */}
         <div className="overflow-hidden py-1 flex justify-start sm:justify-center md:justify-end md:pr-[10vw]">
-          <span className="font-serif italic font-normal text-hero-accent leading-hero-accent text-[var(--color-accent)] drop-shadow-[0_0_45px_var(--glow-gold)]">
+          <span className="font-serif italic font-normal text-hero-accent leading-hero-accent text-[var(--color-accent)] drop-shadow-[var(--glow-gold-lg)]">
             {hero.headlineAccent}
           </span>
         </div>
@@ -67,7 +67,7 @@ export default function Hero() {
       </div>
 
       {/* BOTTOM: METADATA BLOCKS & SCROLL INDICATOR */}
-      <div className="relative z-20 max-w-[1600px] w-full mx-auto flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 pt-6 border-t border-[var(--border-default)]">
+      <div className="relative z-20 max-w-[var(--content-max-width)] w-full mx-auto flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 pt-6 border-t border-[var(--border-default)]">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-12 lg:gap-16">
           {hero.metadata.map((item) => (
             <div key={item.label} className="flex flex-col gap-1">
@@ -83,10 +83,10 @@ export default function Hero() {
 
         <a
           href="#about"
-          className="group flex items-center gap-3 text-2xs tracking-mono-lg font-mono text-[var(--text-secondary)] hover:text-[var(--color-accent)] uppercase transition-colors"
+          className="group flex items-center gap-3 text-2xs tracking-mono-lg font-mono text-[var(--text-secondary)] hover:text-[var(--color-accent)] uppercase transition-colors duration-[var(--dur-base)]"
         >
           <span>EXPLORE</span>
-          <div className="w-5 h-8 rounded-full border border-[var(--border-elevated)] flex items-start justify-center p-1 group-hover:border-[var(--color-accent)]/60 transition-colors">
+          <div className="w-5 h-8 rounded-full border border-[var(--border-elevated)] flex items-start justify-center p-1 group-hover:border-[var(--color-accent)]/60 transition-colors duration-[var(--dur-base)]">
             <span className="w-1 h-2 rounded-full bg-[var(--color-accent)] animate-bounce" />
           </div>
         </a>

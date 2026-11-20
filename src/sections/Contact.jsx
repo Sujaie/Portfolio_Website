@@ -35,7 +35,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative w-full min-h-[90svh] py-28 md:py-36 px-6 md:px-12 lg:px-16 bg-[var(--bg-base)] border-t border-[var(--border-subtle)] overflow-hidden flex flex-col justify-between"
+      className="relative w-full min-h-[90svh] py-[var(--section-py)] px-[var(--page-gutter)] bg-[var(--bg-base)] border-t border-[var(--border-subtle)] overflow-hidden flex flex-col justify-between"
     >
       {/* Background Soft Blue/Cyan Spotlight (GPU isolated) */}
       <div
@@ -47,11 +47,11 @@ export default function Contact() {
       />
       <div className="absolute inset-0 bg-noise opacity-30 pointer-events-none" />
 
-      <div className="relative z-10 max-w-[1600px] w-full mx-auto my-auto py-12">
+      <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto my-auto py-12">
         
         {/* Label */}
         <div className="flex items-center gap-3 text-xs tracking-mono-lg font-mono font-semibold text-[var(--color-accent)] uppercase mb-8">
-          <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[var(--glow-gold-sm)]" />
           <span>INITIATE DIALOGUE</span>
         </div>
 
@@ -61,7 +61,7 @@ export default function Contact() {
             {contact.headline}
           </h2>
           <div className="flex items-baseline gap-4 sm:gap-6 flex-wrap">
-            <span className="font-serif italic font-normal text-contact-accent leading-hero-accent text-[var(--color-accent)] drop-shadow-[0_0_35px_var(--glow-gold)]">
+            <span className="font-serif italic font-normal text-contact-accent leading-hero-accent text-[var(--color-accent)] drop-shadow-[var(--glow-gold-lg)]">
               {contact.headlineItalic}
             </span>
             <span className="text-contact-display font-light leading-hero tracking-hero text-[var(--text-primary)]">
@@ -84,17 +84,17 @@ export default function Contact() {
                 href={`mailto:${contact.email}`}
                 onMouseEnter={() => sound.playHover()}
                 onClick={() => sound.playClick()}
-                className="text-2xl sm:text-3xl md:text-4xl font-light text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors break-all flex items-center gap-2 group"
+                className="text-2xl sm:text-3xl md:text-4xl font-light text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)] break-all flex items-center gap-2 group"
               >
                 <span>{contact.email}</span>
-                <span className="group-hover:translate-x-1 transition-transform">↗</span>
+                <span className="group-hover:translate-x-1 transition-transform duration-[var(--dur-fast)]">↗</span>
               </a>
 
               {/* Quick Copy Button */}
               <button
                 onClick={copyEmail}
                 onMouseEnter={() => sound.playHover()}
-                className="px-3 py-1.5 rounded-full border border-[var(--border-strong)] bg-white/5 hover:border-[var(--color-accent)] text-2xs font-mono tracking-mono-sm uppercase text-[var(--text-secondary)] hover:text-white transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-full border border-[var(--border-strong)] bg-white/5 hover:border-[var(--color-accent)] text-2xs font-mono tracking-mono-sm uppercase text-[var(--text-secondary)] hover:text-white transition-colors duration-[var(--dur-base)] cursor-pointer"
                 title="Copy to clipboard"
               >
                 {copied ? '✓ COPIED' : 'COPY'}
@@ -107,7 +107,7 @@ export default function Contact() {
                   setIsModalOpen(true);
                 }}
                 onMouseEnter={() => sound.playHover()}
-                className="px-3 py-1.5 rounded-full border border-[var(--color-data)]/40 bg-[var(--color-data)]/10 hover:bg-[var(--color-data)]/20 text-2xs font-mono tracking-mono-sm uppercase text-[var(--color-data)] transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-full border border-[var(--color-data)]/40 bg-[var(--color-data)]/10 hover:bg-[var(--color-data)]/20 text-2xs font-mono tracking-mono-sm uppercase text-[var(--color-data)] transition-colors duration-[var(--dur-base)] cursor-pointer"
               >
                 WRITE A NOTE ✍
               </button>
@@ -122,7 +122,7 @@ export default function Contact() {
               rel="noopener noreferrer"
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
-              className="text-[var(--text-secondary)] hover:text-white transition-colors"
+              className="text-[var(--text-secondary)] hover:text-white transition-colors duration-[var(--dur-base)]"
             >
               GITHUB ↗
             </a>
@@ -132,7 +132,7 @@ export default function Contact() {
               rel="noopener noreferrer"
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
-              className="text-[var(--text-secondary)] hover:text-white transition-colors"
+              className="text-[var(--text-secondary)] hover:text-white transition-colors duration-[var(--dur-base)]"
             >
               LINKEDIN ↗
             </a>
@@ -142,7 +142,7 @@ export default function Contact() {
               rel="noopener noreferrer"
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
-              className="text-[var(--text-secondary)] hover:text-white transition-colors"
+              className="text-[var(--text-secondary)] hover:text-white transition-colors duration-[var(--dur-base)]"
             >
               TWITTER ↗
             </a>
@@ -154,7 +154,7 @@ export default function Contact() {
       {/* Interactive Modal Dialogue */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="relative w-full max-w-lg p-6 sm:p-8 rounded-2xl bg-[var(--bg-raised)] border border-[var(--border-strong)] shadow-2xl space-y-6">
+          <div className="relative w-full max-w-lg p-6 sm:p-8 rounded-[var(--radius-xl)] bg-[var(--bg-raised)] border border-[var(--border-strong)] shadow-[var(--shadow-modal)] space-y-6">
             <div className="flex items-center justify-between pb-4 border-b border-[var(--border-default)]">
               <span className="text-sm font-mono uppercase tracking-widest text-[var(--color-accent)]">TRANSMIT DISPATCH</span>
               <button
@@ -179,7 +179,7 @@ export default function Contact() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 rounded-lg bg-white/5 border border-[var(--border-default)] text-white text-sm focus:border-[var(--color-accent)] focus:outline-none"
+                    className="w-full px-3 py-2 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-default)] text-white text-sm focus:border-[var(--color-accent)] focus:outline-none"
                     placeholder="Ada Lovelace"
                   />
                 </div>
@@ -190,7 +190,7 @@ export default function Contact() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 rounded-lg bg-white/5 border border-[var(--border-default)] text-white text-sm focus:border-[var(--color-accent)] focus:outline-none"
+                    className="w-full px-3 py-2 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-default)] text-white text-sm focus:border-[var(--color-accent)] focus:outline-none"
                     placeholder="ada@computing.org"
                   />
                 </div>
@@ -201,7 +201,7 @@ export default function Contact() {
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-3 py-2 rounded-lg bg-white/5 border border-[var(--border-default)] text-white text-sm focus:border-[var(--color-accent)] focus:outline-none"
+                    className="w-full px-3 py-2 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-default)] text-white text-sm focus:border-[var(--color-accent)] focus:outline-none"
                     placeholder="Inquiry or collaboration concept..."
                   />
                 </div>
@@ -210,13 +210,13 @@ export default function Contact() {
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="px-4 py-2 rounded-lg text-xs font-mono uppercase text-[var(--text-secondary)] hover:text-white"
+                    className="px-4 py-2 rounded-[var(--radius-md)] text-xs font-mono uppercase text-[var(--text-secondary)] hover:text-white"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-5 py-2 rounded-lg bg-[var(--color-accent)] text-black text-xs font-mono font-semibold uppercase hover:bg-[var(--color-accent-hover)] transition-colors cursor-pointer"
+                    className="px-5 py-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] text-black text-xs font-mono font-semibold uppercase hover:bg-[var(--color-accent-hover)] transition-colors duration-[var(--dur-base)] cursor-pointer"
                   >
                     Transmit
                   </button>
@@ -228,7 +228,7 @@ export default function Contact() {
       )}
 
       {/* Footer Row */}
-      <footer className="relative z-10 max-w-[1600px] w-full mx-auto pt-12 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-4 text-2xs font-mono tracking-mono-md text-[var(--text-secondary)] uppercase">
+      <footer className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto pt-12 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-4 text-2xs font-mono tracking-mono-md text-[var(--text-secondary)] uppercase">
         <div>
           © {new Date().getFullYear()} SUJAIE • ALL RIGHTS RESERVED
         </div>
@@ -236,7 +236,7 @@ export default function Contact() {
         <button
           onClick={scrollToTop}
           onMouseEnter={() => sound.playHover()}
-          className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-2 cursor-pointer"
+          className="hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)] flex items-center gap-2 cursor-pointer"
         >
           <span>BACK TO TOP</span>
           <span>↑</span>

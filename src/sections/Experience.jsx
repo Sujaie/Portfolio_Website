@@ -44,15 +44,15 @@ export default function Experience() {
     <section
       id="experience"
       ref={sectionRef}
-      className="relative w-full py-28 md:py-36 px-6 md:px-12 lg:px-16 bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
+      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
     >
-      <div className="relative z-10 max-w-[1600px] w-full mx-auto">
+      <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-20">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-[var(--section-header-mb)]">
           <div>
             <div className="flex items-center gap-3 text-xs tracking-mono-lg font-mono font-semibold text-[var(--color-data)] uppercase mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-data)] shadow-[0_0_8px_var(--color-data)]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-data)] shadow-[var(--glow-cyan-sm)]" />
               <span>CAREER & MILESTONES</span>
             </div>
             <h2 className="text-section-heading font-light text-[var(--text-primary)] tracking-section leading-section">
@@ -69,7 +69,7 @@ export default function Experience() {
           {experience.map((item, idx) => (
             <div
               key={idx}
-              className="timeline-item py-10 md:py-14 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-baseline group hover:bg-white/[0.015] px-4 -mx-4 rounded-xl transition-colors"
+              className="timeline-item py-10 md:py-14 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-baseline group hover:bg-white/[0.015] px-4 -mx-4 rounded-[var(--radius-lg)] transition-colors duration-[var(--dur-base)]"
             >
               {/* Period & Tag */}
               <div className="md:col-span-3 flex flex-row md:flex-col justify-between md:justify-start gap-2">
@@ -83,7 +83,7 @@ export default function Experience() {
 
               {/* Role & Org */}
               <div className="md:col-span-4">
-                <h3 className="text-xl font-light text-[var(--text-primary)] group-hover:text-white transition-colors">
+                <h3 className="text-xl font-light text-[var(--text-primary)] group-hover:text-white transition-colors duration-[var(--dur-base)]">
                   {item.role}
                 </h3>
                 <div className="text-sm tracking-wider uppercase text-[var(--color-data)] font-medium mt-1">

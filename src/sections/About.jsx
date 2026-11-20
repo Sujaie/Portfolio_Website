@@ -52,7 +52,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative w-full min-h-[100svh] py-28 md:py-36 px-6 md:px-12 lg:px-16 overflow-hidden flex items-center bg-[var(--bg-base)]"
+      className="relative w-full min-h-[100svh] py-[var(--section-py)] px-[var(--page-gutter)] overflow-hidden flex items-center bg-[var(--bg-base)]"
     >
       {/* VIBRANT MESH GRADIENT ATMOSPHERE (Preserving Section-Specific Identity) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ transform: 'translateZ(0)' }}>
@@ -80,14 +80,14 @@ export default function About() {
         <div className="absolute inset-0 bg-noise opacity-40" />
       </div>
 
-      <div className="relative z-10 max-w-[1600px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-[var(--grid-gap-lg)] items-center">
         
         {/* LEFT COLUMN: EDITORIAL INTRODUCTION */}
         <div className="lg:col-span-5 flex flex-col justify-center">
           
           {/* Badge */}
           <div className="inline-flex items-center gap-3 text-xs tracking-mono-lg font-mono text-[var(--color-accent)] uppercase mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[var(--glow-gold-sm)]" />
             <span>{about.badge}</span>
           </div>
 
@@ -121,7 +121,7 @@ export default function About() {
 
         {/* RIGHT COLUMN: INTERACTIVE DARK SHOWCASE PANEL */}
         <div className="lg:col-span-7">
-          <div className="relative rounded-2xl bg-[var(--bg-raised)]/90 border border-[var(--border-default)] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.85)] backdrop-blur-2xl p-6 sm:p-8 md:p-10 flex flex-col justify-between min-h-[500px]">
+          <div className="relative rounded-[var(--radius-xl)] bg-[var(--bg-raised)]/90 border border-[var(--border-default)] shadow-[var(--shadow-card)] backdrop-blur-2xl p-[var(--card-padding)] flex flex-col justify-between min-h-[500px]">
             
             {/* Top Bar: Categories & Controls */}
             <div className="flex items-center justify-between pb-6 border-b border-[var(--border-default)] gap-2">
@@ -130,9 +130,9 @@ export default function About() {
                   <button
                     key={item.id}
                     onClick={() => handleSlideChange(idx)}
-                    className={`text-2xs tracking-mono-md font-mono uppercase px-3 py-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    className={`text-2xs tracking-mono-md font-mono uppercase px-3 py-1.5 rounded-full transition-all duration-[var(--dur-slow)] cursor-pointer ${
                       idx === activeIndex
-                        ? 'bg-[var(--color-accent)] text-black font-semibold shadow-[0_0_14px_rgba(233,169,39,0.45)]'
+                        ? 'bg-[var(--color-accent)] text-black font-semibold shadow-[var(--glow-gold-md)]'
                         : 'text-[var(--text-secondary)] hover:text-white bg-white/5 hover:bg-white/10'
                     }`}
                   >
@@ -145,14 +145,14 @@ export default function About() {
               <div className="flex items-center gap-2 flex-shrink-0">
                 <button
                   onClick={prevSlide}
-                  className="w-9 h-9 rounded-full border border-[var(--border-default)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white hover:border-[var(--color-accent)] transition-colors cursor-pointer"
+                  className="w-9 h-9 rounded-full border border-[var(--border-default)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white hover:border-[var(--color-accent)] transition-colors duration-[var(--dur-base)] cursor-pointer"
                   aria-label="Previous Project"
                 >
                   ←
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="w-9 h-9 rounded-full border border-[var(--border-default)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white hover:border-[var(--color-accent)] transition-colors cursor-pointer"
+                  className="w-9 h-9 rounded-full border border-[var(--border-default)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white hover:border-[var(--color-accent)] transition-colors duration-[var(--dur-base)] cursor-pointer"
                   aria-label="Next Project"
                 >
                   →
@@ -164,7 +164,7 @@ export default function About() {
             <div ref={slideRef} className="showcase-active-content my-6">
               
               {/* Product Preview Interface Mockup */}
-              <div className="relative w-full h-48 sm:h-56 rounded-xl bg-gradient-to-br from-[var(--surface-preview-start)] to-[var(--surface-preview-end)] border border-[var(--border-default)] p-4 mb-6 overflow-hidden flex flex-col justify-between">
+              <div className="relative w-full h-48 sm:h-56 rounded-[var(--radius-lg)] bg-gradient-to-br from-[var(--surface-preview-start)] to-[var(--surface-preview-end)] border border-[var(--border-default)] p-4 mb-6 overflow-hidden flex flex-col justify-between">
                 
                 {/* Mock Browser Header */}
                 <div className="flex items-center justify-between border-b border-[var(--border-default)] pb-2">
@@ -184,15 +184,15 @@ export default function About() {
 
                 {/* Mock UI Canvas / Telemetry Grid */}
                 <div className="grid grid-cols-3 gap-3 my-auto py-2">
-                  <div className="p-3 rounded-lg bg-white/5 border border-[var(--border-subtle)]">
+                  <div className="p-3 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-subtle)]">
                     <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Engine State</div>
                     <div className="text-sm font-semibold text-[var(--color-data)] mt-1 font-mono">OPTIMIZED</div>
                   </div>
-                  <div className="p-3 rounded-lg bg-white/5 border border-[var(--border-subtle)]">
+                  <div className="p-3 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-subtle)]">
                     <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Throughput</div>
                     <div className="text-sm font-semibold text-[var(--color-accent)] mt-1 font-mono">{currentItem.metrics.split('•')[0]}</div>
                   </div>
-                  <div className="p-3 rounded-lg bg-white/5 border border-[var(--border-subtle)]">
+                  <div className="p-3 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-subtle)]">
                     <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Latency</div>
                     <div className="text-sm font-semibold text-white mt-1 font-mono">{currentItem.metrics.split('•')[1] || 'Sub-ms'}</div>
                   </div>
@@ -203,7 +203,7 @@ export default function About() {
                   {[35, 60, 28, 80, 95, 45, 65, 75, 92, 48, 85, 100, 72, 88, 62].map((h, i) => (
                     <div
                       key={i}
-                      className="flex-1 bg-gradient-to-t from-[var(--color-data)] to-[var(--blue-600)] rounded-t-sm"
+                      className="flex-1 bg-gradient-to-t from-[var(--color-data)] to-[var(--blue-600)] rounded-t-[var(--radius-sm)]"
                       style={{ height: `${h}%` }}
                     />
                   ))}
@@ -230,7 +230,7 @@ export default function About() {
                 {currentItem.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-2xs tracking-mono-sm font-mono px-2.5 py-1 rounded bg-black/50 text-[var(--text-primary)] border border-[var(--border-default)]"
+                    className="text-2xs tracking-mono-sm font-mono px-2.5 py-1 rounded-[var(--radius-sm)] bg-black/50 text-[var(--text-primary)] border border-[var(--border-default)]"
                   >
                     {tag}
                   </span>
@@ -245,7 +245,7 @@ export default function About() {
                   <button
                     key={i}
                     onClick={() => handleSlideChange(i)}
-                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    className={`h-1.5 rounded-full transition-all duration-[var(--dur-slow)] cursor-pointer ${
                       i === activeIndex ? 'w-6 bg-[var(--color-accent)]' : 'w-2 bg-white/20 hover:bg-white/40'
                     }`}
                     aria-label={`Jump to slide ${i + 1}`}
@@ -258,7 +258,7 @@ export default function About() {
                   href={currentItem.links.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[var(--text-secondary)] hover:text-[var(--color-accent)] transition-colors"
+                  className="text-[var(--text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)]"
                 >
                   GitHub ↗
                 </a>

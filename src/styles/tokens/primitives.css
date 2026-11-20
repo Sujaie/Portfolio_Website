@@ -1,0 +1,63 @@
+/* src/styles/tokens/primitives.css
+   Centralized Visual Primitives: Radii, Shadows, Elevation, Motion & Reduced Motion
+*/
+
+:root {
+  /* ==========================================================================
+     1. RADIUS SYSTEM
+     ========================================================================== */
+  --radius-sm: 0.25rem;   /* 4px - Tech pills, command chips, sparklines */
+  --radius-md: 0.5rem;    /* 8px - Form inputs, metric tiles, architecture chips */
+  --radius-lg: 0.75rem;   /* 12px - Mock browser preview, telemetry bed, timeline beds */
+  --radius-xl: 1rem;      /* 16px - Primary container cards: Showcase, 3D Tilt, Skills, Modal */
+  --radius-full: 9999px;  /* Pill buttons, badges, status dots, magnifier lens */
+
+  /* ==========================================================================
+     2. ELEVATION & SHADOWS
+     ========================================================================== */
+  --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 30px 70px -15px rgba(0, 0, 0, 0.85);
+  --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+
+  /* Luminous Optical Glows */
+  --glow-gold-sm: 0 0 8px var(--color-accent);
+  --glow-gold-md: 0 0 14px rgba(233, 169, 39, 0.45);
+  --glow-gold-lg: 0 0 45px rgba(233, 169, 39, 0.35);
+  --glow-cyan-sm: 0 0 8px var(--color-data);
+  --glow-cyan-md: 0 0 20px rgba(0, 191, 196, 0.32);
+  --glow-cyan-lg: 0 25px 60px rgba(0, 191, 196, 0.15);
+
+  /* ==========================================================================
+     3. MOTION TOKENS
+     ========================================================================== */
+  --dur-fast: 150ms;
+  --dur-base: 200ms;
+  --dur-slow: 300ms;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  --transition-colors: color var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+  --transition-opacity: opacity var(--dur-base) var(--ease-out);
+  --transition-transform: transform var(--dur-fast) var(--ease-out);
+  --transition-all: all var(--dur-slow) var(--ease-out);
+}
+
+/* ==========================================================================
+   4. REDUCED MOTION ACCESSIBILITY OVERRIDES (WCAG 2.2 compliant)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0.01ms;
+    --dur-base: 0.01ms;
+    --dur-slow: 0.01ms;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

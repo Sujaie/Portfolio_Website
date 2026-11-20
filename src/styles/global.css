@@ -2,8 +2,11 @@
 @import "tailwindcss";
 @import "./tokens/colors.css";
 @import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/primitives.css";
 
 @theme {
+  /* Colors */
   --color-canvas: var(--bg-base);
   --color-surface-elevated: var(--bg-raised);
   --color-surface-nested: var(--surface-2);
@@ -72,6 +75,22 @@
   --tracking-mono-sm: var(--tracking-mono-sm);
   --tracking-mono-md: var(--tracking-mono-md);
   --tracking-mono-lg: var(--tracking-mono-lg);
+
+  /* Radius Scale */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-full: var(--radius-full);
+
+  /* Shadows */
+  --shadow-subtle: var(--shadow-subtle);
+  --shadow-card: var(--shadow-card);
+  --shadow-modal: var(--shadow-modal);
+  --shadow-glow-gold-sm: var(--glow-gold-sm);
+  --shadow-glow-gold-md: var(--glow-gold-md);
+  --shadow-glow-cyan-sm: var(--glow-cyan-sm);
+  --shadow-glow-cyan-lg: var(--glow-cyan-lg);
 }
 
 :root {
@@ -117,7 +136,7 @@ a:focus-visible, button:focus-visible {
 }
 ::-webkit-scrollbar-thumb {
   background: var(--ink-scrollbar);
-  border-radius: 3px;
+  border-radius: var(--radius-sm);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--ink-scrollbar-hover);

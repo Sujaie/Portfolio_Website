@@ -45,14 +45,14 @@ export default function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative w-full py-28 md:py-36 px-6 md:px-12 lg:px-16 bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
+      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
     >
-      <div className="relative z-10 max-w-[1600px] w-full mx-auto">
+      <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto">
         
         {/* Section Header */}
-        <div className="mb-20 max-w-xl">
+        <div className="mb-[var(--section-header-mb)] max-w-xl">
           <div className="flex items-center gap-3 text-xs tracking-mono-lg font-mono font-semibold text-[var(--color-accent)] uppercase mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[var(--glow-gold-sm)]" />
             <span>CORE PROFICIENCIES</span>
           </div>
           <h2 className="text-section-heading font-light text-[var(--text-primary)] tracking-section leading-section">
@@ -68,7 +68,7 @@ export default function Skills() {
           {Object.entries(skills).map(([category, items]) => (
             <div
               key={category}
-              className="skill-card p-6 md:p-8 rounded-2xl bg-[var(--bg-raised)]/70 border border-[var(--border-subtle)] hover:border-[var(--border-strong)] transition-all duration-300"
+              className="skill-card p-6 md:p-8 rounded-[var(--radius-xl)] bg-[var(--bg-raised)]/70 border border-[var(--border-subtle)] hover:border-[var(--border-strong)] transition-all duration-[var(--dur-slow)]"
             >
               <h3 className="text-xs font-mono tracking-mono-md text-[var(--color-data)] uppercase pb-4 mb-6 border-b border-[var(--border-default)] flex items-center justify-between">
                 <span>{category}</span>
@@ -79,9 +79,9 @@ export default function Skills() {
                 {items.map((skill) => (
                   <div
                     key={skill.name}
-                    className="group flex items-center justify-between py-1 border-b border-white/[0.03] hover:border-[var(--border-default)] transition-colors"
+                    className="group flex items-center justify-between py-1 border-b border-white/[0.03] hover:border-[var(--border-default)] transition-colors duration-[var(--dur-base)]"
                   >
-                    <span className="text-base text-[var(--text-primary)] font-light group-hover:text-[var(--color-accent)] transition-colors">
+                    <span className="text-base text-[var(--text-primary)] font-light group-hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)]">
                       {skill.name}
                     </span>
                     <span className="text-2xs font-mono tracking-mono-sm text-[var(--text-secondary)] uppercase">

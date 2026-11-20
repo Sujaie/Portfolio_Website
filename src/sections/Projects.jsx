@@ -83,14 +83,14 @@ function TiltProjectCard({ proj, isEven }) {
           onMouseLeave={handleMouseLeave}
           style={{
             transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg)',
-            transition: 'transform 0.15s ease-out',
+            transition: 'transform var(--dur-fast) var(--ease-out)',
           }}
-          className="relative rounded-2xl bg-gradient-to-b from-[var(--surface-card-start)] to-[var(--surface-card-end)] border border-[var(--border-default)] p-6 md:p-8 overflow-hidden hover:border-[var(--color-data)]/40 hover:shadow-[0_25px_60px_rgba(0,191,196,0.15)] group will-change-transform"
+          className="relative rounded-[var(--radius-xl)] bg-gradient-to-b from-[var(--surface-card-start)] to-[var(--surface-card-end)] border border-[var(--border-default)] p-[var(--card-padding)] overflow-hidden hover:border-[var(--color-data)]/40 hover:shadow-[var(--glow-cyan-lg)] group will-change-transform"
         >
           {/* Dynamic Cursor Light Sheen */}
           <div
             ref={sheenRef}
-            className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-[var(--dur-slow)]"
             style={{
               background: 'radial-gradient(circle 350px at 50% 50%, rgba(0, 191, 196, 0.14), transparent 70%)',
             }}
@@ -108,7 +108,7 @@ function TiltProjectCard({ proj, isEven }) {
             </div>
 
             {/* Interactive View Modes: Telemetry / Architecture / CLI */}
-            <div className="flex items-center gap-1 bg-black/40 p-1 rounded-lg border border-[var(--border-subtle)]">
+            <div className="flex items-center gap-1 bg-black/40 p-1 rounded-[var(--radius-md)] border border-[var(--border-subtle)]">
               {['telemetry', 'arch', 'terminal'].map((mode) => (
                 <button
                   key={mode}
@@ -117,7 +117,7 @@ function TiltProjectCard({ proj, isEven }) {
                     setActiveTab(mode);
                   }}
                   onMouseEnter={() => sound.playHover()}
-                  className={`text-2xs font-mono tracking-mono-sm uppercase px-2 py-0.5 rounded cursor-pointer transition-colors ${
+                  className={`text-2xs font-mono tracking-mono-sm uppercase px-2 py-0.5 rounded cursor-pointer transition-colors duration-[var(--dur-base)] ${
                     activeTab === mode
                       ? 'bg-[var(--color-accent)] text-black font-semibold'
                       : 'text-[var(--text-secondary)] hover:text-white'
@@ -131,8 +131,8 @@ function TiltProjectCard({ proj, isEven }) {
 
           {/* Tab 1: Telemetry View */}
           {activeTab === 'telemetry' && (
-            <div className="relative z-10 rounded-xl bg-[var(--surface-2)]/95 border border-[var(--border-subtle)] p-6 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-lg bg-white/5 border border-[var(--border-subtle)]">
+            <div className="relative z-10 rounded-[var(--radius-lg)] bg-[var(--surface-2)]/95 border border-[var(--border-subtle)] p-6 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-subtle)]">
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full bg-[var(--color-data)] animate-ping" />
                   <span className="text-sm font-mono text-[var(--text-primary)]">Streaming Telemetry Feed</span>
@@ -144,15 +144,15 @@ function TiltProjectCard({ proj, isEven }) {
 
               {/* Sparkline Visualizer */}
               <div className="grid grid-cols-3 gap-3">
-                <div className="p-3 rounded-lg bg-white/[0.03] border border-[var(--border-subtle)]">
+                <div className="p-3 rounded-[var(--radius-md)] bg-white/[0.03] border border-[var(--border-subtle)]">
                   <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Throughput</div>
                   <div className="text-sm font-semibold text-[var(--color-data)] mt-1 font-mono">1.2M RPS</div>
                 </div>
-                <div className="p-3 rounded-lg bg-white/[0.03] border border-[var(--border-subtle)]">
+                <div className="p-3 rounded-[var(--radius-md)] bg-white/[0.03] border border-[var(--border-subtle)]">
                   <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Memory Footprint</div>
                   <div className="text-sm font-semibold text-[var(--color-accent)] mt-1 font-mono">42 MB (Zero Leak)</div>
                 </div>
-                <div className="p-3 rounded-lg bg-white/[0.03] border border-[var(--border-subtle)]">
+                <div className="p-3 rounded-[var(--radius-md)] bg-white/[0.03] border border-[var(--border-subtle)]">
                   <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Latency</div>
                   <div className="text-sm font-semibold text-[var(--color-status-success)] mt-1 font-mono">&lt; 14ms</div>
                 </div>
@@ -162,14 +162,14 @@ function TiltProjectCard({ proj, isEven }) {
 
           {/* Tab 2: Architecture Diagram */}
           {activeTab === 'arch' && (
-            <div className="relative z-10 rounded-xl bg-[var(--surface-2)]/95 border border-[var(--border-subtle)] p-6 space-y-4 font-mono text-xs">
+            <div className="relative z-10 rounded-[var(--radius-lg)] bg-[var(--surface-2)]/95 border border-[var(--border-subtle)] p-6 space-y-4 font-mono text-xs">
               <div className="text-[var(--text-secondary)] text-2xs uppercase tracking-wider mb-2">SYSTEM TOPOLOGY:</div>
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-2 p-3 bg-white/5 rounded border border-[var(--border-subtle)] text-center">
-                <div className="px-3 py-1.5 bg-[var(--color-data)]/20 border border-[var(--color-data)]/40 rounded text-[var(--color-data)]">Edge Proxy (gRPC)</div>
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-2 p-3 bg-white/5 rounded-[var(--radius-md)] border border-[var(--border-subtle)] text-center">
+                <div className="px-3 py-1.5 bg-[var(--color-data)]/20 border border-[var(--color-data)]/40 rounded-[var(--radius-md)] text-[var(--color-data)]">Edge Proxy (gRPC)</div>
                 <span className="text-[var(--color-accent)]">→</span>
-                <div className="px-3 py-1.5 bg-[var(--color-accent)]/20 border border-[var(--color-accent)]/40 rounded text-[var(--color-accent)]">Worker Pool</div>
+                <div className="px-3 py-1.5 bg-[var(--color-accent)]/20 border border-[var(--color-accent)]/40 rounded-[var(--radius-md)] text-[var(--color-accent)]">Worker Pool</div>
                 <span className="text-[var(--color-accent)]">→</span>
-                <div className="px-3 py-1.5 bg-emerald-500/20 border border-emerald-500/40 rounded text-[var(--color-status-success)]">PostgreSQL (pgvector)</div>
+                <div className="px-3 py-1.5 bg-emerald-500/20 border border-emerald-500/40 rounded-[var(--radius-md)] text-[var(--color-status-success)]">PostgreSQL (pgvector)</div>
               </div>
               <p className="text-xs text-[var(--text-secondary)] font-sans leading-relaxed">
                 Asynchronous state pipeline with automated backpressure regulation and zero-copy JSON parsing.
@@ -179,7 +179,7 @@ function TiltProjectCard({ proj, isEven }) {
 
           {/* Tab 3: Interactive Terminal */}
           {activeTab === 'terminal' && (
-            <div className="relative z-10 rounded-xl bg-black/90 border border-[var(--border-default)] p-4 font-mono text-xs space-y-2">
+            <div className="relative z-10 rounded-[var(--radius-lg)] bg-black/90 border border-[var(--border-default)] p-4 font-mono text-xs space-y-2">
               <div className="max-h-32 overflow-y-auto space-y-1 text-[var(--text-secondary)]">
                 {terminalLogs.map((log, i) => (
                   <div key={i} className={log.startsWith('$') ? 'text-white' : 'text-[var(--color-data)]'}>
@@ -195,7 +195,7 @@ function TiltProjectCard({ proj, isEven }) {
                   <button
                     key={cmd}
                     onClick={() => runCommand(cmd)}
-                    className="text-2xs px-2 py-0.5 rounded bg-white/10 hover:bg-[var(--color-accent)] hover:text-black transition-colors cursor-pointer"
+                    className="text-2xs px-2 py-0.5 rounded-[var(--radius-sm)] bg-white/10 hover:bg-[var(--color-accent)] hover:text-black transition-colors duration-[var(--dur-base)] cursor-pointer"
                   >
                     {cmd}
                   </button>
@@ -212,7 +212,7 @@ function TiltProjectCard({ proj, isEven }) {
           <span className="text-num-display font-mono font-light text-[var(--color-accent)]/70">
             {proj.num}
           </span>
-          <span className="text-2xs tracking-mono-md uppercase font-mono font-semibold text-[var(--color-data)] px-2.5 py-1 rounded bg-[var(--color-data)]/10 border border-[var(--color-data)]/20">
+          <span className="text-2xs tracking-mono-md uppercase font-mono font-semibold text-[var(--color-data)] px-2.5 py-1 rounded-[var(--radius-sm)] bg-[var(--color-data)]/10 border border-[var(--color-data)]/20">
             {proj.role}
           </span>
         </div>
@@ -225,7 +225,7 @@ function TiltProjectCard({ proj, isEven }) {
           {proj.description}
         </p>
 
-        <div className="mb-6 p-4 rounded-xl bg-white/[0.03] border border-[var(--border-subtle)]">
+        <div className="mb-6 p-4 rounded-[var(--radius-lg)] bg-white/[0.03] border border-[var(--border-subtle)]">
           <div className="text-2xs font-mono tracking-mono-sm uppercase text-[var(--color-accent)] font-semibold mb-1">
             IMPACT & HIGHLIGHT
           </div>
@@ -254,7 +254,7 @@ function TiltProjectCard({ proj, isEven }) {
             rel="noopener noreferrer"
             onMouseEnter={() => sound.playHover()}
             onClick={() => sound.playClick()}
-            className="text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors flex items-center gap-1.5"
+            className="text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)] flex items-center gap-1.5"
           >
             <span>SOURCE CODE</span>
             <span>↗</span>
@@ -271,7 +271,7 @@ export default function Projects() {
   return (
     <section
       id="work"
-      className="relative w-full min-h-[100svh] py-28 md:py-36 px-6 md:px-12 lg:px-16 bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
+      className="relative w-full min-h-[100svh] py-[var(--section-py)] px-[var(--page-gutter)] bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
     >
       <div
         className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full blur-[130px] opacity-20 pointer-events-none"
@@ -281,11 +281,11 @@ export default function Projects() {
         }}
       />
 
-      <div className="relative z-10 max-w-[1600px] w-full mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-20">
+      <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-[var(--section-header-mb)]">
           <div>
             <div className="flex items-center gap-3 text-xs tracking-mono-lg font-mono font-semibold text-[var(--color-data)] uppercase mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-data)] shadow-[0_0_8px_var(--color-data)]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-data)] shadow-[var(--glow-cyan-sm)]" />
               <span>SELECTED PRODUCTIONS</span>
             </div>
             <h2 className="text-section-heading font-light text-[var(--text-primary)] tracking-section leading-section">
