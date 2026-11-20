@@ -47,7 +47,7 @@ export default function Experience() {
     <section
       id="experience"
       ref={sectionRef}
-      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
+      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] bg-transparent border-t border-[var(--border-subtle)]"
     >
       <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto">
         

@@ -7,33 +7,8 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative w-full min-h-[100svh] bg-[var(--bg-base)] overflow-hidden flex flex-col justify-between pt-28 md:pt-36 pb-10 px-[var(--page-gutter)]"
+      className="relative w-full min-h-[100svh] bg-transparent overflow-hidden flex flex-col justify-between pt-28 md:pt-36 pb-10 px-[var(--page-gutter)]"
     >
-      {/* ATMOSPHERIC BACKGROUND LAYERS */}
-      <div className="absolute inset-0 bg-noise pointer-events-none z-10 opacity-35" />
-
-      {/* Atmospheric Ambient Depth (GPU-isolated composite layer) */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ transform: 'translateZ(0)' }}>
-        <div
-          className="absolute top-1/4 right-[5%] w-[650px] md:w-[950px] h-[650px] md:h-[950px] rounded-full pointer-events-none blur-[140px] opacity-40"
-          style={{
-            background: 'radial-gradient(circle, var(--hero-ambient-navy) 0%, var(--bg-raised) 60%, transparent 80%)'
-          }}
-        />
-        <div
-          className="absolute top-[22%] left-[12%] md:left-[24%] w-[500px] md:w-[800px] h-[500px] md:h-[800px] rounded-full pointer-events-none blur-[120px] opacity-70"
-          style={{
-            background: 'radial-gradient(circle, rgba(23,105,181,0.3) 0%, rgba(0,191,196,0.12) 45%, transparent 75%)'
-          }}
-        />
-        <div
-          className="absolute -bottom-24 -left-20 w-[450px] md:w-[650px] h-[450px] md:h-[650px] rounded-full pointer-events-none blur-[130px] opacity-25"
-          style={{
-            background: 'radial-gradient(circle, var(--hero-ambient-cyan) 0%, var(--hero-ambient-blue) 50%, transparent 80%)'
-          }}
-        />
-      </div>
-
       {/* TOP CONTENT: INTRO METADATA LABEL */}
       <div className="relative z-20 max-w-[var(--content-max-width)] w-full mx-auto">
         <div className="inline-flex items-center gap-3 text-xs tracking-mono-lg font-mono text-[var(--text-secondary)] uppercase">

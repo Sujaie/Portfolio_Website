@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react';
 import { portfolioData } from '../data/portfolio.js';
 import { sound } from '../utils/sound.js';
+import { useReducedMotion } from '../hooks/useReducedMotion.js';
 
 function TiltProjectCard({ proj, isEven }) {
   const cardRef = useRef(null);
   const sheenRef = useRef(null);
   const rectRef = useRef(null);
+  const prefersReduced = useReducedMotion();
   const [activeTab, setActiveTab] = useState('telemetry'); // 'telemetry' | 'arch' | 'terminal'
   const [terminalInput, setTerminalInput] = useState('');
   const [terminalLogs, setTerminalLogs] = useState([
@@ -15,12 +17,14 @@ function TiltProjectCard({ proj, isEven }) {
   ]);
 
   const handleMouseEnter = () => {
+    if (prefersReduced) return;
     if (cardRef.current) {
       rectRef.current = cardRef.current.getBoundingClientRect();
     }
   };
 
   const handleMouseMove = (e) => {
+    if (prefersReduced) return;
     if (!cardRef.current) return;
     if (!rectRef.current) {
       rectRef.current = cardRef.current.getBoundingClientRect();
@@ -39,7 +43,7 @@ function TiltProjectCard({ proj, isEven }) {
 
     cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
     if (sheenRef.current) {
-      sheenRef.current.style.background = `radial-gradient(circle 350px at ${shineX.toFixed(1)}% ${shineY.toFixed(1)}%, rgba(0, 191, 196, 0.16), transparent 70%)`;
+      sheenRef.current.style.background = `radial-gradient(circle 350px at ${shineX.toFixed(1)}% ${shineY.toFixed(1)}%, rgba(31, 194, 201, 0.16), transparent 70%)`;
       sheenRef.current.style.opacity = '1';
     }
   };
@@ -85,7 +89,7 @@ function TiltProjectCard({ proj, isEven }) {
             transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg)',
             transition: 'transform var(--dur-fast) var(--ease-out)',
           }}
-          className="relative rounded-[var(--radius-xl)] bg-gradient-to-b from-[var(--surface-card-start)] to-[var(--surface-card-end)] border border-[var(--border-default)] p-[var(--card-padding)] overflow-hidden hover:border-[var(--color-data)]/40 hover:shadow-[var(--glow-cyan-lg)] group will-change-transform"
+          className="relative rounded-[var(--radius-xl)] bg-gradient-to-b from-[var(--surface-card-start)] to-[var(--surface-card-end)] border border-[var(--border-default)] p-[var(--card-padding)] overflow-hidden hover:border-[var(--color-data)]/50 hover:-translate-y-1 transition-[transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-standard)] group will-change-transform shadow-[var(--shadow-card)]"
         >
           {/* Dynamic Cursor Light Sheen */}
           <div
@@ -280,16 +284,8 @@ export default function Projects() {
   return (
     <section
       id="work"
-      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
+      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] bg-transparent border-t border-[var(--border-subtle)]"
     >
-      <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full blur-[130px] opacity-20 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, var(--work-ambient-blue) 0%, var(--work-ambient-navy) 60%, transparent 80%)',
-          transform: 'translate(-50%, 0) translateZ(0)',
-        }}
-      />
-
       <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-[var(--section-header-mb)]">
           <div>

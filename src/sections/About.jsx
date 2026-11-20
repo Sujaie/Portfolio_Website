@@ -52,19 +52,8 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] overflow-hidden bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
+      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] overflow-hidden bg-transparent border-t border-[var(--border-subtle)]"
     >
-      {/* SUBTLE ATMOSPHERIC DEPTH (Aligned with Base Canvas) */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ transform: 'translateZ(0)' }}>
-        {/* Low-opacity ambient glow matching global palette */}
-        <div
-          className="absolute top-1/4 -right-1/4 w-[650px] md:w-[900px] h-[650px] md:h-[900px] rounded-full blur-[140px] opacity-20 pointer-events-none"
-          style={{ background: 'radial-gradient(circle, var(--ambient-blue) 0%, var(--ambient-navy) 60%, transparent 80%)' }}
-        />
-        {/* Subtle noise layer */}
-        <div className="absolute inset-0 bg-noise opacity-30" />
-      </div>
-
       <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-[var(--grid-gap-lg)] items-center">
         
         {/* LEFT COLUMN: EDITORIAL INTRODUCTION */}

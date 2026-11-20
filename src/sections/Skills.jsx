@@ -48,7 +48,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
+      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] bg-transparent border-t border-[var(--border-subtle)]"
     >
       <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto">
         
@@ -71,7 +71,7 @@ export default function Skills() {
           {Object.entries(skills).map(([category, items]) => (
             <div
               key={category}
-              className="skill-card p-6 md:p-8 rounded-[var(--radius-xl)] bg-[var(--bg-raised)]/70 border border-[var(--border-subtle)] hover:border-[var(--border-strong)] transition-all duration-[var(--dur-slow)]"
+              className="skill-card p-6 md:p-8 rounded-[var(--radius-xl)] bg-[var(--surface-2)]/90 border border-[var(--border-subtle)] hover:border-[var(--border-strong)] hover:-translate-y-1 transition-[transform,border-color] duration-[var(--dur-base)] ease-[var(--ease-standard)] shadow-[var(--shadow-card)]"
             >
               <h3 className="text-xs font-mono tracking-mono-md text-[var(--color-data)] uppercase pb-4 mb-6 border-b border-[var(--border-default)] flex items-center justify-between">
                 <span>{category}</span>

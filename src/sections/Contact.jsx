@@ -47,7 +47,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] bg-[var(--bg-base)] border-t border-[var(--border-subtle)] overflow-hidden"
+      className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] bg-transparent border-t border-[var(--border-subtle)] overflow-hidden"
     >
       {/* Background Soft Blue/Cyan Spotlight (GPU isolated) */}
       <div
