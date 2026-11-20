@@ -21,7 +21,7 @@ export default function Navbar() {
     return 'home';
   });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(() => sound.isEnabled());
 
   const navRef = useRef(null);
   const linkRefs = useRef({});
@@ -36,7 +36,7 @@ export default function Navbar() {
     opacity: 0,
   });
 
-  // 1. Precise, flicker-free active section detection based on reading focal plane
+  // 1. Precise active section detection based on reading focal plane (~140px below fixed nav)
   const determineActiveSection = () => {
     if (isClickScrollingRef.current) return;
 
@@ -45,20 +45,20 @@ export default function Navbar() {
     const windowHeight = window.innerHeight || 800;
     const maxScroll = Math.max(0, scrollHeight - windowHeight);
 
-    // Edge guard: top of page is strictly 'home'
-    if (scrollY <= 60) {
+    // Edge guard: top of page (<= 50px) is strictly 'home'
+    if (scrollY <= 50) {
       setActiveSection((prev) => (prev !== 'home' ? 'home' : prev));
       return;
     }
 
-    // Edge guard: bottom of page is strictly 'contact'
-    if (maxScroll > 0 && scrollY >= maxScroll - 60) {
+    // Edge guard: bottom of page (within 50px of document bottom) is strictly 'contact'
+    if (maxScroll > 0 && scrollY >= maxScroll - 50) {
       setActiveSection((prev) => (prev !== 'contact' ? 'contact' : prev));
       return;
     }
 
     const sections = ['home', 'about', 'work', 'skills', 'experience', 'contact'];
-    // Reading focal point: 140px below the fixed navbar
+    // Reading focal point: 140px below fixed navbar
     const focalY = scrollY + 140;
 
     let dominantSection = 'home';
@@ -93,7 +93,6 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', determineActiveSection, { passive: true });
 
-    // Initial check on mount
     determineActiveSection();
 
     return () => {
@@ -104,7 +103,7 @@ export default function Navbar() {
     };
   }, []);
 
-  // 2. Single sliding underline indicator positioning (transforms + width)
+  // 2. Sliding underline indicator positioning (transforms + width)
   useEffect(() => {
     const updateIndicator = () => {
       const activeLink = linkRefs.current[activeSection];
@@ -134,7 +133,6 @@ export default function Navbar() {
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
-      // Focus first link on open
       setTimeout(() => firstMobileLinkRef.current?.focus(), 50);
 
       const handleKeyDown = (e) => {
@@ -164,10 +162,10 @@ export default function Navbar() {
     sound.playClick();
     const targetId = href.replace('#', '');
 
-    // 1. Immediately indicate the clicked section
+    // Immediately indicate the clicked section
     setActiveSection(targetId);
 
-    // 2. Temporarily lock scroll tracking so intermediate sections don't cause jitter
+    // Lock scroll tracking for 850ms so intermediate sections don't cause jitter
     isClickScrollingRef.current = true;
     if (clickScrollTimerRef.current) clearTimeout(clickScrollTimerRef.current);
     clickScrollTimerRef.current = setTimeout(() => {
@@ -178,14 +176,22 @@ export default function Navbar() {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (targetId === 'home') {
-      window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+      window.scrollTo({ top: 0, behavior: prefersReduced ? 'instant' : 'smooth' });
       if (window.history?.replaceState) {
         window.history.replaceState(null, '', href);
       }
     } else {
       const element = document.getElementById(targetId);
       if (element) {
-        element.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth' });
+        const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'), 10) || 72;
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = Math.max(0, elementPosition - navHeight);
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: prefersReduced ? 'instant' : 'smooth',
+        });
+
         if (window.history?.replaceState) {
           window.history.replaceState(null, '', href);
         }
@@ -202,7 +208,7 @@ export default function Navbar() {
     <header
       id="main-navbar"
       data-active-section={activeSection}
-      className="fixed top-0 left-0 right-0 z-[1000] h-[var(--nav-height)] px-[var(--page-gutter)] bg-[var(--bg-base)] border-b border-[var(--border-default)] transition-colors duration-[var(--dur-base)] flex items-center"
+      className="fixed top-0 left-0 right-0 z-[1000] h-[var(--nav-height)] px-[var(--page-gutter)] bg-[var(--bg-base)]/95 backdrop-blur-md border-b border-[var(--border-default)] transition-colors duration-[var(--dur-base)] flex items-center"
     >
       <div className="max-w-[var(--content-max-width)] w-full mx-auto flex items-center justify-between">
         
@@ -214,7 +220,7 @@ export default function Navbar() {
           onMouseEnter={() => sound.playHover()}
           className="flex items-center gap-3 text-caption tracking-mono-lg font-mono uppercase font-semibold text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)] cursor-pointer"
         >
-          <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] shadow-[var(--glow-gold-sm)]"></span>
+          <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] shadow-[var(--glow-gold-sm)]" />
           <span>SUJAIE / DEV</span>
         </a>
 
@@ -232,6 +238,7 @@ export default function Navbar() {
                 key={link.name}
                 ref={(el) => (linkRefs.current[sectionKey] = el)}
                 href={link.href}
+                aria-current={isActive ? 'page' : undefined}
                 onClick={(e) => scrollToSection(e, link.href)}
                 onMouseEnter={() => sound.playHover()}
                 className={`group relative py-1 text-xs font-mono tracking-mono-md font-medium transition-colors duration-[var(--dur-base)] cursor-pointer ${
@@ -245,7 +252,7 @@ export default function Navbar() {
 
           {/* Single Reusable Sliding Underline Indicator */}
           <span
-            className="absolute bottom-0 left-0 h-[1.5px] bg-[var(--color-accent)] shadow-[var(--glow-gold-sm)] transition-[transform,width,opacity] duration-[var(--dur-slow)] ease-[var(--ease-out)] pointer-events-none"
+            className="absolute bottom-0 left-0 h-[1.5px] bg-[var(--color-accent)] shadow-[var(--glow-gold-sm)] transition-[transform,width,opacity] duration-[var(--dur-base)] ease-[var(--ease-standard)] pointer-events-none"
             style={indicatorStyle}
             aria-hidden="true"
           />
@@ -304,6 +311,7 @@ export default function Navbar() {
                 key={link.name}
                 ref={idx === 0 ? firstMobileLinkRef : null}
                 href={link.href}
+                aria-current={isActive ? 'page' : undefined}
                 onClick={(e) => scrollToSection(e, link.href)}
                 className={`text-xs tracking-mono-lg font-mono uppercase font-medium py-3 border-b border-[var(--border-subtle)] flex items-center justify-between cursor-pointer transition-colors duration-[var(--dur-base)] ${
                   isActive

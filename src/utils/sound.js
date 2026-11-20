@@ -1,10 +1,24 @@
 // src/utils/sound.js
-// Lightweight Web Audio API synthesizer for tactile UI feedback (zero external audio files)
+// Lightweight Web Audio API synthesizer for tactile UI feedback (zero external audio files, zero HTTP requests)
 
 class SoundEngine {
   constructor() {
     this.ctx = null;
     this.enabled = false;
+
+    // Persist audio consent state in localStorage
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = localStorage.getItem('sujaie_sfx_enabled');
+        if (stored !== null) {
+          this.enabled = stored === 'true';
+        }
+      } catch (_) {}
+    }
+  }
+
+  isEnabled() {
+    return this.enabled;
   }
 
   init() {
@@ -22,13 +36,17 @@ class SoundEngine {
   toggle() {
     this.init();
     this.enabled = !this.enabled;
+    try {
+      localStorage.setItem('sujaie_sfx_enabled', String(this.enabled));
+    } catch (_) {}
+
     if (this.enabled) {
       this.playChime();
     }
     return this.enabled;
   }
 
-  // Soft subtle click for buttons and tabs
+  // Soft low pop click for buttons, nav links, and tabs (~620Hz -> ~320Hz, 40ms, soft decay)
   playClick() {
     if (!this.enabled || !this.ctx) return;
     try {
@@ -50,7 +68,7 @@ class SoundEngine {
     } catch (_) {}
   }
 
-  // Soft atmospheric hover hum
+  // Soft atmospheric hover hum/tick (~440Hz, 35ms, very low gain)
   playHover() {
     if (!this.enabled || !this.ctx) return;
     try {
@@ -71,7 +89,7 @@ class SoundEngine {
     } catch (_) {}
   }
 
-  // Positive chime for copies & slide transitions
+  // Subtle three-note harmonic chime for toggles & copy confirmations (C5, E5, G5)
   playChime() {
     if (!this.ctx) this.init();
     if (!this.ctx) return;
@@ -98,4 +116,3 @@ class SoundEngine {
 }
 
 export const sound = new SoundEngine();
-
