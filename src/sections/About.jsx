@@ -1,14 +1,73 @@
-import React, { useState, useRef } from 'react';
-import { animate } from 'animejs';
+import React, { useState, useRef, useEffect } from 'react';
+import gsap from 'gsap';
 import { portfolioData } from '../data/portfolio.js';
 import { useReducedMotion } from '../hooks/useReducedMotion.js';
 
 export default function About() {
   const { about, showcase } = portfolioData;
   const [activeIndex, setActiveIndex] = useState(0);
-  const slideRef = useRef(null);
-  const animRef = useRef(null);
+  const sectionRef = useRef(null);
+  const editorialRef = useRef(null);
+  const scanLineRef = useRef(null);
+  const isRevealedRef = useRef(false);
   const prefersReduced = useReducedMotion();
+
+  // About "Transmission" Signature: Scan-line wipe & editorial brightening
+  useEffect(() => {
+    if (prefersReduced) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isRevealedRef.current && editorialRef.current) {
+            isRevealedRef.current = true;
+
+            const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+
+            // Luminous cyan transmission beam sweeps down
+            if (scanLineRef.current) {
+              tl.fromTo(
+                scanLineRef.current,
+                { top: '0%', opacity: 0.8 },
+                { top: '100%', opacity: 0, duration: 1.2, ease: 'power1.inOut' }
+              );
+            }
+
+            // Lead heading & paragraphs brighten sequentially
+            tl.fromTo(
+              '.about-lead-text',
+              { opacity: 0.35, y: 8 },
+              { opacity: 1, y: 0, duration: 0.8 },
+              0.1
+            );
+
+            tl.fromTo(
+              '.about-paragraph',
+              { opacity: 0.35, y: 6 },
+              { opacity: 1, y: 0, duration: 0.7, stagger: 0.2 },
+              0.3
+            );
+
+            tl.fromTo(
+              '.about-highlight-pill',
+              { opacity: 0, scale: 0.95 },
+              { opacity: 1, scale: 1, duration: 0.4, stagger: 0.08 },
+              0.6
+            );
+
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [prefersReduced]);
 
   const handleSlideChange = (newIndex) => {
     if (newIndex === activeIndex) return;
@@ -18,24 +77,19 @@ export default function About() {
       return;
     }
 
-    if (animRef.current?.pause) {
-      animRef.current.pause();
-    }
-
-    animRef.current = animate('.showcase-active-content', {
-      opacity: [1, 0],
-      translateX: [0, newIndex > activeIndex ? -20 : 20],
-      duration: 180,
-      ease: 'inQuad',
+    gsap.to('.showcase-active-content', {
+      opacity: 0,
+      x: newIndex > activeIndex ? -20 : 20,
+      duration: 0.18,
+      ease: 'power2.in',
       onComplete: () => {
         setActiveIndex(newIndex);
-        animRef.current = animate('.showcase-active-content', {
-          opacity: [0, 1],
-          translateX: [newIndex > activeIndex ? 20 : -20, 0],
-          duration: 260,
-          ease: 'outCubic'
-        });
-      }
+        gsap.fromTo(
+          '.showcase-active-content',
+          { opacity: 0, x: newIndex > activeIndex ? 20 : -20 },
+          { opacity: 1, x: 0, duration: 0.26, ease: 'power2.out' }
+        );
+      },
     });
   };
 
@@ -47,18 +101,37 @@ export default function About() {
     handleSlideChange((activeIndex - 1 + showcase.length) % showcase.length);
   };
 
+  const handleTabKeyDown = (e, idx) => {
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      handleSlideChange((idx + 1) % showcase.length);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      handleSlideChange((idx - 1 + showcase.length) % showcase.length);
+    }
+  };
+
   const currentItem = showcase[activeIndex];
 
   return (
     <section
       id="about"
+      ref={sectionRef}
       className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] overflow-hidden bg-transparent border-t border-[var(--border-subtle)]"
     >
       <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-[var(--grid-gap-lg)] items-center">
         
-        {/* LEFT COLUMN: EDITORIAL INTRODUCTION */}
-        <div className="lg:col-span-5 flex flex-col justify-center">
+        {/* LEFT COLUMN: EDITORIAL INTRODUCTION (Transmission Signature) */}
+        <div ref={editorialRef} className="relative lg:col-span-5 flex flex-col justify-center">
           
+          {/* Luminous Transmission Beam (Sweeps vertically when revealed) */}
+          <div
+            ref={scanLineRef}
+            aria-hidden="true"
+            className="pointer-events-none absolute left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[var(--color-data)] to-transparent shadow-[var(--glow-cyan-sm)] opacity-0"
+            style={{ willChange: 'top, opacity' }}
+          />
+
           {/* Badge */}
           <div className="inline-flex items-center gap-3 text-xs tracking-mono-lg font-mono text-[var(--color-accent)] uppercase mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[var(--glow-gold-sm)]" />
@@ -66,7 +139,7 @@ export default function About() {
           </div>
 
           {/* Lead statement */}
-          <h2 className="text-section-lead font-light tracking-tight text-[var(--text-primary)] mb-6 leading-section-lead">
+          <h2 className="about-lead-text text-section-lead font-light tracking-tight text-[var(--text-primary)] mb-6 leading-section-lead">
             {about.lead} <br />
             <span className="font-serif italic text-[var(--color-accent)]">
               Crafting systems
@@ -76,7 +149,7 @@ export default function About() {
           {/* Body paragraphs */}
           <div className="space-y-4 text-base text-[var(--text-secondary)] font-light leading-relaxed max-w-lg">
             {about.paragraphs.map((p, i) => (
-              <p key={i}>{p}</p>
+              <p key={i} className="about-paragraph">{p}</p>
             ))}
           </div>
 
@@ -85,7 +158,7 @@ export default function About() {
             {about.highlights.map((item) => (
               <span
                 key={item}
-                className="text-xs font-mono tracking-mono-sm uppercase px-3 py-1.5 rounded-full bg-[var(--about-pill-bg)] border border-[var(--border-default)] text-[var(--text-primary)]"
+                className="about-highlight-pill text-xs font-mono tracking-mono-sm uppercase px-3 py-1.5 rounded-full bg-[var(--about-pill-bg)] border border-[var(--border-default)] text-[var(--text-primary)]"
               >
                 {item}
               </span>
@@ -112,6 +185,7 @@ export default function About() {
                     aria-selected={idx === activeIndex}
                     aria-controls={`showcase-panel-${item.id}`}
                     onClick={() => handleSlideChange(idx)}
+                    onKeyDown={(e) => handleTabKeyDown(e, idx)}
                     className={`text-2xs tracking-mono-md font-mono uppercase px-3 py-1.5 rounded-full transition-all duration-[var(--dur-slow)] cursor-pointer ${
                       idx === activeIndex
                         ? 'bg-[var(--color-accent)] text-black font-semibold shadow-[var(--glow-gold-md)]'
@@ -123,7 +197,7 @@ export default function About() {
                 ))}
               </div>
 
-              {/* Prev / Next Controls (Accessible 44x44px target) */}
+              {/* Prev / Next Controls (Accessible target) */}
               <div className="flex items-center gap-2 flex-shrink-0">
                 <button
                   onClick={prevSlide}
@@ -144,7 +218,6 @@ export default function About() {
 
             {/* Active Showcase Content (Animated) */}
             <div
-              ref={slideRef}
               id={`showcase-panel-${currentItem.id}`}
               role="tabpanel"
               aria-labelledby={`showcase-tab-${currentItem.id}`}
@@ -172,15 +245,15 @@ export default function About() {
 
                 {/* Mock UI Canvas / Telemetry Grid */}
                 <div className="grid grid-cols-3 gap-3 my-auto py-2">
-                  <div className="p-3 rounded-[var(--radius-md)] bg-[var(--about-pill-bg)] border border-[var(--border-subtle)]">
+                  <div className="p-3 rounded-[var(--radius-md)] bg-[var(--surface-2)]/90 border border-[var(--border-subtle)]">
                     <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Engine State</div>
                     <div className="text-sm font-semibold text-[var(--color-data)] mt-1 font-mono">OPTIMIZED</div>
                   </div>
-                  <div className="p-3 rounded-[var(--radius-md)] bg-[var(--about-pill-bg)] border border-[var(--border-subtle)]">
+                  <div className="p-3 rounded-[var(--radius-md)] bg-[var(--surface-2)]/90 border border-[var(--border-subtle)]">
                     <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Throughput</div>
                     <div className="text-sm font-semibold text-[var(--color-accent)] mt-1 font-mono">{currentItem.metrics.split('•')[0]}</div>
                   </div>
-                  <div className="p-3 rounded-[var(--radius-md)] bg-[var(--about-pill-bg)] border border-[var(--border-subtle)]">
+                  <div className="p-3 rounded-[var(--radius-md)] bg-[var(--surface-2)]/90 border border-[var(--border-subtle)]">
                     <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Latency</div>
                     <div className="text-sm font-semibold text-white mt-1 font-mono">{currentItem.metrics.split('•')[1] || 'Sub-ms'}</div>
                   </div>

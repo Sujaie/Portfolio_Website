@@ -18,10 +18,25 @@ export default function GlobalCursorMagnifier() {
   const rimRef = useRef(null);
   const [isTouch, setIsTouch] = useState(false);
   const prefersReduced = useReducedMotion();
+  const [ready, setReady] = useState(() => prefersReduced);
 
   const LENS_RADIUS = 60; // 120px circular optical window
 
+  // Hero Ignition synchronization: cursor orb wakes only after hero settles
   useEffect(() => {
+    if (prefersReduced) {
+      setReady(true);
+      return;
+    }
+    const timer = setTimeout(() => {
+      setReady(true);
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, [prefersReduced]);
+
+  useEffect(() => {
+    if (!ready) return;
+
     // Touch device detection
     const touchQuery = window.matchMedia('(hover: none) and (pointer: coarse)');
     if (touchQuery.matches) {
@@ -160,7 +175,7 @@ export default function GlobalCursorMagnifier() {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (rafId) cancelAnimationFrame(rafId);
     };
-  }, [prefersReduced]);
+  }, [ready, prefersReduced]);
 
   if (isTouch) {
     return null;
