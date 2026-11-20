@@ -1,44 +1,46 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-test.describe('Global Optical Cursor Magnifier Verification', () => {
-  test('optical-magnifier-renders-mirror-and-tracks-cursor', async ({ page }) => {
+test.describe('Global Optical Cursor Instrument Glass Orb Verification', () => {
+  test('optical-glass-orb-renders-and-tracks-with-zero-dom-duplication', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto('/', { waitUntil: 'networkidle' });
     await page.waitForTimeout(600);
 
-    // 1. Verify data-magnifier-source is present on main
-    const mainSource = page.locator('main[data-magnifier-source]');
-    await expect(mainSource).toBeVisible();
-
-    // 2. Move pointer over hero headline
-    await page.mouse.move(400, 350);
-    await page.waitForTimeout(300);
-
-    // 3. Verify optical mirror contains mirrored elements
-    const mirrorContent = await page.evaluate(() => {
-      const mirror = document.querySelector('.cursor-mirror-element');
-      return {
-        exists: !!mirror,
-        hasChildren: (mirror?.children.length || 0) > 0,
-      };
+    // 1. Verify zero mirror elements or duplicate DOM exist anywhere
+    const mirrorCount = await page.evaluate(() => {
+      return document.querySelectorAll('.cursor-mirror-element').length;
     });
-    expect(mirrorContent.exists).toBe(true);
-    expect(mirrorContent.hasChildren).toBe(true);
+    expect(mirrorCount).toBe(0);
 
-    // 4. Verify clip-path circle is positioned around cursor coordinates
-    const clipPath = await page.evaluate(() => {
-      const clipLayer = document.querySelector('div[style*="clip-path"]');
-      return clipLayer?.getAttribute('style') || '';
+    // 2. Verify cursor lens shell exists in high z-index plane
+    const lensShell = page.locator('#cursor-lens-shell');
+    await expect(lensShell).toBeAttached();
+
+    // 3. Move pointer over hero headline
+    await page.mouse.move(500, 400);
+    await page.waitForTimeout(350);
+
+    // 4. Verify lens shell tracks pointer coordinates
+    const transform = await page.evaluate(() => {
+      const shell = document.getElementById('cursor-lens-shell');
+      return shell?.style.transform || '';
     });
-    expect(clipPath).toContain('circle(65px at');
+    expect(transform).toContain('translate3d');
 
-    // 5. Test hover over interactive element changes rim color to gold
+    // 5. Verify optical filter has contrast and brightness enhancement
+    const filterStyle = await page.evaluate(() => {
+      const filterEl = document.getElementById('cursor-optical-filter');
+      return filterEl ? getComputedStyle(filterEl).backdropFilter || filterEl.style.backdropFilter : '';
+    });
+    expect(filterStyle).toContain('contrast');
+
+    // 6. Test hover over interactive element changes rim color to Champagne Gold and expands
     const navLink = page.locator('#main-navbar a[href="#work"]');
     const box = await navLink.boundingBox();
     if (box) {
       await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-      await page.waitForTimeout(300);
+      await page.waitForTimeout(350);
 
       const result = await page.evaluate(() => {
         const rim = document.getElementById('cursor-lens-rim');
