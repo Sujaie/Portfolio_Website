@@ -4,6 +4,7 @@ import { useReducedMotion } from '../hooks/useReducedMotion.js';
 
 export default function GlobalCursorMagnifier() {
   const lensRef = useRef(null);
+  const lensShellRef = useRef(null);
   const clipLayerRef = useRef(null);
   const contentMirrorRef = useRef(null);
   const headerMirrorRef = useRef(null);
@@ -49,10 +50,11 @@ export default function GlobalCursorMagnifier() {
         // Strip non-visual elements
         contentClone.querySelectorAll('audio, video, script').forEach((el) => el.remove());
 
-        // Retain all rich atmospheric gradients & mesh colors so the lens displays the exact vibrant palette!
-        // Tune blur to blur-[60px] in the mirror so colors are smooth, vivid, and fast:
-        contentClone.querySelectorAll('[class*="blur-"]').forEach((el) => {
-          el.className = el.className.replace(/blur-\[[^\]]+\]/g, 'blur-[60px]');
+        // Retain original atmospheric blurs and mesh lighting (no destructive class mutations)
+        // Disable backdrop-filter inside the mirror so Chromium / Opera GX GPU compositor never samples black
+        contentClone.querySelectorAll('[class*="backdrop-blur"], [style*="backdrop-filter"]').forEach((el) => {
+          el.style.backdropFilter = 'none';
+          el.style.webkitBackdropFilter = 'none';
         });
 
         contentClone.querySelectorAll('[id]').forEach((el) => {
@@ -214,8 +216,8 @@ export default function GlobalCursorMagnifier() {
         currentY = mouseY;
         setIsVisible(true);
 
-        if (lensRef.current && !prefersReduced) {
-          animate(lensRef.current, {
+        if (lensShellRef.current && !prefersReduced) {
+          animate(lensShellRef.current, {
             scale: [0.85, 1],
             opacity: [0, 1],
             duration: 200,
@@ -238,8 +240,8 @@ export default function GlobalCursorMagnifier() {
     const handlePointerLeave = () => {
       isInside = false;
       setIsVisible(false);
-      if (lensRef.current && !prefersReduced) {
-        animate(lensRef.current, {
+      if (lensShellRef.current && !prefersReduced) {
+        animate(lensShellRef.current, {
           scale: [1, 0.85],
           opacity: [1, 0],
           duration: 180,
@@ -296,14 +298,14 @@ export default function GlobalCursorMagnifier() {
         {/* Scrollable Main Content Mirror (Exact zero-offset transform origin 0 0) */}
         <div
           ref={contentMirrorRef}
-          className="absolute top-0 left-0 w-full pointer-events-none select-none will-change-transform filter brightness-[1.12] contrast-[1.08]"
+          className="absolute top-0 left-0 w-full pointer-events-none select-none will-change-transform"
           style={{ transformOrigin: '0 0' }}
         />
 
         {/* Fixed Header Mirror (Sits on top with z-50, displayed only when hovering top bar) */}
         <div
           ref={headerMirrorRef}
-          className="absolute top-0 left-0 w-full pointer-events-none select-none z-50 will-change-transform filter brightness-[1.12] contrast-[1.08]"
+          className="absolute top-0 left-0 w-full pointer-events-none select-none z-50 will-change-transform"
           style={{ transformOrigin: '0 0', display: 'none' }}
         />
       </div>
@@ -311,7 +313,7 @@ export default function GlobalCursorMagnifier() {
       {/* Layer 2: Single Glass Lens Shell with Pure Luminous Cyan/Gold Rim */}
       <div
         ref={lensRef}
-        className={`fixed top-0 left-0 pointer-events-none z-[9999] rounded-full will-change-transform transition-opacity duration-200 ${
+        className={`fixed top-0 left-0 pointer-events-none z-[9999] will-change-transform transition-opacity duration-200 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
         style={{
@@ -320,23 +322,28 @@ export default function GlobalCursorMagnifier() {
         }}
         aria-hidden="true"
       >
-        {/* Luminous Outer Rim (Cyan by default / Gold on hover) */}
         <div
-          className={`absolute inset-0 rounded-full border-[1.5px] transition-colors duration-200 ${
-            isHovered
-              ? 'border-[var(--color-accent)]/85 shadow-[0_0_24px_rgba(233,169,39,0.45),inset_0_0_12px_rgba(255,255,255,0.2)]'
-              : 'border-[var(--color-highlight)]/60 shadow-[0_0_20px_rgba(0,191,196,0.32),inset_0_0_12px_rgba(255,255,255,0.12)]'
-          }`}
-        />
+          ref={lensShellRef}
+          className="relative w-full h-full rounded-full"
+        >
+          {/* Luminous Outer Rim (Cyan by default / Gold on hover) */}
+          <div
+            className={`absolute inset-0 rounded-full border-[1.5px] transition-colors duration-200 ${
+              isHovered
+                ? 'border-[var(--color-accent)]/85 shadow-[0_0_24px_rgba(233,169,39,0.45),inset_0_0_12px_rgba(255,255,255,0.2)]'
+                : 'border-[var(--color-highlight)]/60 shadow-[0_0_20px_rgba(0,191,196,0.32),inset_0_0_12px_rgba(255,255,255,0.12)]'
+            }`}
+          />
 
-        {/* Delicate Glass Refraction Highlight (subtle radial sheen, no harsh white lines) */}
-        <div
-          className="absolute inset-[2px] rounded-full pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(circle at 35% 30%, rgba(255,255,255,0.12) 0%, rgba(0,191,196,0.03) 45%, transparent 70%)',
-          }}
-        />
+          {/* Delicate Glass Refraction Highlight (subtle radial sheen, no harsh white lines) */}
+          <div
+            className="absolute inset-[2px] rounded-full pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(circle at 35% 30%, rgba(255,255,255,0.12) 0%, rgba(0,191,196,0.03) 45%, transparent 70%)',
+            }}
+          />
+        </div>
       </div>
     </>
   );

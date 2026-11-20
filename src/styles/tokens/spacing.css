@@ -45,4 +45,9 @@
 
   /* Inner Card Padding */
   --card-padding: clamp(1.5rem, 2vw + 1rem, 2.5rem);
+
+  /* Navigation Dimensions */
+  --nav-height-desktop: 72px;
+  --nav-height-mobile: 64px;
+  --nav-height: var(--nav-height-desktop);
 }
