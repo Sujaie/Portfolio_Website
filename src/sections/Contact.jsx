@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
 import { portfolioData } from '../data/portfolio.js';
 import { sound } from '../utils/sound.js';
+import { useReducedMotion } from '../hooks/useReducedMotion.js';
 
 export default function Contact() {
   const { contact } = portfolioData;
@@ -9,17 +11,95 @@ export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [sentSuccess, setSentSuccess] = useState(false);
 
-  // Keyboard accessibility: Escape key closes modal dialogue
+  const emailMagneticRef = useRef(null);
+  const modalRef = useRef(null);
+  const triggerButtonRef = useRef(null);
+  const prefersReduced = useReducedMotion();
+
+  // Accessibility: Focus trap & focus restoration for modal dialogue
   useEffect(() => {
     if (!isModalOpen) return;
+
+    const previousFocus = document.activeElement;
+    const modalElement = modalRef.current;
+
+    // Focus first interactive element in modal
+    const focusableSelectors = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const focusableElements = modalElement?.querySelectorAll(focusableSelectors);
+    const firstFocusable = focusableElements?.[0];
+    const lastFocusable = focusableElements?.[focusableElements.length - 1];
+
+    // Focus first input field or first interactive element in modal
+    const inputElement = modalElement?.querySelector('input, textarea, select');
+    if (inputElement) {
+      inputElement.focus();
+    } else if (firstFocusable) {
+      firstFocusable.focus();
+    }
+
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
+        e.preventDefault();
         setIsModalOpen(false);
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        if (e.shiftKey) {
+          if (document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable?.focus();
+          }
+        } else {
+          if (document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable?.focus();
+          }
+        }
       }
     };
+
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      if (previousFocus && typeof previousFocus.focus === 'function') {
+        previousFocus.focus();
+      }
+    };
   }, [isModalOpen]);
+
+  // Magnetic attraction physics on email target
+  const handleEmailMouseMove = (e) => {
+    if (prefersReduced || !emailMagneticRef.current) return;
+    const rect = emailMagneticRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const deltaX = (e.clientX - centerX) * 0.22;
+    const deltaY = (e.clientY - centerY) * 0.22;
+
+    // Cap magnetic pull to max 12px
+    const clampedX = Math.max(-12, Math.min(12, deltaX));
+    const clampedY = Math.max(-12, Math.min(12, deltaY));
+
+    gsap.to(emailMagneticRef.current, {
+      x: clampedX,
+      y: clampedY,
+      duration: 0.25,
+      ease: 'power2.out',
+    });
+  };
+
+  const handleEmailMouseLeave = () => {
+    if (!emailMagneticRef.current) return;
+    gsap.to(emailMagneticRef.current, {
+      x: 0,
+      y: 0,
+      duration: 0.5,
+      ease: 'elastic.out(1, 0.4)',
+    });
+  };
 
   const scrollToTop = () => {
     sound.playClick();
@@ -27,7 +107,9 @@ export default function Contact() {
   };
 
   const copyEmail = () => {
-    navigator.clipboard.writeText(contact.email);
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(contact.email);
+    }
     sound.playChime();
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -49,25 +131,34 @@ export default function Contact() {
       id="contact"
       className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] bg-transparent border-t border-[var(--border-subtle)] overflow-hidden"
     >
-      {/* Background Soft Blue/Cyan Spotlight (GPU isolated) */}
+      {/* Contact "Handshake" Signature: Converging Teal and Gold Atmospheric Spotlights */}
       <div
-        className="absolute bottom-0 right-1/4 w-[600px] md:w-[900px] h-[500px] md:h-[800px] rounded-full blur-[130px] opacity-25 pointer-events-none"
+        className="absolute bottom-10 left-1/4 w-[500px] md:w-[750px] h-[450px] md:h-[650px] rounded-full blur-[140px] opacity-20 pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, var(--contact-spotlight-cyan) 0%, var(--contact-spotlight-blue) 45%, transparent 75%)',
+          background: 'radial-gradient(circle, var(--color-data) 0%, transparent 70%)',
           transform: 'translateZ(0)',
         }}
+        aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-noise opacity-30 pointer-events-none" />
+      <div
+        className="absolute bottom-4 right-1/4 w-[550px] md:w-[800px] h-[500px] md:h-[700px] rounded-full blur-[150px] opacity-15 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, var(--color-accent) 0%, transparent 70%)',
+          transform: 'translateZ(0)',
+        }}
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-noise opacity-25 pointer-events-none" aria-hidden="true" />
 
       <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto">
         
         {/* Label */}
         <div className="flex items-center gap-3 text-xs tracking-mono-lg font-mono font-semibold text-[var(--color-accent)] uppercase mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[var(--glow-gold-sm)]" />
-          <span>INITIATE DIALOGUE</span>
+          <span>INITIATE DIALOGUE & CONVERGENCE</span>
         </div>
 
-        {/* Oversized Headline */}
+        {/* Oversized Converging Headline */}
         <div className="space-y-1 mb-16 select-text">
           <h2 className="text-contact-display font-light leading-hero tracking-hero text-[var(--text-primary)]">
             {contact.headline}
@@ -85,21 +176,25 @@ export default function Contact() {
         {/* Contact Links & Actions */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-end border-t border-[var(--border-default)] pt-12">
           
-          {/* Email Direct & Quick-Copy Interaction */}
-          <div className="md:col-span-6 space-y-4">
+          {/* Email Direct Channel with Magnetic Pull */}
+          <div className="md:col-span-7 space-y-4">
             <span className="text-2xs tracking-mono-lg text-[var(--text-secondary)] font-mono font-semibold uppercase block">
               DIRECT CHANNEL
             </span>
             
             <div className="flex flex-wrap items-center gap-4">
               <a
+                ref={emailMagneticRef}
                 href={`mailto:${contact.email}`}
+                onMouseMove={handleEmailMouseMove}
+                onMouseLeave={handleEmailMouseLeave}
                 onMouseEnter={() => sound.playHover()}
                 onClick={() => sound.playClick()}
-                className="text-2xl sm:text-3xl md:text-4xl font-light text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)] break-all flex items-center gap-2 group"
+                className="text-2xl sm:text-3xl md:text-4xl font-light text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)] break-all flex items-center gap-2 group will-change-transform"
+                aria-label={`Send direct email to ${contact.email}`}
               >
                 <span>{contact.email}</span>
-                <span className="group-hover:translate-x-1 transition-transform duration-[var(--dur-fast)]">↗</span>
+                <span className="group-hover:translate-x-1 transition-transform duration-[var(--dur-fast)] text-[var(--color-accent)]">↗</span>
               </a>
 
               {/* Quick Copy Button */}
@@ -107,14 +202,19 @@ export default function Contact() {
                 onClick={copyEmail}
                 onMouseEnter={() => sound.playHover()}
                 aria-label="Copy email address to clipboard"
-                className="px-3 py-1.5 rounded-full border border-[var(--border-strong)] bg-white/5 hover:border-[var(--color-accent)] text-2xs font-mono tracking-mono-sm uppercase text-[var(--text-secondary)] hover:text-white transition-colors duration-[var(--dur-base)] cursor-pointer"
-                title="Copy to clipboard"
+                className={`px-3 py-1.5 rounded-full border text-2xs font-mono tracking-mono-sm uppercase transition-all duration-[var(--dur-base)] cursor-pointer ${
+                  copied
+                    ? 'border-[var(--color-accent)] bg-[var(--color-accent)] text-black font-semibold shadow-[var(--glow-gold-sm)]'
+                    : 'border-[var(--border-strong)] bg-white/5 hover:border-[var(--color-accent)] text-[var(--text-secondary)] hover:text-white'
+                }`}
+                title="Copy email to clipboard"
               >
                 {copied ? '✓ COPIED' : 'COPY'}
               </button>
 
-              {/* Send Quick Note Button */}
+              {/* Send Quick Note Modal Trigger */}
               <button
+                ref={triggerButtonRef}
                 onClick={() => {
                   sound.playClick();
                   setIsModalOpen(true);
@@ -129,7 +229,7 @@ export default function Contact() {
           </div>
 
           {/* Social Profiles */}
-          <div className="md:col-span-6 flex flex-wrap gap-6 sm:gap-10 md:justify-end text-sm font-mono tracking-mono-md uppercase font-semibold">
+          <div className="md:col-span-5 flex flex-wrap gap-6 sm:gap-10 md:justify-end text-sm font-mono tracking-mono-md uppercase font-semibold">
             <a
               href={contact.github}
               target="_blank"
@@ -137,7 +237,7 @@ export default function Contact() {
               aria-label="GitHub profile (opens in new tab)"
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
-              className="text-[var(--text-secondary)] hover:text-white transition-colors duration-[var(--dur-base)]"
+              className="text-[var(--text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)]"
             >
               GITHUB ↗
             </a>
@@ -148,7 +248,7 @@ export default function Contact() {
               aria-label="LinkedIn profile (opens in new tab)"
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
-              className="text-[var(--text-secondary)] hover:text-white transition-colors duration-[var(--dur-base)]"
+              className="text-[var(--text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)]"
             >
               LINKEDIN ↗
             </a>
@@ -159,7 +259,7 @@ export default function Contact() {
               aria-label="Twitter profile (opens in new tab)"
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
-              className="text-[var(--text-secondary)] hover:text-white transition-colors duration-[var(--dur-base)]"
+              className="text-[var(--text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)]"
             >
               TWITTER ↗
             </a>
@@ -168,7 +268,7 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Interactive Modal Dialogue */}
+      {/* Interactive Modal Dialogue with Focus Trapping & Accessibility */}
       {isModalOpen && (
         <div
           role="dialog"
@@ -176,7 +276,10 @@ export default function Contact() {
           aria-labelledby="contact-modal-title"
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
         >
-          <div className="relative w-full max-w-lg p-6 sm:p-8 rounded-[var(--radius-xl)] bg-[var(--bg-raised)] border border-[var(--border-strong)] shadow-[var(--shadow-modal)] space-y-6">
+          <div
+            ref={modalRef}
+            className="relative w-full max-w-lg p-6 sm:p-8 rounded-[var(--radius-xl)] bg-[var(--bg-raised)] border border-[var(--border-strong)] shadow-[var(--shadow-modal)] space-y-6"
+          >
             <div className="flex items-center justify-between pb-4 border-b border-[var(--border-default)]">
               <h3 id="contact-modal-title" className="text-sm font-mono uppercase tracking-widest text-[var(--color-accent)] font-semibold">
                 TRANSMIT DISPATCH
@@ -184,7 +287,7 @@ export default function Contact() {
               <button
                 onClick={() => setIsModalOpen(false)}
                 aria-label="Close dialog"
-                className="text-xs text-[var(--text-secondary)] hover:text-white p-1 rounded"
+                className="text-xs text-[var(--text-secondary)] hover:text-white p-1 rounded cursor-pointer"
               >
                 ✕
               </button>
@@ -192,8 +295,8 @@ export default function Contact() {
 
             {sentSuccess ? (
               <div className="py-8 text-center space-y-2">
-                <div className="text-2xl text-[var(--color-status-success)]">✓ Dispatch Logged</div>
-                <p className="text-xs text-[var(--text-secondary)]">Thank you! I will respond promptly.</p>
+                <div className="text-2xl text-[var(--color-status-success)] font-mono">✓ Dispatch Logged</div>
+                <p className="text-xs text-[var(--text-secondary)]">Transmission received. I will respond promptly.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -244,7 +347,7 @@ export default function Contact() {
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="px-4 py-2 rounded-[var(--radius-md)] text-xs font-mono uppercase text-[var(--text-secondary)] hover:text-white"
+                    className="px-4 py-2 rounded-[var(--radius-md)] text-xs font-mono uppercase text-[var(--text-secondary)] hover:text-white cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -273,7 +376,7 @@ export default function Contact() {
           className="hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)] flex items-center gap-2 cursor-pointer"
         >
           <span>BACK TO TOP</span>
-          <span>↑</span>
+          <span aria-hidden="true">↑</span>
         </button>
       </footer>
     </section>

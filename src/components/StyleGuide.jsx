@@ -6,71 +6,77 @@ export default function StyleGuide({ onBack }) {
     fast: false,
     base: false,
     slow: false,
-    easeOut: false,
-    easeInOut: false,
-    easeIn: false,
+    deliberate: false,
   });
 
   const triggerMotion = (key) => {
     setMotionActive((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  // 1. Primitive Palette
+  // 1. Primitive Palette (Look Bible Values)
   const primitiveColors = [
-    { group: 'Inks (Canvas & Surfaces)', items: [
-      { token: '--ink-950', val: '#050609', desc: 'Canvas Base' },
-      { token: '--ink-900', val: '#080D14', desc: 'Elevated Surface' },
-      { token: '--ink-850', val: '#05080E', desc: 'Nested Telemetry Bed' },
-      { token: '--ink-800', val: '#071A2B', desc: 'Atmospheric Deep Navy' },
-      { token: '--ink-750', val: '#0A121F', desc: 'Card Gradient Top' },
-      { token: '--ink-700', val: '#0C1421', desc: 'Preview Top Stop' },
-      { token: '--ink-650', val: '#060A10', desc: 'Card Bottom Stop' },
+    { group: 'Inks (Canvas, Depth Planes & Elevation)', items: [
+      { token: '--ink-950', val: '#04070b', desc: 'Base Canvas (Plane 0)' },
+      { token: '--ink-900', val: '#070c12', desc: 'Substrate & Recessed (Plane 1)' },
+      { token: '--ink-850', val: '#091018', desc: 'Telemetry Bed (Plane 1.5)' },
+      { token: '--ink-800', val: '#0c131b', desc: 'Standard Panels (Plane 2)' },
+      { token: '--ink-700', val: '#121b25', desc: 'Raised / Active Cards (Plane 3)' },
+      { token: '--ink-600', val: '#1b2633', desc: 'Popovers & Tooltips (Plane 4)' },
+      { token: '--ink-500', val: '#263545', desc: 'Overlays & Dialogs (Plane 5)' },
     ]},
-    { group: 'Papers & Slates (Typography)', items: [
-      { token: '--paper-50', val: '#F4F3F0', desc: 'Primary Text (Bone White)' },
-      { token: '--paper-100', val: '#FFFFFF', desc: 'Pure White (Emphasis)' },
-      { token: '--slate-400', val: '#B4B7BF', desc: 'Secondary & Muted Slate (10.2:1)' },
+    { group: 'Papers & Greys (Typography & Hierarchy)', items: [
+      { token: '--paper-50', val: '#f6f3ee', desc: 'Primary Text (Bone White, 18.2:1)' },
+      { token: '--paper-100', val: '#ffffff', desc: 'Pure White (Emphasis)' },
+      { token: '--grey-300', val: '#b5bcc6', desc: 'Secondary Metadata (10.6:1)' },
+      { token: '--grey-400', val: '#949ea9', desc: 'Muted Labels (7.2:1)' },
+      { token: '--grey-500', val: '#7d8793', desc: 'Borders & Rules (5.1:1)' },
     ]},
-    { group: 'Golds & Ambers (Warm Accents)', items: [
-      { token: '--gold-500', val: '#E9A927', desc: 'Architectural Gold Accent' },
-      { token: '--gold-400', val: '#FFD566', desc: 'Luminous Gold Hover' },
-      { token: '--gold-300', val: '#F5BE37', desc: 'Warm Ambient Glow Stop' },
+    { group: 'Golds & Ambers (Warm Accents & Ignition)', items: [
+      { token: '--gold-300', val: '#fad47e', desc: 'Ambient Gold Stop' },
+      { token: '--gold-400', val: '#f4be54', desc: 'Luminous Gold Hover' },
+      { token: '--gold-500', val: '#e8a823', desc: 'Architectural Gold Focal Accent' },
+      { token: '--gold-600', val: '#b88114', desc: 'Deep Gold Border Accent' },
     ]},
-    { group: 'Teals & Cyans (Telemetry & Highlights)', items: [
-      { token: '--teal-400', val: '#00BFC4', desc: 'Electric Cyan Telemetry' },
-      { token: '--teal-700', val: '#0F766E', desc: 'Deep Ambient Teal' },
-    ]},
-    { group: 'Atmospheric Lighting & Chromatic Mesh', items: [
-      { token: '--blue-600', val: '#1769B5', desc: 'Atmospheric Deep Blue' },
-      { token: '--magenta-600', val: '#C90070', desc: 'Atmospheric Magenta' },
-      { token: '--purple-600', val: '#7C3AED', desc: 'Atmospheric Purple' },
-      { token: '--orange-500', val: '#FF6543', desc: 'Atmospheric Orange' },
-      { token: '--emerald-400', val: '#34D399', desc: 'Success / Audio Active' },
+    { group: 'Teals & Cyans (Telemetry & Technical Signal)', items: [
+      { token: '--teal-300', val: '#4ee2e8', desc: 'Bright Data Glow' },
+      { token: '--teal-400', val: '#1fc2c9', desc: 'Electric Cyan Technical Signal' },
+      { token: '--teal-500', val: '#159ea4', desc: 'Deep Cyan Border Accent' },
+      { token: '--teal-900', val: '#063133', desc: 'Atmospheric Well Cyan' },
     ]},
   ];
 
-  // 2. Semantic Tokens
+  // 2. The Six Depth Planes
+  const depthPlanes = [
+    { plane: 'Plane 0', token: '--plane-0', ref: 'var(--ink-950)', desc: 'Base canvas underneath all content', bg: '#04070b' },
+    { plane: 'Plane 1', token: '--plane-1', ref: 'var(--ink-900)', desc: 'Substrate: sections, recessed areas, cards', bg: '#070c12' },
+    { plane: 'Plane 2', token: '--plane-2', ref: 'var(--ink-800)', desc: 'Panel: standard cards, showcase, timeline beds', bg: '#0c131b' },
+    { plane: 'Plane 3', token: '--plane-3', ref: 'var(--ink-700)', desc: 'Raised: active cards, terminal, hovered items', bg: '#121b25' },
+    { plane: 'Plane 4', token: '--plane-4', ref: 'var(--ink-600)', desc: 'Popover: dropdowns, tooltips, toasts', bg: '#1b2633' },
+    { plane: 'Plane 5', token: '--plane-5', ref: 'var(--ink-500)', desc: 'Overlay: modal dialogs, lightbox', bg: '#263545' },
+  ];
+
+  // 3. Semantic Tokens
   const semanticTokens = [
-    { token: '--bg-base', ref: 'var(--ink-950)', desc: 'Main canvas background' },
-    { token: '--bg-raised', ref: 'var(--ink-900)', desc: 'Primary cards & panels' },
-    { token: '--surface-1', ref: 'var(--ink-900)', desc: 'Surface tier 1' },
-    { token: '--surface-2', ref: 'var(--ink-850)', desc: 'Surface tier 2 (nested data)' },
+    { token: '--bg-base', ref: 'var(--plane-0)', desc: 'Main canvas background' },
+    { token: '--bg-raised', ref: 'var(--plane-1)', desc: 'Primary cards & panels' },
+    { token: '--surface-1', ref: 'var(--plane-1)', desc: 'Surface tier 1' },
+    { token: '--surface-2', ref: 'var(--plane-2)', desc: 'Surface tier 2 (nested data)' },
+    { token: '--surface-3', ref: 'var(--plane-3)', desc: 'Surface tier 3 (elevated active)' },
     { token: '--text-primary', ref: 'var(--paper-50)', desc: 'Primary headings & body' },
-    { token: '--text-secondary', ref: 'var(--slate-400)', desc: 'Metadata, labels & captions' },
+    { token: '--text-secondary', ref: 'var(--grey-300)', desc: 'Metadata, labels & captions' },
+    { token: '--text-muted', ref: 'var(--grey-400)', desc: 'Subdued telemetry chips' },
     { token: '--color-accent', ref: 'var(--gold-500)', desc: 'Interactive gold & badges' },
     { token: '--color-data', ref: 'var(--teal-400)', desc: 'Electric cyan telemetry' },
-    { token: '--border-subtle', ref: 'rgba(255, 255, 255, 0.05)', desc: 'Dividers & soft borders' },
+    { token: '--border-subtle', ref: 'rgba(255, 255, 255, 0.06)', desc: 'Dividers & soft borders' },
     { token: '--border-default', ref: 'rgba(255, 255, 255, 0.10)', desc: 'Standard card outlines' },
-    { token: '--border-strong', ref: 'rgba(255, 255, 255, 0.15)', desc: 'Emphasized containers' },
-    { token: '--border-elevated', ref: 'rgba(255, 255, 255, 0.20)', desc: 'Interactive outlines' },
+    { token: '--border-strong', ref: 'rgba(255, 255, 255, 0.16)', desc: 'Emphasized containers' },
+    { token: '--border-elevated', ref: 'rgba(255, 255, 255, 0.22)', desc: 'Interactive outlines' },
   ];
 
-  // 3. Spacing Scale
+  // 4. Spacing Scale
   const spacingScale = [
     { token: '--space-1', val: '0.25rem', px: '4px' },
-    { token: '--space-1-5', val: '0.375rem', px: '6px' },
     { token: '--space-2', val: '0.5rem', px: '8px' },
-    { token: '--space-2-5', val: '0.625rem', px: '10px' },
     { token: '--space-3', val: '0.75rem', px: '12px' },
     { token: '--space-4', val: '1rem', px: '16px' },
     { token: '--space-5', val: '1.25rem', px: '20px' },
@@ -113,7 +119,7 @@ export default function StyleGuide({ onBack }) {
               </h1>
             </div>
             <span className="text-2xs font-mono uppercase px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              FOUNDATIONS VERIFIED
+              CORE LOOK VERIFIED
             </span>
           </div>
 
@@ -130,13 +136,13 @@ export default function StyleGuide({ onBack }) {
               {debugGrid ? 'GRID: ON' : 'GRID: OFF'}
             </button>
             <nav className="hidden xl:flex items-center gap-4 text-2xs font-mono uppercase text-[var(--text-secondary)]">
+              <a href="#planes" className="hover:text-white">Planes</a>
               <a href="#colors" className="hover:text-white">Colors</a>
               <a href="#typography" className="hover:text-white">Typography</a>
               <a href="#spacing" className="hover:text-white">Spacing</a>
               <a href="#radius" className="hover:text-white">Radius</a>
               <a href="#elevation" className="hover:text-white">Elevation</a>
               <a href="#motion" className="hover:text-white">Motion</a>
-              <a href="#layout" className="hover:text-white">Layout</a>
               <a href="#cursor" className="hover:text-white">Cursor</a>
             </nav>
           </div>
@@ -144,13 +150,49 @@ export default function StyleGuide({ onBack }) {
       </header>
 
       {/* Main Content Body */}
-      <main data-magnifier-source className="max-w-[var(--content-max-width)] mx-auto px-[var(--page-gutter)] pt-12 space-y-24">
+      <main className="max-w-[var(--content-max-width)] mx-auto px-[var(--page-gutter)] pt-12 space-y-24">
 
-        {/* 1. COLOR TOKENS SHOWCASE */}
+        {/* 1. THE SIX DEPTH PLANES SHOWCASE */}
+        <section id="planes" className="space-y-10 scroll-mt-24">
+          <div className="border-b border-[var(--border-default)] pb-4">
+            <div className="text-xs font-mono tracking-mono-lg uppercase text-[var(--color-accent)] mb-1">
+              FOUNDATION 01
+            </div>
+            <h2 className="text-3xl font-light text-white">The Six Depth Planes</h2>
+            <p className="text-sm text-[var(--text-secondary)] font-light mt-1">
+              Rigid surface hierarchy from Plane 0 (deep canvas) through Plane 5 (interactive overlays).
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {depthPlanes.map((dp) => (
+              <div
+                key={dp.plane}
+                className="p-6 rounded-[var(--radius-xl)] border border-[var(--border-default)] space-y-4"
+                style={{ backgroundColor: dp.bg }}
+              >
+                <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                  <span className="text-xs font-mono font-semibold text-[var(--color-accent)] uppercase">
+                    {dp.plane}
+                  </span>
+                  <span className="text-2xs font-mono text-[var(--text-secondary)]">
+                    {dp.bg}
+                  </span>
+                </div>
+                <div>
+                  <div className="text-sm font-mono text-white">{dp.token}</div>
+                  <div className="text-2xs text-[var(--text-secondary)] font-light mt-1">{dp.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 2. COLOR TOKENS SHOWCASE */}
         <section id="colors" className="space-y-10 scroll-mt-24">
           <div className="border-b border-[var(--border-default)] pb-4">
             <div className="text-xs font-mono tracking-mono-lg uppercase text-[var(--color-accent)] mb-1">
-              SECTION 01
+              FOUNDATION 02
             </div>
             <h2 className="text-3xl font-light text-white">Color System Architecture</h2>
             <p className="text-sm text-[var(--text-secondary)] font-light mt-1">
@@ -213,7 +255,7 @@ export default function StyleGuide({ onBack }) {
                     <div className="text-2xs font-mono text-[var(--text-secondary)] truncate">
                       {s.ref}
                     </div>
-                    <div className="text-2xs text-[var(--slate-400)] font-light truncate">
+                    <div className="text-2xs text-[var(--text-secondary)] font-light truncate">
                       {s.desc}
                     </div>
                   </div>
@@ -223,11 +265,11 @@ export default function StyleGuide({ onBack }) {
           </div>
         </section>
 
-        {/* 2. TYPOGRAPHY SHOWCASE */}
+        {/* 3. TYPOGRAPHY SHOWCASE */}
         <section id="typography" className="space-y-10 scroll-mt-24">
           <div className="border-b border-[var(--border-default)] pb-4">
             <div className="text-xs font-mono tracking-mono-lg uppercase text-[var(--color-accent)] mb-1">
-              SECTION 02
+              FOUNDATION 03
             </div>
             <h2 className="text-3xl font-light text-white">Responsive & Fluid Typography</h2>
             <p className="text-sm text-[var(--text-secondary)] font-light mt-1">
@@ -240,7 +282,7 @@ export default function StyleGuide({ onBack }) {
             {/* Hero Display */}
             <div className="pb-8 border-b border-[var(--border-subtle)] space-y-2">
               <div className="flex items-baseline justify-between text-2xs font-mono text-[var(--color-data)]">
-                <span>--text-hero-display (clamp(3.2rem, 9.2vw, 8.8rem))</span>
+                <span>--text-hero-display (clamp(3rem, 8.5vw, 7.5rem))</span>
                 <span>Sans-serif display</span>
               </div>
               <div className="text-hero-display font-light leading-hero tracking-hero text-[var(--text-primary)]">
@@ -251,7 +293,7 @@ export default function StyleGuide({ onBack }) {
             {/* Serif Italic Hero Accent */}
             <div className="pb-8 border-b border-[var(--border-subtle)] space-y-2">
               <div className="flex items-baseline justify-between text-2xs font-mono text-[var(--color-accent)]">
-                <span>--text-hero-accent (clamp(3.5rem, 10.2vw, 9.8rem))</span>
+                <span>--text-hero-accent (clamp(3.2rem, 9vw, 8rem))</span>
                 <span>Serif italic accent</span>
               </div>
               <div className="font-serif italic text-hero-accent leading-hero-accent text-[var(--color-accent)] drop-shadow-[var(--glow-gold-lg)]">
@@ -262,7 +304,7 @@ export default function StyleGuide({ onBack }) {
             {/* Section Heading */}
             <div className="pb-8 border-b border-[var(--border-subtle)] space-y-2">
               <div className="flex items-baseline justify-between text-2xs font-mono text-[var(--color-data)]">
-                <span>--text-section-heading (clamp(2.25rem, 4.5vw + 1rem, 3.75rem))</span>
+                <span>--text-section-heading (clamp(2rem, 4.5vw, 3.5rem))</span>
                 <span>Section title scale</span>
               </div>
               <h2 className="text-section-heading font-light text-white tracking-section leading-section">
@@ -273,7 +315,7 @@ export default function StyleGuide({ onBack }) {
             {/* Section Lead */}
             <div className="pb-8 border-b border-[var(--border-subtle)] space-y-2">
               <div className="flex items-baseline justify-between text-2xs font-mono text-[var(--color-accent)]">
-                <span>--text-section-lead (clamp(1.875rem, 3.2vw + 0.8rem, 3rem))</span>
+                <span>--text-section-lead (clamp(1.75rem, 3vw, 2.5rem))</span>
                 <span>About narrative lead</span>
               </div>
               <h3 className="text-section-lead font-light text-[var(--text-primary)] leading-section-lead max-w-2xl">
@@ -316,11 +358,11 @@ export default function StyleGuide({ onBack }) {
           </div>
         </section>
 
-        {/* 3. SPACING & RHYTHM SHOWCASE */}
+        {/* 4. SPACING & RHYTHM SHOWCASE */}
         <section id="spacing" className="space-y-10 scroll-mt-24">
           <div className="border-b border-[var(--border-default)] pb-4">
             <div className="text-xs font-mono tracking-mono-lg uppercase text-[var(--color-accent)] mb-1">
-              SECTION 03
+              FOUNDATION 04
             </div>
             <h2 className="text-3xl font-light text-white">Spacing & Rhythm Foundation</h2>
             <p className="text-sm text-[var(--text-secondary)] font-light mt-1">
@@ -329,7 +371,6 @@ export default function StyleGuide({ onBack }) {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            
             {/* Visual Bars for Relative Values */}
             <div className="p-6 rounded-[var(--radius-xl)] bg-[var(--bg-raised)] border border-[var(--border-default)] space-y-4">
               <h3 className="text-xs font-mono uppercase tracking-wider text-[var(--color-data)]">
@@ -362,7 +403,7 @@ export default function StyleGuide({ onBack }) {
                     <div className="text-xs font-mono font-semibold text-white">--content-max-width</div>
                     <div className="text-2xs text-[var(--text-secondary)]">Max horizontal layout bounding plane</div>
                   </div>
-                  <span className="text-sm font-mono text-[var(--color-accent)]">1600px</span>
+                  <span className="text-sm font-mono text-[var(--color-accent)]">1280px</span>
                 </div>
 
                 <div className="p-4 rounded-[var(--radius-lg)] bg-white/5 border border-[var(--border-subtle)] flex justify-between items-center">
@@ -370,7 +411,7 @@ export default function StyleGuide({ onBack }) {
                     <div className="text-xs font-mono font-semibold text-white">--page-gutter</div>
                     <div className="text-2xs text-[var(--text-secondary)]">Fluid horizontal container margin</div>
                   </div>
-                  <span className="text-sm font-mono text-[var(--color-accent)]">24px → 64px</span>
+                  <span className="text-sm font-mono text-[var(--color-accent)]">clamp(1.5rem, 4vw, 3rem)</span>
                 </div>
 
                 <div className="p-4 rounded-[var(--radius-lg)] bg-white/5 border border-[var(--border-subtle)] flex justify-between items-center">
@@ -378,7 +419,7 @@ export default function StyleGuide({ onBack }) {
                     <div className="text-xs font-mono font-semibold text-white">--section-py</div>
                     <div className="text-2xs text-[var(--text-secondary)]">Standard vertical section padding</div>
                   </div>
-                  <span className="text-sm font-mono text-[var(--color-accent)]">112px → 144px</span>
+                  <span className="text-sm font-mono text-[var(--color-accent)]">clamp(5rem, 8vw, 8rem)</span>
                 </div>
 
                 <div className="p-4 rounded-[var(--radius-lg)] bg-white/5 border border-[var(--border-subtle)] flex justify-between items-center">
@@ -386,7 +427,7 @@ export default function StyleGuide({ onBack }) {
                     <div className="text-xs font-mono font-semibold text-white">--grid-gap-lg</div>
                     <div className="text-2xs text-[var(--text-secondary)]">Two-column architectural gap</div>
                   </div>
-                  <span className="text-sm font-mono text-[var(--color-accent)]">40px → 64px</span>
+                  <span className="text-sm font-mono text-[var(--color-accent)]">clamp(2rem, 3.5vw, 3.5rem)</span>
                 </div>
 
                 <div className="p-4 rounded-[var(--radius-lg)] bg-white/5 border border-[var(--border-subtle)] flex justify-between items-center">
@@ -398,15 +439,14 @@ export default function StyleGuide({ onBack }) {
                 </div>
               </div>
             </div>
-
           </div>
         </section>
 
-        {/* 4. RADIUS SHOWCASE */}
+        {/* 5. RADIUS SHOWCASE */}
         <section id="radius" className="space-y-10 scroll-mt-24">
           <div className="border-b border-[var(--border-default)] pb-4">
             <div className="text-xs font-mono tracking-mono-lg uppercase text-[var(--color-accent)] mb-1">
-              SECTION 04
+              FOUNDATION 05
             </div>
             <h2 className="text-3xl font-light text-white">Border Radius Scale</h2>
             <p className="text-sm text-[var(--text-secondary)] font-light mt-1">
@@ -447,11 +487,11 @@ export default function StyleGuide({ onBack }) {
           </div>
         </section>
 
-        {/* 5. ELEVATION & GLOW SHOWCASE */}
+        {/* 6. ELEVATION & GLOW SHOWCASE */}
         <section id="elevation" className="space-y-10 scroll-mt-24">
           <div className="border-b border-[var(--border-default)] pb-4">
             <div className="text-xs font-mono tracking-mono-lg uppercase text-[var(--color-accent)] mb-1">
-              SECTION 05
+              FOUNDATION 06
             </div>
             <h2 className="text-3xl font-light text-white">Elevation, Shadows & Luminous Glows</h2>
             <p className="text-sm text-[var(--text-secondary)] font-light mt-1">
@@ -492,11 +532,11 @@ export default function StyleGuide({ onBack }) {
           </div>
         </section>
 
-        {/* 6. MOTION TOKENS SHOWCASE */}
+        {/* 7. MOTION TOKENS SHOWCASE */}
         <section id="motion" className="space-y-10 scroll-mt-24">
           <div className="border-b border-[var(--border-default)] pb-4">
             <div className="text-xs font-mono tracking-mono-lg uppercase text-[var(--color-accent)] mb-1">
-              SECTION 06
+              FOUNDATION 07
             </div>
             <h2 className="text-3xl font-light text-white">Motion & Easing Physics</h2>
             <p className="text-sm text-[var(--text-secondary)] font-light mt-1">
@@ -505,11 +545,10 @@ export default function StyleGuide({ onBack }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
             {/* Fast Duration */}
             <div className="p-6 rounded-[var(--radius-xl)] bg-[var(--bg-raised)] border border-[var(--border-default)] space-y-4">
               <div className="flex justify-between items-center">
-                <span className="text-xs font-mono text-[var(--color-data)] uppercase">--dur-fast (150ms)</span>
+                <span className="text-xs font-mono text-[var(--color-data)] uppercase">--dur-fast (160ms)</span>
                 <button
                   onClick={() => triggerMotion('fast')}
                   className="px-3 py-1 rounded-full text-2xs font-mono bg-white/10 hover:bg-white/20 text-white cursor-pointer"
@@ -528,7 +567,7 @@ export default function StyleGuide({ onBack }) {
             {/* Base Duration */}
             <div className="p-6 rounded-[var(--radius-xl)] bg-[var(--bg-raised)] border border-[var(--border-default)] space-y-4">
               <div className="flex justify-between items-center">
-                <span className="text-xs font-mono text-[var(--color-accent)] uppercase">--dur-base (200ms)</span>
+                <span className="text-xs font-mono text-[var(--color-accent)] uppercase">--dur-base (260ms)</span>
                 <button
                   onClick={() => triggerMotion('base')}
                   className="px-3 py-1 rounded-full text-2xs font-mono bg-white/10 hover:bg-white/20 text-white cursor-pointer"
@@ -547,7 +586,7 @@ export default function StyleGuide({ onBack }) {
             {/* Slow Duration */}
             <div className="p-6 rounded-[var(--radius-xl)] bg-[var(--bg-raised)] border border-[var(--border-default)] space-y-4">
               <div className="flex justify-between items-center">
-                <span className="text-xs font-mono text-[var(--color-data)] uppercase">--dur-slow (300ms)</span>
+                <span className="text-xs font-mono text-[var(--color-data)] uppercase">--dur-slow (440ms)</span>
                 <button
                   onClick={() => triggerMotion('slow')}
                   className="px-3 py-1 rounded-full text-2xs font-mono bg-white/10 hover:bg-white/20 text-white cursor-pointer"
@@ -562,19 +601,18 @@ export default function StyleGuide({ onBack }) {
                 />
               </div>
             </div>
-
           </div>
         </section>
 
-        {/* 7. CURSOR & INTERACTION SHOWCASE */}
+        {/* 8. CURSOR & INTERACTION SHOWCASE */}
         <section id="cursor" className="space-y-10 scroll-mt-24">
           <div className="border-b border-[var(--border-default)] pb-4">
             <div className="text-xs font-mono tracking-mono-lg uppercase text-[var(--color-accent)] mb-1">
-              SECTION 07
+              FOUNDATION 08
             </div>
-            <h2 className="text-3xl font-light text-white">Global Optical Cursor Lens</h2>
+            <h2 className="text-3xl font-light text-white">Global Optical Glass Lens</h2>
             <p className="text-sm text-[var(--text-secondary)] font-light mt-1">
-              Verify optical magnification ($1.35\times$), zero subpixel drift, and state changes (Cyan idle $\leftrightarrow$ Gold interactive).
+              Performant 120px backdrop-filter glass lens with cyan rim, gold hover expansion, and 0% CPU idle dormancy.
             </p>
           </div>
 
@@ -584,7 +622,7 @@ export default function StyleGuide({ onBack }) {
                 State 1: Passive Typography Hover (Cyan Rim)
               </div>
               <p className="text-base text-[var(--text-secondary)] font-light leading-relaxed">
-                Move the cursor over this paragraph. Notice the single circular optical window magnifying the text underneath by 1.35x with razor-sharp vector clarity and a restrained cyan illuminated rim.
+                Move the cursor over this paragraph. The circular optical window glides smoothly with backdrop-filter blur, high readability, and a subtle cyan illuminated rim.
               </p>
             </div>
 
@@ -609,7 +647,7 @@ export default function StyleGuide({ onBack }) {
                 />
               </div>
               <p className="text-xs text-[var(--text-secondary)] font-light pt-2">
-                Hovering over interactive elements transitions the lens rim to luminous architectural gold with zero React re-render lag.
+                Hovering over interactive elements expands the lens by 1.15x and transitions the rim to architectural gold.
               </p>
             </div>
           </div>
@@ -619,7 +657,7 @@ export default function StyleGuide({ onBack }) {
 
       {/* Footer */}
       <footer className="mt-32 pt-12 border-t border-[var(--border-subtle)] text-center text-2xs font-mono text-[var(--text-secondary)] uppercase">
-        FOUNDATIONS PHASE COMPLETED • DESIGN SYSTEM SPECIFICATION V1.0 • {new Date().getFullYear()}
+        CORE LOOK PHASE COMPLETED • DESIGN SYSTEM SPECIFICATION V1.0 • {new Date().getFullYear()}
       </footer>
 
     </div>
