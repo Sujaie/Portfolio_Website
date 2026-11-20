@@ -15,14 +15,17 @@ export default function Experience() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animRef.current = animate('.timeline-item', {
-              opacity: [0, 1],
-              translateX: [-25, 0],
-              delay: (el, i) => i * 120,
-              duration: 750,
-              ease: 'outQuad',
-            });
+          if (entry.isIntersecting && sectionRef.current) {
+            const items = sectionRef.current.querySelectorAll('.timeline-item');
+            if (items.length) {
+              animRef.current = animate(items, {
+                opacity: [0, 1],
+                translateX: [-25, 0],
+                delay: (el, i) => i * 120,
+                duration: 750,
+                ease: 'outQuad',
+              });
+            }
             observer.disconnect();
           }
         });

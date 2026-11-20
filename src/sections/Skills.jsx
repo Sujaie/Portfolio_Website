@@ -16,14 +16,17 @@ export default function Skills() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animRef.current = animate('.skill-card', {
-              opacity: [0, 1],
-              translateY: [30, 0],
-              delay: (el, i) => i * 80,
-              duration: 700,
-              ease: 'outQuad',
-            });
+          if (entry.isIntersecting && sectionRef.current) {
+            const cards = sectionRef.current.querySelectorAll('.skill-card');
+            if (cards.length) {
+              animRef.current = animate(cards, {
+                opacity: [0, 1],
+                translateY: [30, 0],
+                delay: (el, i) => i * 80,
+                duration: 700,
+                ease: 'outQuad',
+              });
+            }
             observer.disconnect();
           }
         });
