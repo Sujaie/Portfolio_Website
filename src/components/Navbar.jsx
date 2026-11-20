@@ -11,7 +11,15 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const hash = window.location.hash.slice(1);
+      if (['home', 'about', 'work', 'skills', 'experience', 'contact'].includes(hash)) {
+        return hash;
+      }
+    }
+    return 'home';
+  });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(false);
 
@@ -19,6 +27,8 @@ export default function Navbar() {
   const linkRefs = useRef({});
   const mobileToggleRef = useRef(null);
   const firstMobileLinkRef = useRef(null);
+  const isClickScrollingRef = useRef(false);
+  const clickScrollTimerRef = useRef(null);
 
   const [indicatorStyle, setIndicatorStyle] = useState({
     transform: 'translate3d(0, 0, 0)',
@@ -26,53 +36,71 @@ export default function Navbar() {
     opacity: 0,
   });
 
-  // 1. IntersectionObserver for smooth, flicker-free active section detection
-  useEffect(() => {
+  // 1. Precise, flicker-free active section detection based on reading focal plane
+  const determineActiveSection = () => {
+    if (isClickScrollingRef.current) return;
+
+    const scrollY = window.scrollY || window.pageYOffset || 0;
+    const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight || 0;
+    const windowHeight = window.innerHeight || 800;
+    const maxScroll = Math.max(0, scrollHeight - windowHeight);
+
+    // Edge guard: top of page is strictly 'home'
+    if (scrollY <= 60) {
+      setActiveSection((prev) => (prev !== 'home' ? 'home' : prev));
+      return;
+    }
+
+    // Edge guard: bottom of page is strictly 'contact'
+    if (maxScroll > 0 && scrollY >= maxScroll - 60) {
+      setActiveSection((prev) => (prev !== 'contact' ? 'contact' : prev));
+      return;
+    }
+
     const sections = ['home', 'about', 'work', 'skills', 'experience', 'contact'];
-    const sectionElements = sections.map((id) => document.getElementById(id)).filter(Boolean);
+    // Reading focal point: 140px below the fixed navbar
+    const focalY = scrollY + 140;
 
-    if (!sectionElements.length) return;
-
-    // Viewport focal region: 80px below navbar down to 60% of viewport
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries.filter((e) => e.isIntersecting);
-        if (visibleEntries.length > 0) {
-          // Sort by distance to top of viewport
-          visibleEntries.sort(
-            (a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top)
-          );
-          const dominant = visibleEntries[0].target.id;
-          setActiveSection((prev) => (prev !== dominant ? dominant : prev));
+    let dominantSection = 'home';
+    for (let i = 0; i < sections.length; i++) {
+      const el = document.getElementById(sections[i]);
+      if (el) {
+        const top = el.offsetTop;
+        if (focalY >= top) {
+          dominantSection = sections[i];
+        } else {
+          break;
         }
-      },
-      {
-        root: null,
-        rootMargin: '-80px 0px -40% 0px',
-        threshold: [0, 0.2, 0.5],
       }
-    );
+    }
 
-    sectionElements.forEach((el) => observer.observe(el));
+    setActiveSection((prev) => (prev !== dominantSection ? dominantSection : prev));
+  };
 
-    // Edge guard for top & bottom bounds
-    const handleScrollEdges = () => {
-      const scrollY = window.scrollY || window.pageYOffset;
-      if (scrollY <= 50) {
-        setActiveSection((prev) => (prev !== 'home' ? 'home' : prev));
-      } else if (
-        window.innerHeight + scrollY >=
-        document.documentElement.scrollHeight - 60
-      ) {
-        setActiveSection((prev) => (prev !== 'contact' ? 'contact' : prev));
+  useEffect(() => {
+    let rafId = null;
+
+    const handleScroll = () => {
+      if (isClickScrollingRef.current) return;
+      if (!rafId) {
+        rafId = requestAnimationFrame(() => {
+          determineActiveSection();
+          rafId = null;
+        });
       }
     };
 
-    window.addEventListener('scroll', handleScrollEdges, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', determineActiveSection, { passive: true });
+
+    // Initial check on mount
+    determineActiveSection();
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', handleScrollEdges);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', determineActiveSection);
+      if (rafId) cancelAnimationFrame(rafId);
+      if (clickScrollTimerRef.current) clearTimeout(clickScrollTimerRef.current);
     };
   }, []);
 
@@ -95,6 +123,9 @@ export default function Navbar() {
     };
 
     updateIndicator();
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(updateIndicator);
+    }
     window.addEventListener('resize', updateIndicator);
     return () => window.removeEventListener('resize', updateIndicator);
   }, [activeSection]);
@@ -132,14 +163,35 @@ export default function Navbar() {
     e.preventDefault();
     sound.playClick();
     const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      element.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth' });
+
+    // 1. Immediately indicate the clicked section
+    setActiveSection(targetId);
+
+    // 2. Temporarily lock scroll tracking so intermediate sections don't cause jitter
+    isClickScrollingRef.current = true;
+    if (clickScrollTimerRef.current) clearTimeout(clickScrollTimerRef.current);
+    clickScrollTimerRef.current = setTimeout(() => {
+      isClickScrollingRef.current = false;
+      determineActiveSection();
+    }, 850);
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (targetId === 'home') {
+      window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
       if (window.history?.replaceState) {
         window.history.replaceState(null, '', href);
       }
+    } else {
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth' });
+        if (window.history?.replaceState) {
+          window.history.replaceState(null, '', href);
+        }
+      }
     }
+
     if (mobileMenuOpen) {
       setMobileMenuOpen(false);
       mobileToggleRef.current?.focus();
