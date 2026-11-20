@@ -85,7 +85,7 @@ function TiltProjectCard({ proj, isEven }) {
             transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg)',
             transition: 'transform 0.15s ease-out',
           }}
-          className="relative rounded-2xl bg-gradient-to-b from-[#0a121f] to-[#060a10] border border-white/10 p-6 md:p-8 overflow-hidden hover:border-[#00BFC4]/40 hover:shadow-[0_25px_60px_rgba(0,191,196,0.15)] group will-change-transform"
+          className="relative rounded-2xl bg-gradient-to-b from-[var(--surface-card-start)] to-[var(--surface-card-end)] border border-[var(--border-default)] p-6 md:p-8 overflow-hidden hover:border-[var(--color-data)]/40 hover:shadow-[0_25px_60px_rgba(0,191,196,0.15)] group will-change-transform"
         >
           {/* Dynamic Cursor Light Sheen */}
           <div
@@ -97,18 +97,18 @@ function TiltProjectCard({ proj, isEven }) {
           />
 
           {/* Window Title Bar */}
-          <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6 relative z-10">
+          <div className="flex items-center justify-between pb-4 border-b border-[var(--border-default)] mb-6 relative z-10">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
               <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
               <span className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
-              <span className="text-[10px] tracking-wider text-[#A8ABB2] font-mono ml-2">
+              <span className="text-[10px] tracking-wider text-[var(--text-secondary)] font-mono ml-2">
                 {proj.name.toLowerCase().replace(/\s+/g, '-')}.sys
               </span>
             </div>
 
             {/* Interactive View Modes: Telemetry / Architecture / CLI */}
-            <div className="flex items-center gap-1 bg-black/40 p-1 rounded-lg border border-white/5">
+            <div className="flex items-center gap-1 bg-black/40 p-1 rounded-lg border border-[var(--border-subtle)]">
               {['telemetry', 'arch', 'terminal'].map((mode) => (
                 <button
                   key={mode}
@@ -119,8 +119,8 @@ function TiltProjectCard({ proj, isEven }) {
                   onMouseEnter={() => sound.playHover()}
                   className={`text-[9px] font-mono tracking-wider uppercase px-2 py-0.5 rounded cursor-pointer transition-colors ${
                     activeTab === mode
-                      ? 'bg-[#E9A927] text-black font-semibold'
-                      : 'text-[#A8ABB2] hover:text-white'
+                      ? 'bg-[var(--color-accent)] text-black font-semibold'
+                      : 'text-[var(--text-secondary)] hover:text-white'
                   }`}
                 >
                   {mode}
@@ -131,30 +131,30 @@ function TiltProjectCard({ proj, isEven }) {
 
           {/* Tab 1: Telemetry View */}
           {activeTab === 'telemetry' && (
-            <div className="relative z-10 rounded-xl bg-[#05080e]/95 border border-white/5 p-6 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-lg bg-white/5 border border-white/5">
+            <div className="relative z-10 rounded-xl bg-[var(--surface-2)]/95 border border-[var(--border-subtle)] p-6 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-lg bg-white/5 border border-[var(--border-subtle)]">
                 <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 rounded-full bg-[#00BFC4] animate-ping" />
-                  <span className="text-xs font-mono text-[#F4F3F0]">Streaming Telemetry Feed</span>
+                  <div className="w-3 h-3 rounded-full bg-[var(--color-data)] animate-ping" />
+                  <span className="text-xs font-mono text-[var(--text-primary)]">Streaming Telemetry Feed</span>
                 </div>
-                <span className="text-xs font-mono text-[#E9A927] font-medium">
+                <span className="text-xs font-mono text-[var(--color-accent)] font-medium">
                   {proj.impact}
                 </span>
               </div>
 
               {/* Sparkline Visualizer */}
               <div className="grid grid-cols-3 gap-3">
-                <div className="p-3 rounded-lg bg-white/[0.03] border border-white/5">
-                  <div className="text-[10px] font-mono text-[#A8ABB2] uppercase">Throughput</div>
-                  <div className="text-sm font-semibold text-[#00BFC4] mt-1 font-mono">1.2M RPS</div>
+                <div className="p-3 rounded-lg bg-white/[0.03] border border-[var(--border-subtle)]">
+                  <div className="text-[10px] font-mono text-[var(--text-secondary)] uppercase">Throughput</div>
+                  <div className="text-sm font-semibold text-[var(--color-data)] mt-1 font-mono">1.2M RPS</div>
                 </div>
-                <div className="p-3 rounded-lg bg-white/[0.03] border border-white/5">
-                  <div className="text-[10px] font-mono text-[#A8ABB2] uppercase">Memory Footprint</div>
-                  <div className="text-sm font-semibold text-[#E9A927] mt-1 font-mono">42 MB (Zero Leak)</div>
+                <div className="p-3 rounded-lg bg-white/[0.03] border border-[var(--border-subtle)]">
+                  <div className="text-[10px] font-mono text-[var(--text-secondary)] uppercase">Memory Footprint</div>
+                  <div className="text-sm font-semibold text-[var(--color-accent)] mt-1 font-mono">42 MB (Zero Leak)</div>
                 </div>
-                <div className="p-3 rounded-lg bg-white/[0.03] border border-white/5">
-                  <div className="text-[10px] font-mono text-[#A8ABB2] uppercase">Latency</div>
-                  <div className="text-sm font-semibold text-emerald-400 mt-1 font-mono">&lt; 14ms</div>
+                <div className="p-3 rounded-lg bg-white/[0.03] border border-[var(--border-subtle)]">
+                  <div className="text-[10px] font-mono text-[var(--text-secondary)] uppercase">Latency</div>
+                  <div className="text-sm font-semibold text-[var(--color-status-success)] mt-1 font-mono">&lt; 14ms</div>
                 </div>
               </div>
             </div>
@@ -162,16 +162,16 @@ function TiltProjectCard({ proj, isEven }) {
 
           {/* Tab 2: Architecture Diagram */}
           {activeTab === 'arch' && (
-            <div className="relative z-10 rounded-xl bg-[#05080e]/95 border border-white/5 p-6 space-y-4 font-mono text-xs">
-              <div className="text-[#A8ABB2] text-[10px] uppercase tracking-wider mb-2">SYSTEM TOPOLOGY:</div>
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-2 p-3 bg-white/5 rounded border border-white/5 text-center">
-                <div className="px-3 py-1.5 bg-[#00BFC4]/20 border border-[#00BFC4]/40 rounded text-[#00BFC4]">Edge Proxy (gRPC)</div>
-                <span className="text-[#E9A927]">→</span>
-                <div className="px-3 py-1.5 bg-[#E9A927]/20 border border-[#E9A927]/40 rounded text-[#E9A927]">Worker Pool</div>
-                <span className="text-[#E9A927]">→</span>
-                <div className="px-3 py-1.5 bg-emerald-500/20 border border-emerald-500/40 rounded text-emerald-400">PostgreSQL (pgvector)</div>
+            <div className="relative z-10 rounded-xl bg-[var(--surface-2)]/95 border border-[var(--border-subtle)] p-6 space-y-4 font-mono text-xs">
+              <div className="text-[var(--text-secondary)] text-[10px] uppercase tracking-wider mb-2">SYSTEM TOPOLOGY:</div>
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-2 p-3 bg-white/5 rounded border border-[var(--border-subtle)] text-center">
+                <div className="px-3 py-1.5 bg-[var(--color-data)]/20 border border-[var(--color-data)]/40 rounded text-[var(--color-data)]">Edge Proxy (gRPC)</div>
+                <span className="text-[var(--color-accent)]">→</span>
+                <div className="px-3 py-1.5 bg-[var(--color-accent)]/20 border border-[var(--color-accent)]/40 rounded text-[var(--color-accent)]">Worker Pool</div>
+                <span className="text-[var(--color-accent)]">→</span>
+                <div className="px-3 py-1.5 bg-emerald-500/20 border border-emerald-500/40 rounded text-[var(--color-status-success)]">PostgreSQL (pgvector)</div>
               </div>
-              <p className="text-[11px] text-[#A8ABB2] font-sans leading-relaxed">
+              <p className="text-[11px] text-[var(--text-secondary)] font-sans leading-relaxed">
                 Asynchronous state pipeline with automated backpressure regulation and zero-copy JSON parsing.
               </p>
             </div>
@@ -179,23 +179,23 @@ function TiltProjectCard({ proj, isEven }) {
 
           {/* Tab 3: Interactive Terminal */}
           {activeTab === 'terminal' && (
-            <div className="relative z-10 rounded-xl bg-black/90 border border-white/10 p-4 font-mono text-xs space-y-2">
-              <div className="max-h-32 overflow-y-auto space-y-1 text-[#A8ABB2]">
+            <div className="relative z-10 rounded-xl bg-black/90 border border-[var(--border-default)] p-4 font-mono text-xs space-y-2">
+              <div className="max-h-32 overflow-y-auto space-y-1 text-[var(--text-secondary)]">
                 {terminalLogs.map((log, i) => (
-                  <div key={i} className={log.startsWith('$') ? 'text-white' : 'text-[#00BFC4]'}>
+                  <div key={i} className={log.startsWith('$') ? 'text-white' : 'text-[var(--color-data)]'}>
                     {log}
                   </div>
                 ))}
               </div>
 
               {/* Terminal Quick Command Chips */}
-              <div className="flex items-center gap-2 pt-2 border-t border-white/10">
-                <span className="text-[10px] text-[#E9A927]">RUN:</span>
+              <div className="flex items-center gap-2 pt-2 border-t border-[var(--border-default)]">
+                <span className="text-[10px] text-[var(--color-accent)]">RUN:</span>
                 {['ping', 'stack', 'clear'].map((cmd) => (
                   <button
                     key={cmd}
                     onClick={() => runCommand(cmd)}
-                    className="text-[10px] px-2 py-0.5 rounded bg-white/10 hover:bg-[#E9A927] hover:text-black transition-colors cursor-pointer"
+                    className="text-[10px] px-2 py-0.5 rounded bg-white/10 hover:bg-[var(--color-accent)] hover:text-black transition-colors cursor-pointer"
                   >
                     {cmd}
                   </button>
@@ -209,27 +209,27 @@ function TiltProjectCard({ proj, isEven }) {
       {/* Project Details */}
       <div className={`lg:col-span-5 ${isEven ? 'order-2' : 'order-2 lg:order-1'} flex flex-col justify-center`}>
         <div className="flex items-center gap-4 mb-3">
-          <span className="text-3xl sm:text-4xl font-mono font-light text-[#E9A927]/70">
+          <span className="text-3xl sm:text-4xl font-mono font-light text-[var(--color-accent)]/70">
             {proj.num}
           </span>
-          <span className="text-[10px] tracking-[0.2em] uppercase font-mono font-semibold text-[#00BFC4] px-2.5 py-1 rounded bg-[#00BFC4]/10 border border-[#00BFC4]/20">
+          <span className="text-[10px] tracking-[0.2em] uppercase font-mono font-semibold text-[var(--color-data)] px-2.5 py-1 rounded bg-[var(--color-data)]/10 border border-[var(--color-data)]/20">
             {proj.role}
           </span>
         </div>
 
-        <h3 className="text-2xl sm:text-4xl font-light text-[#F4F3F0] mb-4">
+        <h3 className="text-2xl sm:text-4xl font-light text-[var(--text-primary)] mb-4">
           {proj.name}
         </h3>
 
-        <p className="text-sm md:text-base text-[#A8ABB2] font-light leading-relaxed mb-6">
+        <p className="text-sm md:text-base text-[var(--text-secondary)] font-light leading-relaxed mb-6">
           {proj.description}
         </p>
 
-        <div className="mb-6 p-4 rounded-xl bg-white/[0.03] border border-white/5">
-          <div className="text-[10px] font-mono tracking-wider uppercase text-[#E9A927] font-semibold mb-1">
+        <div className="mb-6 p-4 rounded-xl bg-white/[0.03] border border-[var(--border-subtle)]">
+          <div className="text-[10px] font-mono tracking-wider uppercase text-[var(--color-accent)] font-semibold mb-1">
             IMPACT & HIGHLIGHT
           </div>
-          <div className="text-xs text-[#F4F3F0] font-light leading-normal">
+          <div className="text-xs text-[var(--text-primary)] font-light leading-normal">
             {proj.impact}
           </div>
         </div>
@@ -239,7 +239,7 @@ function TiltProjectCard({ proj, isEven }) {
           {proj.stack.map((item) => (
             <span
               key={item}
-              className="text-[10px] tracking-wider font-mono px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#F4F3F0]"
+              className="text-[10px] tracking-wider font-mono px-3 py-1 rounded-full bg-white/5 border border-[var(--border-default)] text-[var(--text-primary)]"
             >
               {item}
             </span>
@@ -254,7 +254,7 @@ function TiltProjectCard({ proj, isEven }) {
             rel="noopener noreferrer"
             onMouseEnter={() => sound.playHover()}
             onClick={() => sound.playClick()}
-            className="text-[#F4F3F0] hover:text-[#E9A927] transition-colors flex items-center gap-1.5"
+            className="text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors flex items-center gap-1.5"
           >
             <span>SOURCE CODE</span>
             <span>↗</span>
@@ -271,12 +271,12 @@ export default function Projects() {
   return (
     <section
       id="work"
-      className="relative w-full min-h-[100svh] py-28 md:py-36 px-6 md:px-12 lg:px-16 bg-[#050609] border-t border-white/5"
+      className="relative w-full min-h-[100svh] py-28 md:py-36 px-6 md:px-12 lg:px-16 bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
     >
       <div
         className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full blur-[130px] opacity-20 pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, #1769B5 0%, #071A2B 60%, transparent 80%)',
+          background: 'radial-gradient(circle, var(--work-ambient-blue) 0%, var(--work-ambient-navy) 60%, transparent 80%)',
           transform: 'translate(-50%, 0) translateZ(0)',
         }}
       />
@@ -284,15 +284,15 @@ export default function Projects() {
       <div className="relative z-10 max-w-[1600px] w-full mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-20">
           <div>
-            <div className="flex items-center gap-3 text-[11px] tracking-[0.25em] font-mono font-semibold text-[#00BFC4] uppercase mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00BFC4] shadow-[0_0_8px_#00BFC4]" />
+            <div className="flex items-center gap-3 text-[11px] tracking-[0.25em] font-mono font-semibold text-[var(--color-data)] uppercase mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-data)] shadow-[0_0_8px_var(--color-data)]" />
               <span>SELECTED PRODUCTIONS</span>
             </div>
-            <h2 className="text-4xl sm:text-6xl font-light text-[#F4F3F0] tracking-tight">
-              FEATURED <span className="font-serif italic text-[#E9A927]">WORKS</span>
+            <h2 className="text-4xl sm:text-6xl font-light text-[var(--text-primary)] tracking-tight">
+              FEATURED <span className="font-serif italic text-[var(--color-accent)]">WORKS</span>
             </h2>
           </div>
-          <span className="text-xs tracking-[0.2em] uppercase text-[#A8ABB2] pb-2 font-mono">
+          <span className="text-xs tracking-[0.2em] uppercase text-[var(--text-secondary)] pb-2 font-mono">
             ARCHIVE 2024 — 2026
           </span>
         </div>

@@ -10,7 +10,7 @@ import Contact from './sections/Contact.jsx';
 
 export default function App() {
   return (
-    <div className="relative bg-[#050609] text-[#F4F3F0] min-h-screen selection:bg-[#E9A927]/30 selection:text-white">
+    <div className="relative bg-[var(--bg-base)] text-[var(--text-primary)] min-h-screen selection:bg-[var(--color-accent)]/30 selection:text-white">
       {/* Exactly ONE Global Glass Magnifier Lens Active Across the Entire Website */}
       <GlobalCursorMagnifier />
 

@@ -44,7 +44,7 @@ export default function GlobalCursorMagnifier() {
         const contentClone = contentSource.cloneNode(true);
         contentClone.removeAttribute('data-magnifier-source');
         contentClone.classList.add('cursor-mirror-element');
-        contentClone.style.backgroundColor = '#050609';
+        contentClone.style.backgroundColor = 'var(--bg-base)';
 
         // Strip non-visual elements
         contentClone.querySelectorAll('audio, video, script').forEach((el) => el.remove());
@@ -84,7 +84,7 @@ export default function GlobalCursorMagnifier() {
       headerClone.style.top = '0px';
       headerClone.style.left = '0px';
       headerClone.style.width = '100%';
-      headerClone.style.backgroundColor = '#050609';
+      headerClone.style.backgroundColor = 'var(--bg-base)';
       headerMirrorRef.current.appendChild(headerClone);
     };
 
@@ -324,8 +324,8 @@ export default function GlobalCursorMagnifier() {
         <div
           className={`absolute inset-0 rounded-full border-[1.5px] transition-colors duration-200 ${
             isHovered
-              ? 'border-[#E9A927]/85 shadow-[0_0_24px_rgba(233,169,39,0.45),inset_0_0_12px_rgba(255,255,255,0.2)]'
-              : 'border-[#00BFC4]/60 shadow-[0_0_20px_rgba(0,191,196,0.32),inset_0_0_12px_rgba(255,255,255,0.12)]'
+              ? 'border-[var(--color-accent)]/85 shadow-[0_0_24px_rgba(233,169,39,0.45),inset_0_0_12px_rgba(255,255,255,0.2)]'
+              : 'border-[var(--color-highlight)]/60 shadow-[0_0_20px_rgba(0,191,196,0.32),inset_0_0_12px_rgba(255,255,255,0.12)]'
           }`}
         />
 

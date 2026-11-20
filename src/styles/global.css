@@ -1,18 +1,36 @@
 /* src/styles/global.css */
 @import "tailwindcss";
+@import "./tokens/colors.css";
 
 @theme {
-  --color-primary-bg: #050609;
-  --color-secondary-dark: #080D14;
-  --color-deep-navy: #071A2B;
-  --color-primary-text: #F4F3F0;
-  --color-secondary-text: #A8ABB2;
-  --color-warm-accent: #E9A927;
-  --color-cyan-glow: #00BFC4;
-  --color-blue-glow: #1769B5;
-  --color-magenta-glow: #C90070;
-  --color-yellow-glow: #F5BE37;
-  --color-orange-glow: #FF6543;
+  --color-canvas: var(--bg-base);
+  --color-surface-elevated: var(--bg-raised);
+  --color-surface-nested: var(--surface-2);
+  --color-surface-navy: var(--surface-navy);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-emphasis: var(--text-emphasis);
+
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-data: var(--color-data);
+  --color-focus: var(--color-focus);
+  --color-status-success: var(--color-status-success);
+
+  /* Preserved aliases for theme consistency */
+  --color-primary-bg: var(--bg-base);
+  --color-secondary-dark: var(--bg-raised);
+  --color-deep-navy: var(--surface-navy);
+  --color-primary-text: var(--text-primary);
+  --color-secondary-text: var(--text-secondary);
+  --color-warm-accent: var(--color-accent);
+  --color-cyan-glow: var(--color-data);
+  --color-blue-glow: var(--blue-600);
+  --color-magenta-glow: var(--magenta-600);
+  --color-yellow-glow: var(--gold-300);
+  --color-orange-glow: var(--orange-500);
 
   --font-sans: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-serif: "Bodoni Moda", "Cormorant Garamond", "Playfair Display", Georgia, serif;
@@ -34,8 +52,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #050609;
-  color: #F4F3F0;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -44,7 +62,7 @@ body {
 
 /* Accessible focus visible outlines per WCAG 2.2 / UI-UX-PRO-MAX */
 a:focus-visible, button:focus-visible {
-  outline: 2px solid #E9A927;
+  outline: 2px solid var(--color-focus);
   outline-offset: 3px;
 }
 
@@ -53,20 +71,19 @@ a:focus-visible, button:focus-visible {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
 }
 
-
 /* Refined Minimal Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #050609;
+  background: var(--bg-base);
 }
 ::-webkit-scrollbar-thumb {
-  background: #141f2d;
+  background: var(--ink-scrollbar);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #1e3247;
+  background: var(--ink-scrollbar-hover);
 }
 
 /* Animation utilities (GPU compositor-only opacity animation) */

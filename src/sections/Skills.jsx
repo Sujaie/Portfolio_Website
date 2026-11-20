@@ -45,20 +45,20 @@ export default function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative w-full py-28 md:py-36 px-6 md:px-12 lg:px-16 bg-[#050609] border-t border-white/5"
+      className="relative w-full py-28 md:py-36 px-6 md:px-12 lg:px-16 bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
     >
       <div className="relative z-10 max-w-[1600px] w-full mx-auto">
         
         {/* Section Header */}
         <div className="mb-20 max-w-xl">
-          <div className="flex items-center gap-3 text-[11px] tracking-[0.25em] font-semibold text-[#E9A927] uppercase mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#E9A927] shadow-[0_0_8px_#E9A927]" />
+          <div className="flex items-center gap-3 text-[11px] tracking-[0.25em] font-semibold text-[var(--color-accent)] uppercase mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]" />
             <span>CORE PROFICIENCIES</span>
           </div>
-          <h2 className="text-4xl sm:text-6xl font-light text-[#F4F3F0] tracking-tight">
-            TECHNICAL <span className="font-serif italic text-[#E9A927]">ARSENAL</span>
+          <h2 className="text-4xl sm:text-6xl font-light text-[var(--text-primary)] tracking-tight">
+            TECHNICAL <span className="font-serif italic text-[var(--color-accent)]">ARSENAL</span>
           </h2>
-          <p className="mt-4 text-sm text-[#A8ABB2] font-light leading-relaxed">
+          <p className="mt-4 text-sm text-[var(--text-secondary)] font-light leading-relaxed">
             Curated toolsets and runtime systems mastered across production environments, algorithmic research, and interactive engineering.
           </p>
         </div>
@@ -68,23 +68,23 @@ export default function Skills() {
           {Object.entries(skills).map(([category, items]) => (
             <div
               key={category}
-              className="skill-card p-6 md:p-8 rounded-2xl bg-[#080D14]/70 border border-white/5 hover:border-white/15 transition-all duration-300"
+              className="skill-card p-6 md:p-8 rounded-2xl bg-[var(--bg-raised)]/70 border border-[var(--border-subtle)] hover:border-[var(--border-strong)] transition-all duration-300"
             >
-              <h3 className="text-xs font-mono tracking-[0.2em] text-[#00BFC4] uppercase pb-4 mb-6 border-b border-white/10 flex items-center justify-between">
+              <h3 className="text-xs font-mono tracking-[0.2em] text-[var(--color-data)] uppercase pb-4 mb-6 border-b border-[var(--border-default)] flex items-center justify-between">
                 <span>{category}</span>
-                <span className="text-[10px] text-[#A8ABB2] opacity-60">[{items.length}]</span>
+                <span className="text-[10px] text-[var(--text-secondary)] opacity-60">[{items.length}]</span>
               </h3>
 
               <div className="space-y-4">
                 {items.map((skill) => (
                   <div
                     key={skill.name}
-                    className="group flex items-center justify-between py-1 border-b border-white/[0.03] hover:border-white/10 transition-colors"
+                    className="group flex items-center justify-between py-1 border-b border-white/[0.03] hover:border-[var(--border-default)] transition-colors"
                   >
-                    <span className="text-sm text-[#F4F3F0] font-light group-hover:text-[#E9A927] transition-colors">
+                    <span className="text-sm text-[var(--text-primary)] font-light group-hover:text-[var(--color-accent)] transition-colors">
                       {skill.name}
                     </span>
-                    <span className="text-[10px] font-mono tracking-wider text-[#A8ABB2] uppercase">
+                    <span className="text-[10px] font-mono tracking-wider text-[var(--text-secondary)] uppercase">
                       {skill.level}
                     </span>
                   </div>
@@ -98,4 +98,3 @@ export default function Skills() {
     </section>
   );
 }
-
