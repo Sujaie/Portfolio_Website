@@ -86,13 +86,13 @@ export default function About() {
         <div className="lg:col-span-5 flex flex-col justify-center">
           
           {/* Badge */}
-          <div className="inline-flex items-center gap-3 text-[11px] tracking-[0.25em] font-mono text-[var(--color-accent)] uppercase mb-6">
+          <div className="inline-flex items-center gap-3 text-xs tracking-mono-lg font-mono text-[var(--color-accent)] uppercase mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]" />
             <span>{about.badge}</span>
           </div>
 
           {/* Lead statement */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-[var(--text-primary)] mb-6 leading-[1.18]">
+          <h2 className="text-section-lead font-light tracking-tight text-[var(--text-primary)] mb-6 leading-section-lead">
             {about.lead} <br />
             <span className="font-serif italic text-[var(--color-accent)]">
               Crafting systems
@@ -100,7 +100,7 @@ export default function About() {
           </h2>
 
           {/* Body paragraphs */}
-          <div className="space-y-4 text-sm md:text-base text-[var(--text-secondary)] font-light leading-relaxed max-w-lg">
+          <div className="space-y-4 text-base text-[var(--text-secondary)] font-light leading-relaxed max-w-lg">
             {about.paragraphs.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
@@ -111,7 +111,7 @@ export default function About() {
             {about.highlights.map((item) => (
               <span
                 key={item}
-                className="text-[11px] font-mono tracking-wider uppercase px-3 py-1.5 rounded-full bg-white/5 border border-[var(--border-default)] text-[var(--text-primary)]"
+                className="text-xs font-mono tracking-mono-sm uppercase px-3 py-1.5 rounded-full bg-white/5 border border-[var(--border-default)] text-[var(--text-primary)]"
               >
                 {item}
               </span>
@@ -130,7 +130,7 @@ export default function About() {
                   <button
                     key={item.id}
                     onClick={() => handleSlideChange(idx)}
-                    className={`text-[10px] tracking-[0.2em] font-mono uppercase px-3 py-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    className={`text-2xs tracking-mono-md font-mono uppercase px-3 py-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                       idx === activeIndex
                         ? 'bg-[var(--color-accent)] text-black font-semibold shadow-[0_0_14px_rgba(233,169,39,0.45)]'
                         : 'text-[var(--text-secondary)] hover:text-white bg-white/5 hover:bg-white/10'
@@ -173,10 +173,10 @@ export default function About() {
                     <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
                     <span className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
                   </div>
-                  <span className="text-[10px] tracking-wider text-[var(--text-secondary)] font-mono">
+                  <span className="text-2xs tracking-wider text-[var(--text-secondary)] font-mono">
                     {currentItem.title.toLowerCase().replace(/\s+/g, '-')}.local
                   </span>
-                  <span className="text-[10px] text-[var(--color-status-success)] font-mono flex items-center gap-1.5">
+                  <span className="text-2xs text-[var(--color-status-success)] font-mono flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-status-success)] animate-ping" />
                     CONNECTED
                   </span>
@@ -185,16 +185,16 @@ export default function About() {
                 {/* Mock UI Canvas / Telemetry Grid */}
                 <div className="grid grid-cols-3 gap-3 my-auto py-2">
                   <div className="p-3 rounded-lg bg-white/5 border border-[var(--border-subtle)]">
-                    <div className="text-[10px] font-mono text-[var(--text-secondary)] uppercase">Engine State</div>
-                    <div className="text-sm font-semibold text-[var(--color-data)] mt-1">OPTIMIZED</div>
+                    <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Engine State</div>
+                    <div className="text-sm font-semibold text-[var(--color-data)] mt-1 font-mono">OPTIMIZED</div>
                   </div>
                   <div className="p-3 rounded-lg bg-white/5 border border-[var(--border-subtle)]">
-                    <div className="text-[10px] font-mono text-[var(--text-secondary)] uppercase">Throughput</div>
-                    <div className="text-sm font-semibold text-[var(--color-accent)] mt-1">{currentItem.metrics.split('•')[0]}</div>
+                    <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Throughput</div>
+                    <div className="text-sm font-semibold text-[var(--color-accent)] mt-1 font-mono">{currentItem.metrics.split('•')[0]}</div>
                   </div>
                   <div className="p-3 rounded-lg bg-white/5 border border-[var(--border-subtle)]">
-                    <div className="text-[10px] font-mono text-[var(--text-secondary)] uppercase">Latency</div>
-                    <div className="text-sm font-semibold text-white mt-1">{currentItem.metrics.split('•')[1] || 'Sub-ms'}</div>
+                    <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Latency</div>
+                    <div className="text-sm font-semibold text-white mt-1 font-mono">{currentItem.metrics.split('•')[1] || 'Sub-ms'}</div>
                   </div>
                 </div>
 
@@ -215,13 +215,13 @@ export default function About() {
                 <h3 className="text-2xl font-light text-white">
                   {currentItem.title}
                 </h3>
-                <span className="text-xs text-[var(--color-accent)] font-medium tracking-wide">
+                <span className="text-sm text-[var(--color-accent)] font-medium tracking-wide">
                   {currentItem.tagline}
                 </span>
               </div>
 
               {/* Description */}
-              <p className="text-xs sm:text-sm text-[var(--text-secondary)] font-light leading-relaxed mb-4">
+              <p className="text-sm text-[var(--text-secondary)] font-light leading-relaxed mb-4">
                 {currentItem.description}
               </p>
 
@@ -230,7 +230,7 @@ export default function About() {
                 {currentItem.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[10px] tracking-wider font-mono px-2.5 py-1 rounded bg-black/50 text-[var(--text-primary)] border border-[var(--border-default)]"
+                    className="text-2xs tracking-mono-sm font-mono px-2.5 py-1 rounded bg-black/50 text-[var(--text-primary)] border border-[var(--border-default)]"
                   >
                     {tag}
                   </span>
@@ -253,7 +253,7 @@ export default function About() {
                 ))}
               </div>
 
-              <div className="flex items-center gap-4 text-xs tracking-wider uppercase font-mono">
+              <div className="flex items-center gap-4 text-sm tracking-wider uppercase font-mono">
                 <a
                   href={currentItem.links.github}
                   target="_blank"

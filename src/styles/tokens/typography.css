@@ -1,0 +1,74 @@
+/* src/styles/tokens/typography.css
+   Centralized Responsive & Fluid Typography System
+   Preserves editorial aesthetic, oversized Hero typography, serif italic accents,
+   clean sans-serif body, and precise monospaced labels.
+*/
+
+:root {
+  /* ==========================================================================
+     1. FONT FAMILIES
+     Three intentional typography voices
+     ========================================================================== */
+  --font-sans: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Bodoni Moda", "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* ==========================================================================
+     2. FONT WEIGHTS
+     ========================================================================== */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* ==========================================================================
+     3. FLUID FONT SIZE SCALE (clamp-based for smooth multi-viewport scaling)
+     ========================================================================== */
+  /* Labels, Tags & Metadata */
+  --text-2xs: 0.625rem;              /* 10px - Tech pills, metric labels, audio toggle */
+  --text-xs: 0.6875rem;              /* 11px - Navigation links, kicker labels */
+  --text-caption: 0.75rem;           /* 12px - Monogram, secondary labels */
+
+  /* Body & General UI */
+  --text-sm: clamp(0.75rem, 0.25vw + 0.7rem, 0.875rem);       /* 12px -> 14px */
+  --text-base: clamp(0.875rem, 0.35vw + 0.8rem, 1rem);        /* 14px -> 16px */
+  --text-lg: clamp(1rem, 0.5vw + 0.9rem, 1.125rem);           /* 16px -> 18px */
+
+  /* Component Titles & Highlights */
+  --text-xl: clamp(1.25rem, 0.8vw + 1rem, 1.5rem);            /* 20px -> 24px - Timeline roles */
+  --text-2xl: clamp(1.5rem, 1.2vw + 1.2rem, 2rem);            /* 24px -> 32px - Showcase titles */
+  --text-3xl: clamp(1.75rem, 1.8vw + 1.3rem, 2.5rem);          /* 28px -> 40px - Project titles */
+  --text-num-display: clamp(1.875rem, 2.2vw + 1.2rem, 2.5rem); /* 30px -> 40px - Project index numbers */
+
+  /* Section Headings */
+  --text-section-lead: clamp(1.875rem, 3.2vw + 0.8rem, 3rem);  /* 30px -> 48px - About lead */
+  --text-section-heading: clamp(2.25rem, 4.5vw + 1rem, 3.75rem); /* 36px -> 60px - Standard sections */
+
+  /* Hero & Oversized Editorial Display */
+  --text-hero-display: clamp(3.2rem, 9.2vw, 8.8rem);          /* ~51px -> ~140px - "CREATIVE", "DEVELOPER" */
+  --text-hero-accent: clamp(3.5rem, 10.2vw, 9.8rem);          /* ~56px -> ~156px - "SOFTWARE" */
+  --text-contact-display: clamp(2.75rem, 8.5vw, 7.8rem);      /* Oversized contact headline */
+  --text-contact-accent: clamp(3rem, 9.2vw, 8.6rem);          /* Oversized contact italic serif */
+
+  /* ==========================================================================
+     4. LINE HEIGHTS
+     ========================================================================== */
+  --leading-hero: 0.88;             /* Ultra-tight editorial display */
+  --leading-hero-accent: 0.90;      /* Ultra-tight italic serif accent */
+  --leading-section: 1.08;          /* Tight section headings */
+  --leading-section-lead: 1.18;     /* Editorial lead statement */
+  --leading-snug: 1.30;             /* Subheadings and card titles */
+  --leading-normal: 1.50;           /* UI components, inputs, lists */
+  --leading-relaxed: 1.65;          /* Editorial body paragraphs */
+
+  /* ==========================================================================
+     5. LETTER SPACING (TRACKING)
+     ========================================================================== */
+  --tracking-hero: -0.035em;        /* Compressed giant display */
+  --tracking-section: -0.025em;     /* Tight section headings */
+  --tracking-tight: -0.015em;       /* Subheadings */
+  --tracking-normal: 0em;           /* Body paragraphs */
+  --tracking-mono-sm: 0.10em;       /* Tag pills, command chips */
+  --tracking-mono-md: 0.20em;       /* Nav links, category titles */
+  --tracking-mono-lg: 0.25em;       /* Kickers, badges, brand monogram */
+}

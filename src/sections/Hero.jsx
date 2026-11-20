@@ -36,7 +36,7 @@ export default function Hero() {
 
       {/* TOP CONTENT: INTRO METADATA LABEL */}
       <div className="relative z-20 max-w-[1600px] w-full mx-auto">
-        <div className="inline-flex items-center gap-3 text-[11px] md:text-xs tracking-[0.25em] font-mono text-[var(--text-secondary)] uppercase">
+        <div className="inline-flex items-center gap-3 text-xs tracking-mono-lg font-mono text-[var(--text-secondary)] uppercase">
           <span className="w-2 h-2 rounded-full bg-[var(--color-highlight)] shadow-[0_0_10px_var(--color-highlight)] animate-pulse" />
           <span>{hero.introLabel}</span>
         </div>
@@ -46,21 +46,21 @@ export default function Hero() {
       <div className="relative z-20 max-w-[1600px] w-full mx-auto my-auto py-6 md:py-10 select-text">
         {/* Row 1: "CREATIVE" offset left */}
         <div className="overflow-hidden py-1">
-          <h1 className="text-[14vw] sm:text-[12vw] md:text-[9.5vw] lg:text-[8.8vw] font-light leading-[0.88] tracking-[-0.035em] text-[var(--text-primary)] font-sans">
+          <h1 className="text-hero-display font-light leading-hero tracking-hero text-[var(--text-primary)] font-sans">
             {hero.headlinePart1}
           </h1>
         </div>
 
         {/* Row 2: "SOFTWARE" italic serif accent offset right */}
         <div className="overflow-hidden py-1 flex justify-start sm:justify-center md:justify-end md:pr-[10vw]">
-          <span className="font-serif italic font-normal text-[15vw] sm:text-[13vw] md:text-[10.5vw] lg:text-[9.8vw] leading-[0.9] text-[var(--color-accent)] drop-shadow-[0_0_45px_var(--glow-gold)]">
+          <span className="font-serif italic font-normal text-hero-accent leading-hero-accent text-[var(--color-accent)] drop-shadow-[0_0_45px_var(--glow-gold)]">
             {hero.headlineAccent}
           </span>
         </div>
 
         {/* Row 3: "DEVELOPER" lower row extending right */}
         <div className="overflow-hidden py-1 flex justify-end">
-          <h1 className="text-[14vw] sm:text-[12vw] md:text-[9.5vw] lg:text-[8.8vw] font-light leading-[0.88] tracking-[-0.035em] text-[var(--text-primary)] font-sans">
+          <h1 className="text-hero-display font-light leading-hero tracking-hero text-[var(--text-primary)] font-sans">
             {hero.headlinePart2}
           </h1>
         </div>
@@ -71,10 +71,10 @@ export default function Hero() {
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-12 lg:gap-16">
           {hero.metadata.map((item) => (
             <div key={item.label} className="flex flex-col gap-1">
-              <span className="text-[10px] tracking-[0.25em] text-[var(--text-secondary)] font-mono font-medium uppercase">
+              <span className="text-2xs tracking-mono-lg text-[var(--text-secondary)] font-mono font-medium uppercase">
                 {item.label}
               </span>
-              <span className="text-xs md:text-sm tracking-wider text-[var(--text-primary)] font-light">
+              <span className="text-sm tracking-wider text-[var(--text-primary)] font-light">
                 {item.value}
               </span>
             </div>
@@ -83,7 +83,7 @@ export default function Hero() {
 
         <a
           href="#about"
-          className="group flex items-center gap-3 text-[10px] tracking-[0.25em] font-mono text-[var(--text-secondary)] hover:text-[var(--color-accent)] uppercase transition-colors"
+          className="group flex items-center gap-3 text-2xs tracking-mono-lg font-mono text-[var(--text-secondary)] hover:text-[var(--color-accent)] uppercase transition-colors"
         >
           <span>EXPLORE</span>
           <div className="w-5 h-8 rounded-full border border-[var(--border-elevated)] flex items-start justify-center p-1 group-hover:border-[var(--color-accent)]/60 transition-colors">

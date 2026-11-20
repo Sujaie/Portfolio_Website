@@ -1,6 +1,7 @@
 /* src/styles/global.css */
 @import "tailwindcss";
 @import "./tokens/colors.css";
+@import "./tokens/typography.css";
 
 @theme {
   --color-canvas: var(--bg-base);
@@ -32,9 +33,45 @@
   --color-yellow-glow: var(--gold-300);
   --color-orange-glow: var(--orange-500);
 
-  --font-sans: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-serif: "Bodoni Moda", "Cormorant Garamond", "Playfair Display", Georgia, serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  /* Typography Font Families */
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+
+  /* Fluid Typography Sizes */
+  --text-2xs: var(--text-2xs);
+  --text-xs: var(--text-xs);
+  --text-caption: var(--text-caption);
+  --text-sm: var(--text-sm);
+  --text-base: var(--text-base);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
+  --text-3xl: var(--text-3xl);
+  --text-num-display: var(--text-num-display);
+  --text-section-lead: var(--text-section-lead);
+  --text-section-heading: var(--text-section-heading);
+  --text-hero-display: var(--text-hero-display);
+  --text-hero-accent: var(--text-hero-accent);
+  --text-contact-display: var(--text-contact-display);
+  --text-contact-accent: var(--text-contact-accent);
+
+  /* Line Heights */
+  --leading-hero: var(--leading-hero);
+  --leading-hero-accent: var(--leading-hero-accent);
+  --leading-section: var(--leading-section);
+  --leading-section-lead: var(--leading-section-lead);
+  --leading-snug: var(--leading-snug);
+  --leading-normal: var(--leading-normal);
+  --leading-relaxed: var(--leading-relaxed);
+
+  /* Letter Spacing */
+  --tracking-hero: var(--tracking-hero);
+  --tracking-section: var(--tracking-section);
+  --tracking-tight: var(--tracking-tight);
+  --tracking-mono-sm: var(--tracking-mono-sm);
+  --tracking-mono-md: var(--tracking-mono-md);
+  --tracking-mono-lg: var(--tracking-mono-lg);
 }
 
 :root {

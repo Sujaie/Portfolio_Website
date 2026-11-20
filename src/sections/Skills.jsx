@@ -51,14 +51,14 @@ export default function Skills() {
         
         {/* Section Header */}
         <div className="mb-20 max-w-xl">
-          <div className="flex items-center gap-3 text-[11px] tracking-[0.25em] font-semibold text-[var(--color-accent)] uppercase mb-4">
+          <div className="flex items-center gap-3 text-xs tracking-mono-lg font-mono font-semibold text-[var(--color-accent)] uppercase mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]" />
             <span>CORE PROFICIENCIES</span>
           </div>
-          <h2 className="text-4xl sm:text-6xl font-light text-[var(--text-primary)] tracking-tight">
+          <h2 className="text-section-heading font-light text-[var(--text-primary)] tracking-section leading-section">
             TECHNICAL <span className="font-serif italic text-[var(--color-accent)]">ARSENAL</span>
           </h2>
-          <p className="mt-4 text-sm text-[var(--text-secondary)] font-light leading-relaxed">
+          <p className="mt-4 text-base text-[var(--text-secondary)] font-light leading-relaxed">
             Curated toolsets and runtime systems mastered across production environments, algorithmic research, and interactive engineering.
           </p>
         </div>
@@ -70,9 +70,9 @@ export default function Skills() {
               key={category}
               className="skill-card p-6 md:p-8 rounded-2xl bg-[var(--bg-raised)]/70 border border-[var(--border-subtle)] hover:border-[var(--border-strong)] transition-all duration-300"
             >
-              <h3 className="text-xs font-mono tracking-[0.2em] text-[var(--color-data)] uppercase pb-4 mb-6 border-b border-[var(--border-default)] flex items-center justify-between">
+              <h3 className="text-xs font-mono tracking-mono-md text-[var(--color-data)] uppercase pb-4 mb-6 border-b border-[var(--border-default)] flex items-center justify-between">
                 <span>{category}</span>
-                <span className="text-[10px] text-[var(--text-secondary)] opacity-60">[{items.length}]</span>
+                <span className="text-2xs text-[var(--text-secondary)] opacity-60 font-mono">[{items.length}]</span>
               </h3>
 
               <div className="space-y-4">
@@ -81,10 +81,10 @@ export default function Skills() {
                     key={skill.name}
                     className="group flex items-center justify-between py-1 border-b border-white/[0.03] hover:border-[var(--border-default)] transition-colors"
                   >
-                    <span className="text-sm text-[var(--text-primary)] font-light group-hover:text-[var(--color-accent)] transition-colors">
+                    <span className="text-base text-[var(--text-primary)] font-light group-hover:text-[var(--color-accent)] transition-colors">
                       {skill.name}
                     </span>
-                    <span className="text-[10px] font-mono tracking-wider text-[var(--text-secondary)] uppercase">
+                    <span className="text-2xs font-mono tracking-mono-sm text-[var(--text-secondary)] uppercase">
                       {skill.level}
                     </span>
                   </div>

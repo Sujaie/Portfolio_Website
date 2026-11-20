@@ -51,15 +51,15 @@ export default function Experience() {
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-20">
           <div>
-            <div className="flex items-center gap-3 text-[11px] tracking-[0.25em] font-semibold text-[var(--color-data)] uppercase mb-4">
+            <div className="flex items-center gap-3 text-xs tracking-mono-lg font-mono font-semibold text-[var(--color-data)] uppercase mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-data)] shadow-[0_0_8px_var(--color-data)]" />
               <span>CAREER & MILESTONES</span>
             </div>
-            <h2 className="text-4xl sm:text-6xl font-light text-[var(--text-primary)] tracking-tight">
+            <h2 className="text-section-heading font-light text-[var(--text-primary)] tracking-section leading-section">
               EXPERIENCE & <span className="font-serif italic text-[var(--color-accent)]">IMPACT</span>
             </h2>
           </div>
-          <span className="text-xs tracking-[0.2em] uppercase text-[var(--text-secondary)] pb-2 font-mono">
+          <span className="text-sm tracking-mono-md uppercase text-[var(--text-secondary)] pb-2 font-mono">
             CHRONOLOGICAL TRAJECTORY
           </span>
         </div>
@@ -73,27 +73,27 @@ export default function Experience() {
             >
               {/* Period & Tag */}
               <div className="md:col-span-3 flex flex-row md:flex-col justify-between md:justify-start gap-2">
-                <span className="text-xs font-mono tracking-widest text-[var(--color-accent)]">
+                <span className="text-sm font-mono tracking-widest text-[var(--color-accent)]">
                   {item.period}
                 </span>
-                <span className="text-[10px] font-mono tracking-widest text-[var(--text-secondary)] uppercase">
+                <span className="text-2xs font-mono tracking-widest text-[var(--text-secondary)] uppercase">
                   [{item.tag}]
                 </span>
               </div>
 
               {/* Role & Org */}
               <div className="md:col-span-4">
-                <h3 className="text-xl sm:text-2xl font-light text-[var(--text-primary)] group-hover:text-white transition-colors">
+                <h3 className="text-xl font-light text-[var(--text-primary)] group-hover:text-white transition-colors">
                   {item.role}
                 </h3>
-                <div className="text-xs tracking-wider uppercase text-[var(--color-data)] font-medium mt-1">
+                <div className="text-sm tracking-wider uppercase text-[var(--color-data)] font-medium mt-1">
                   {item.organization}
                 </div>
               </div>
 
               {/* Description */}
               <div className="md:col-span-5">
-                <p className="text-sm text-[var(--text-secondary)] font-light leading-relaxed">
+                <p className="text-base text-[var(--text-secondary)] font-light leading-relaxed">
                   {item.description}
                 </p>
               </div>

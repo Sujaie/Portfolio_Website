@@ -50,21 +50,21 @@ export default function Contact() {
       <div className="relative z-10 max-w-[1600px] w-full mx-auto my-auto py-12">
         
         {/* Label */}
-        <div className="flex items-center gap-3 text-[11px] tracking-[0.25em] font-mono font-semibold text-[var(--color-accent)] uppercase mb-8">
+        <div className="flex items-center gap-3 text-xs tracking-mono-lg font-mono font-semibold text-[var(--color-accent)] uppercase mb-8">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]" />
           <span>INITIATE DIALOGUE</span>
         </div>
 
         {/* Oversized Headline */}
         <div className="space-y-1 mb-16 select-text">
-          <h2 className="text-[12vw] sm:text-[10vw] md:text-[8vw] font-light leading-[0.9] tracking-[-0.03em] text-[var(--text-primary)]">
+          <h2 className="text-contact-display font-light leading-hero tracking-hero text-[var(--text-primary)]">
             {contact.headline}
           </h2>
           <div className="flex items-baseline gap-4 sm:gap-6 flex-wrap">
-            <span className="font-serif italic font-normal text-[13vw] sm:text-[11vw] md:text-[8.8vw] leading-[0.9] text-[var(--color-accent)] drop-shadow-[0_0_35px_var(--glow-gold)]">
+            <span className="font-serif italic font-normal text-contact-accent leading-hero-accent text-[var(--color-accent)] drop-shadow-[0_0_35px_var(--glow-gold)]">
               {contact.headlineItalic}
             </span>
-            <span className="text-[12vw] sm:text-[10vw] md:text-[8vw] font-light leading-[0.9] tracking-[-0.03em] text-[var(--text-primary)]">
+            <span className="text-contact-display font-light leading-hero tracking-hero text-[var(--text-primary)]">
               {contact.headlineEnd}
             </span>
           </div>
@@ -75,7 +75,7 @@ export default function Contact() {
           
           {/* Email Direct & Quick-Copy Interaction */}
           <div className="md:col-span-6 space-y-4">
-            <span className="text-[10px] tracking-[0.25em] text-[var(--text-secondary)] font-mono font-semibold uppercase block">
+            <span className="text-2xs tracking-mono-lg text-[var(--text-secondary)] font-mono font-semibold uppercase block">
               DIRECT CHANNEL
             </span>
             
@@ -94,7 +94,7 @@ export default function Contact() {
               <button
                 onClick={copyEmail}
                 onMouseEnter={() => sound.playHover()}
-                className="px-3 py-1.5 rounded-full border border-[var(--border-strong)] bg-white/5 hover:border-[var(--color-accent)] text-[10px] font-mono tracking-widest uppercase text-[var(--text-secondary)] hover:text-white transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-full border border-[var(--border-strong)] bg-white/5 hover:border-[var(--color-accent)] text-2xs font-mono tracking-mono-sm uppercase text-[var(--text-secondary)] hover:text-white transition-colors cursor-pointer"
                 title="Copy to clipboard"
               >
                 {copied ? '✓ COPIED' : 'COPY'}
@@ -107,7 +107,7 @@ export default function Contact() {
                   setIsModalOpen(true);
                 }}
                 onMouseEnter={() => sound.playHover()}
-                className="px-3 py-1.5 rounded-full border border-[var(--color-data)]/40 bg-[var(--color-data)]/10 hover:bg-[var(--color-data)]/20 text-[10px] font-mono tracking-widest uppercase text-[var(--color-data)] transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-full border border-[var(--color-data)]/40 bg-[var(--color-data)]/10 hover:bg-[var(--color-data)]/20 text-2xs font-mono tracking-mono-sm uppercase text-[var(--color-data)] transition-colors cursor-pointer"
               >
                 WRITE A NOTE ✍
               </button>
@@ -115,7 +115,7 @@ export default function Contact() {
           </div>
 
           {/* Social Profiles */}
-          <div className="md:col-span-6 flex flex-wrap gap-6 sm:gap-10 md:justify-end text-xs font-mono tracking-[0.2em] uppercase font-semibold">
+          <div className="md:col-span-6 flex flex-wrap gap-6 sm:gap-10 md:justify-end text-sm font-mono tracking-mono-md uppercase font-semibold">
             <a
               href={contact.github}
               target="_blank"
@@ -156,7 +156,7 @@ export default function Contact() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
           <div className="relative w-full max-w-lg p-6 sm:p-8 rounded-2xl bg-[var(--bg-raised)] border border-[var(--border-strong)] shadow-2xl space-y-6">
             <div className="flex items-center justify-between pb-4 border-b border-[var(--border-default)]">
-              <span className="text-xs font-mono uppercase tracking-widest text-[var(--color-accent)]">TRANSMIT DISPATCH</span>
+              <span className="text-sm font-mono uppercase tracking-widest text-[var(--color-accent)]">TRANSMIT DISPATCH</span>
               <button
                 onClick={() => setIsModalOpen(false)}
                 className="text-xs text-[var(--text-secondary)] hover:text-white"
@@ -173,7 +173,7 @@ export default function Contact() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-[10px] font-mono text-[var(--text-secondary)] uppercase mb-1">Your Name</label>
+                  <label className="block text-2xs font-mono text-[var(--text-secondary)] uppercase mb-1">Your Name</label>
                   <input
                     type="text"
                     required
@@ -184,7 +184,7 @@ export default function Contact() {
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-mono text-[var(--text-secondary)] uppercase mb-1">Email Coordinates</label>
+                  <label className="block text-2xs font-mono text-[var(--text-secondary)] uppercase mb-1">Email Coordinates</label>
                   <input
                     type="email"
                     required
@@ -195,7 +195,7 @@ export default function Contact() {
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-mono text-[var(--text-secondary)] uppercase mb-1">Message</label>
+                  <label className="block text-2xs font-mono text-[var(--text-secondary)] uppercase mb-1">Message</label>
                   <textarea
                     rows={4}
                     required
@@ -228,7 +228,7 @@ export default function Contact() {
       )}
 
       {/* Footer Row */}
-      <footer className="relative z-10 max-w-[1600px] w-full mx-auto pt-12 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] font-mono tracking-[0.2em] text-[var(--text-secondary)] uppercase">
+      <footer className="relative z-10 max-w-[1600px] w-full mx-auto pt-12 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-4 text-2xs font-mono tracking-mono-md text-[var(--text-secondary)] uppercase">
         <div>
           © {new Date().getFullYear()} SUJAIE • ALL RIGHTS RESERVED
         </div>

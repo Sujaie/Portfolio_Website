@@ -76,7 +76,7 @@ export default function Navbar() {
           href="#home" 
           onClick={(e) => scrollToSection(e, '#home')}
           onMouseEnter={() => sound.playHover()}
-          className="flex items-center gap-3 text-xs tracking-[0.25em] font-mono uppercase font-semibold text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors cursor-pointer"
+          className="flex items-center gap-3 text-caption tracking-mono-lg font-mono uppercase font-semibold text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors cursor-pointer"
         >
           <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]"></span>
           <span>SUJAIE / DEV</span>
@@ -92,7 +92,7 @@ export default function Navbar() {
                 href={link.href}
                 onClick={(e) => scrollToSection(e, link.href)}
                 onMouseEnter={() => sound.playHover()}
-                className="group relative py-1 text-[11px] font-mono tracking-[0.2em] font-medium transition-colors cursor-pointer"
+                className="group relative py-1 text-xs font-mono tracking-mono-md font-medium transition-colors cursor-pointer"
                 style={{
                   color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
                 }}
@@ -116,7 +116,7 @@ export default function Navbar() {
             onClick={toggleSound}
             onMouseEnter={() => sound.playHover()}
             title={soundEnabled ? "Mute interactive audio" : "Enable tactile synthesized sound"}
-            className="flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border-default)] hover:border-[var(--color-accent)]/60 text-[10px] font-mono tracking-widest uppercase text-[var(--text-secondary)] hover:text-white transition-colors cursor-pointer"
+            className="flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border-default)] hover:border-[var(--color-accent)]/60 text-2xs font-mono tracking-mono-sm uppercase text-[var(--text-secondary)] hover:text-white transition-colors cursor-pointer"
             aria-label="Toggle Sound"
           >
             <span className={`w-1.5 h-1.5 rounded-full ${soundEnabled ? 'bg-[var(--color-status-success)] shadow-[0_0_6px_var(--color-status-success)]' : 'bg-white/20'}`} />
@@ -128,14 +128,14 @@ export default function Navbar() {
         <div className="md:hidden flex items-center gap-3">
           <button
             onClick={toggleSound}
-            className="text-[10px] font-mono tracking-wider px-2.5 py-1 rounded border border-[var(--border-default)] bg-black/40 text-[var(--text-secondary)]"
+            className="text-2xs font-mono tracking-wider px-2.5 py-1 rounded border border-[var(--border-default)] bg-black/40 text-[var(--text-secondary)]"
             aria-label="Toggle Sound"
           >
             {soundEnabled ? 'SFX: ON' : 'SFX: OFF'}
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-[11px] tracking-[0.2em] uppercase text-[var(--text-primary)] px-3 py-1.5 rounded border border-[var(--border-default)] bg-black/40 backdrop-blur-md"
+            className="text-xs tracking-mono-md uppercase text-[var(--text-primary)] px-3 py-1.5 rounded border border-[var(--border-default)] bg-black/40 backdrop-blur-md"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? 'CLOSE' : 'MENU'}
@@ -151,7 +151,7 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               onClick={(e) => scrollToSection(e, link.href)}
-              className="text-xs tracking-[0.25em] font-mono uppercase font-medium text-[var(--text-secondary)] hover:text-[var(--color-accent)] py-2 border-b border-[var(--border-subtle)] cursor-pointer"
+              className="text-xs tracking-mono-lg font-mono uppercase font-medium text-[var(--text-secondary)] hover:text-[var(--color-accent)] py-2 border-b border-[var(--border-subtle)] cursor-pointer"
             >
               {link.name}
             </a>

@@ -102,7 +102,7 @@ function TiltProjectCard({ proj, isEven }) {
               <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
               <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
               <span className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
-              <span className="text-[10px] tracking-wider text-[var(--text-secondary)] font-mono ml-2">
+              <span className="text-2xs tracking-wider text-[var(--text-secondary)] font-mono ml-2">
                 {proj.name.toLowerCase().replace(/\s+/g, '-')}.sys
               </span>
             </div>
@@ -117,7 +117,7 @@ function TiltProjectCard({ proj, isEven }) {
                     setActiveTab(mode);
                   }}
                   onMouseEnter={() => sound.playHover()}
-                  className={`text-[9px] font-mono tracking-wider uppercase px-2 py-0.5 rounded cursor-pointer transition-colors ${
+                  className={`text-2xs font-mono tracking-mono-sm uppercase px-2 py-0.5 rounded cursor-pointer transition-colors ${
                     activeTab === mode
                       ? 'bg-[var(--color-accent)] text-black font-semibold'
                       : 'text-[var(--text-secondary)] hover:text-white'
@@ -135,9 +135,9 @@ function TiltProjectCard({ proj, isEven }) {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-lg bg-white/5 border border-[var(--border-subtle)]">
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full bg-[var(--color-data)] animate-ping" />
-                  <span className="text-xs font-mono text-[var(--text-primary)]">Streaming Telemetry Feed</span>
+                  <span className="text-sm font-mono text-[var(--text-primary)]">Streaming Telemetry Feed</span>
                 </div>
-                <span className="text-xs font-mono text-[var(--color-accent)] font-medium">
+                <span className="text-sm font-mono text-[var(--color-accent)] font-medium">
                   {proj.impact}
                 </span>
               </div>
@@ -145,15 +145,15 @@ function TiltProjectCard({ proj, isEven }) {
               {/* Sparkline Visualizer */}
               <div className="grid grid-cols-3 gap-3">
                 <div className="p-3 rounded-lg bg-white/[0.03] border border-[var(--border-subtle)]">
-                  <div className="text-[10px] font-mono text-[var(--text-secondary)] uppercase">Throughput</div>
+                  <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Throughput</div>
                   <div className="text-sm font-semibold text-[var(--color-data)] mt-1 font-mono">1.2M RPS</div>
                 </div>
                 <div className="p-3 rounded-lg bg-white/[0.03] border border-[var(--border-subtle)]">
-                  <div className="text-[10px] font-mono text-[var(--text-secondary)] uppercase">Memory Footprint</div>
+                  <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Memory Footprint</div>
                   <div className="text-sm font-semibold text-[var(--color-accent)] mt-1 font-mono">42 MB (Zero Leak)</div>
                 </div>
                 <div className="p-3 rounded-lg bg-white/[0.03] border border-[var(--border-subtle)]">
-                  <div className="text-[10px] font-mono text-[var(--text-secondary)] uppercase">Latency</div>
+                  <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Latency</div>
                   <div className="text-sm font-semibold text-[var(--color-status-success)] mt-1 font-mono">&lt; 14ms</div>
                 </div>
               </div>
@@ -163,7 +163,7 @@ function TiltProjectCard({ proj, isEven }) {
           {/* Tab 2: Architecture Diagram */}
           {activeTab === 'arch' && (
             <div className="relative z-10 rounded-xl bg-[var(--surface-2)]/95 border border-[var(--border-subtle)] p-6 space-y-4 font-mono text-xs">
-              <div className="text-[var(--text-secondary)] text-[10px] uppercase tracking-wider mb-2">SYSTEM TOPOLOGY:</div>
+              <div className="text-[var(--text-secondary)] text-2xs uppercase tracking-wider mb-2">SYSTEM TOPOLOGY:</div>
               <div className="flex flex-col sm:flex-row items-center justify-between gap-2 p-3 bg-white/5 rounded border border-[var(--border-subtle)] text-center">
                 <div className="px-3 py-1.5 bg-[var(--color-data)]/20 border border-[var(--color-data)]/40 rounded text-[var(--color-data)]">Edge Proxy (gRPC)</div>
                 <span className="text-[var(--color-accent)]">→</span>
@@ -171,7 +171,7 @@ function TiltProjectCard({ proj, isEven }) {
                 <span className="text-[var(--color-accent)]">→</span>
                 <div className="px-3 py-1.5 bg-emerald-500/20 border border-emerald-500/40 rounded text-[var(--color-status-success)]">PostgreSQL (pgvector)</div>
               </div>
-              <p className="text-[11px] text-[var(--text-secondary)] font-sans leading-relaxed">
+              <p className="text-xs text-[var(--text-secondary)] font-sans leading-relaxed">
                 Asynchronous state pipeline with automated backpressure regulation and zero-copy JSON parsing.
               </p>
             </div>
@@ -190,12 +190,12 @@ function TiltProjectCard({ proj, isEven }) {
 
               {/* Terminal Quick Command Chips */}
               <div className="flex items-center gap-2 pt-2 border-t border-[var(--border-default)]">
-                <span className="text-[10px] text-[var(--color-accent)]">RUN:</span>
+                <span className="text-2xs text-[var(--color-accent)]">RUN:</span>
                 {['ping', 'stack', 'clear'].map((cmd) => (
                   <button
                     key={cmd}
                     onClick={() => runCommand(cmd)}
-                    className="text-[10px] px-2 py-0.5 rounded bg-white/10 hover:bg-[var(--color-accent)] hover:text-black transition-colors cursor-pointer"
+                    className="text-2xs px-2 py-0.5 rounded bg-white/10 hover:bg-[var(--color-accent)] hover:text-black transition-colors cursor-pointer"
                   >
                     {cmd}
                   </button>
@@ -209,27 +209,27 @@ function TiltProjectCard({ proj, isEven }) {
       {/* Project Details */}
       <div className={`lg:col-span-5 ${isEven ? 'order-2' : 'order-2 lg:order-1'} flex flex-col justify-center`}>
         <div className="flex items-center gap-4 mb-3">
-          <span className="text-3xl sm:text-4xl font-mono font-light text-[var(--color-accent)]/70">
+          <span className="text-num-display font-mono font-light text-[var(--color-accent)]/70">
             {proj.num}
           </span>
-          <span className="text-[10px] tracking-[0.2em] uppercase font-mono font-semibold text-[var(--color-data)] px-2.5 py-1 rounded bg-[var(--color-data)]/10 border border-[var(--color-data)]/20">
+          <span className="text-2xs tracking-mono-md uppercase font-mono font-semibold text-[var(--color-data)] px-2.5 py-1 rounded bg-[var(--color-data)]/10 border border-[var(--color-data)]/20">
             {proj.role}
           </span>
         </div>
 
-        <h3 className="text-2xl sm:text-4xl font-light text-[var(--text-primary)] mb-4">
+        <h3 className="text-3xl font-light text-[var(--text-primary)] mb-4">
           {proj.name}
         </h3>
 
-        <p className="text-sm md:text-base text-[var(--text-secondary)] font-light leading-relaxed mb-6">
+        <p className="text-base text-[var(--text-secondary)] font-light leading-relaxed mb-6">
           {proj.description}
         </p>
 
         <div className="mb-6 p-4 rounded-xl bg-white/[0.03] border border-[var(--border-subtle)]">
-          <div className="text-[10px] font-mono tracking-wider uppercase text-[var(--color-accent)] font-semibold mb-1">
+          <div className="text-2xs font-mono tracking-mono-sm uppercase text-[var(--color-accent)] font-semibold mb-1">
             IMPACT & HIGHLIGHT
           </div>
-          <div className="text-xs text-[var(--text-primary)] font-light leading-normal">
+          <div className="text-sm text-[var(--text-primary)] font-light leading-normal">
             {proj.impact}
           </div>
         </div>
@@ -239,7 +239,7 @@ function TiltProjectCard({ proj, isEven }) {
           {proj.stack.map((item) => (
             <span
               key={item}
-              className="text-[10px] tracking-wider font-mono px-3 py-1 rounded-full bg-white/5 border border-[var(--border-default)] text-[var(--text-primary)]"
+              className="text-2xs tracking-mono-sm font-mono px-3 py-1 rounded-full bg-white/5 border border-[var(--border-default)] text-[var(--text-primary)]"
             >
               {item}
             </span>
@@ -247,7 +247,7 @@ function TiltProjectCard({ proj, isEven }) {
         </div>
 
         {/* Links */}
-        <div className="flex items-center gap-6 text-xs tracking-[0.2em] font-mono uppercase font-semibold">
+        <div className="flex items-center gap-6 text-sm tracking-mono-md font-mono uppercase font-semibold">
           <a
             href={proj.github}
             target="_blank"
@@ -284,15 +284,15 @@ export default function Projects() {
       <div className="relative z-10 max-w-[1600px] w-full mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-20">
           <div>
-            <div className="flex items-center gap-3 text-[11px] tracking-[0.25em] font-mono font-semibold text-[var(--color-data)] uppercase mb-4">
+            <div className="flex items-center gap-3 text-xs tracking-mono-lg font-mono font-semibold text-[var(--color-data)] uppercase mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-data)] shadow-[0_0_8px_var(--color-data)]" />
               <span>SELECTED PRODUCTIONS</span>
             </div>
-            <h2 className="text-4xl sm:text-6xl font-light text-[var(--text-primary)] tracking-tight">
+            <h2 className="text-section-heading font-light text-[var(--text-primary)] tracking-section leading-section">
               FEATURED <span className="font-serif italic text-[var(--color-accent)]">WORKS</span>
             </h2>
           </div>
-          <span className="text-xs tracking-[0.2em] uppercase text-[var(--text-secondary)] pb-2 font-mono">
+          <span className="text-sm tracking-mono-md uppercase text-[var(--text-secondary)] pb-2 font-mono">
             ARCHIVE 2024 — 2026
           </span>
         </div>
