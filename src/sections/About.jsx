@@ -125,10 +125,18 @@ export default function About() {
             
             {/* Top Bar: Categories & Controls */}
             <div className="flex items-center justify-between pb-6 border-b border-[var(--border-default)] gap-2">
-              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+              <div
+                role="tablist"
+                aria-label="Showcase Categories"
+                className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1"
+              >
                 {showcase.map((item, idx) => (
                   <button
                     key={item.id}
+                    role="tab"
+                    id={`showcase-tab-${item.id}`}
+                    aria-selected={idx === activeIndex}
+                    aria-controls={`showcase-panel-${item.id}`}
                     onClick={() => handleSlideChange(idx)}
                     className={`text-2xs tracking-mono-md font-mono uppercase px-3 py-1.5 rounded-full transition-all duration-[var(--dur-slow)] cursor-pointer ${
                       idx === activeIndex
@@ -161,7 +169,13 @@ export default function About() {
             </div>
 
             {/* Active Showcase Content (Animated) */}
-            <div ref={slideRef} className="showcase-active-content my-6">
+            <div
+              ref={slideRef}
+              id={`showcase-panel-${currentItem.id}`}
+              role="tabpanel"
+              aria-labelledby={`showcase-tab-${currentItem.id}`}
+              className="showcase-active-content my-6"
+            >
               
               {/* Product Preview Interface Mockup */}
               <div className="relative w-full h-48 sm:h-56 rounded-[var(--radius-lg)] bg-gradient-to-br from-[var(--surface-preview-start)] to-[var(--surface-preview-end)] border border-[var(--border-default)] p-4 mb-6 overflow-hidden flex flex-col justify-between">
@@ -258,6 +272,7 @@ export default function About() {
                   href={currentItem.links.github}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`View ${currentItem.title} repository on GitHub (opens in new tab)`}
                   className="text-[var(--text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)]"
                 >
                   GitHub ↗

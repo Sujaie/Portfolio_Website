@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { portfolioData } from '../data/portfolio.js';
 import { sound } from '../utils/sound.js';
 
@@ -8,6 +8,18 @@ export default function Contact() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [sentSuccess, setSentSuccess] = useState(false);
+
+  // Keyboard accessibility: Escape key closes modal dialogue
+  useEffect(() => {
+    if (!isModalOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsModalOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isModalOpen]);
 
   const scrollToTop = () => {
     sound.playClick();
@@ -94,6 +106,7 @@ export default function Contact() {
               <button
                 onClick={copyEmail}
                 onMouseEnter={() => sound.playHover()}
+                aria-label="Copy email address to clipboard"
                 className="px-3 py-1.5 rounded-full border border-[var(--border-strong)] bg-white/5 hover:border-[var(--color-accent)] text-2xs font-mono tracking-mono-sm uppercase text-[var(--text-secondary)] hover:text-white transition-colors duration-[var(--dur-base)] cursor-pointer"
                 title="Copy to clipboard"
               >
@@ -107,6 +120,7 @@ export default function Contact() {
                   setIsModalOpen(true);
                 }}
                 onMouseEnter={() => sound.playHover()}
+                aria-label="Open dispatch message form"
                 className="px-3 py-1.5 rounded-full border border-[var(--color-data)]/40 bg-[var(--color-data)]/10 hover:bg-[var(--color-data)]/20 text-2xs font-mono tracking-mono-sm uppercase text-[var(--color-data)] transition-colors duration-[var(--dur-base)] cursor-pointer"
               >
                 WRITE A NOTE ✍
@@ -120,6 +134,7 @@ export default function Contact() {
               href={contact.github}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="GitHub profile (opens in new tab)"
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
               className="text-[var(--text-secondary)] hover:text-white transition-colors duration-[var(--dur-base)]"
@@ -130,6 +145,7 @@ export default function Contact() {
               href={contact.linkedin}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="LinkedIn profile (opens in new tab)"
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
               className="text-[var(--text-secondary)] hover:text-white transition-colors duration-[var(--dur-base)]"
@@ -140,6 +156,7 @@ export default function Contact() {
               href={contact.twitter}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Twitter profile (opens in new tab)"
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
               className="text-[var(--text-secondary)] hover:text-white transition-colors duration-[var(--dur-base)]"
@@ -153,13 +170,21 @@ export default function Contact() {
 
       {/* Interactive Modal Dialogue */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="contact-modal-title"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+        >
           <div className="relative w-full max-w-lg p-6 sm:p-8 rounded-[var(--radius-xl)] bg-[var(--bg-raised)] border border-[var(--border-strong)] shadow-[var(--shadow-modal)] space-y-6">
             <div className="flex items-center justify-between pb-4 border-b border-[var(--border-default)]">
-              <span className="text-sm font-mono uppercase tracking-widest text-[var(--color-accent)]">TRANSMIT DISPATCH</span>
+              <h3 id="contact-modal-title" className="text-sm font-mono uppercase tracking-widest text-[var(--color-accent)] font-semibold">
+                TRANSMIT DISPATCH
+              </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="text-xs text-[var(--text-secondary)] hover:text-white"
+                aria-label="Close dialog"
+                className="text-xs text-[var(--text-secondary)] hover:text-white p-1 rounded"
               >
                 ✕
               </button>
@@ -173,35 +198,44 @@ export default function Contact() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-2xs font-mono text-[var(--text-secondary)] uppercase mb-1">Your Name</label>
+                  <label htmlFor="contact-name" className="block text-2xs font-mono text-[var(--text-secondary)] uppercase mb-1">
+                    Your Name
+                  </label>
                   <input
+                    id="contact-name"
                     type="text"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-default)] text-white text-sm focus:border-[var(--color-accent)] focus:outline-none"
+                    className="w-full px-3 py-2 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-default)] text-white text-sm focus:border-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
                     placeholder="Ada Lovelace"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-mono text-[var(--text-secondary)] uppercase mb-1">Email Coordinates</label>
+                  <label htmlFor="contact-email" className="block text-2xs font-mono text-[var(--text-secondary)] uppercase mb-1">
+                    Email Coordinates
+                  </label>
                   <input
+                    id="contact-email"
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-default)] text-white text-sm focus:border-[var(--color-accent)] focus:outline-none"
+                    className="w-full px-3 py-2 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-default)] text-white text-sm focus:border-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
                     placeholder="ada@computing.org"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-mono text-[var(--text-secondary)] uppercase mb-1">Message</label>
+                  <label htmlFor="contact-message" className="block text-2xs font-mono text-[var(--text-secondary)] uppercase mb-1">
+                    Message
+                  </label>
                   <textarea
+                    id="contact-message"
                     rows={4}
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-3 py-2 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-default)] text-white text-sm focus:border-[var(--color-accent)] focus:outline-none"
+                    className="w-full px-3 py-2 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-default)] text-white text-sm focus:border-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
                     placeholder="Inquiry or collaboration concept..."
                   />
                 </div>

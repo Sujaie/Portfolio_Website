@@ -83,7 +83,8 @@ export default function Hero() {
 
         <a
           href="#about"
-          className="group flex items-center gap-3 text-2xs tracking-mono-lg font-mono text-[var(--text-secondary)] hover:text-[var(--color-accent)] uppercase transition-colors duration-[var(--dur-base)]"
+          aria-label="Explore: scroll down to About section"
+          className="group flex items-center gap-3 text-2xs tracking-mono-lg font-mono text-[var(--text-secondary)] hover:text-[var(--color-accent)] uppercase transition-colors duration-[var(--dur-base)] cursor-pointer"
         >
           <span>EXPLORE</span>
           <div className="w-5 h-8 rounded-full border border-[var(--border-elevated)] flex items-start justify-center p-1 group-hover:border-[var(--color-accent)]/60 transition-colors duration-[var(--dur-base)]">

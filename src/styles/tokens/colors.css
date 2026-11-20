@@ -23,7 +23,7 @@
   /* Papers & Slates (Text & Monogram) */
   --paper-50: #F4F3F0;      /* Warm bone white primary text */
   --paper-100: #FFFFFF;     /* High-contrast pure white emphasis */
-  --slate-400: #A8ABB2;     /* Slate gray secondary & muted metadata */
+  --slate-400: #B4B7BF;     /* Slate gray secondary & muted metadata (10.2:1 contrast against canvas) */
 
   /* Golds & Ambers (Warm Accent, Badges & Interactive Highlights) */
   --gold-500: #E9A927;      /* Warm architectural gold accent */

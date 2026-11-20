@@ -209,6 +209,7 @@ export default function Navbar() {
         {/* Monogram / Brand */}
         <a 
           href="#home" 
+          aria-label="Sujaie Developer Portfolio Home"
           onClick={(e) => scrollToSection(e, '#home')}
           onMouseEnter={() => sound.playHover()}
           className="flex items-center gap-3 text-caption tracking-mono-lg font-mono uppercase font-semibold text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)] cursor-pointer"
@@ -254,8 +255,9 @@ export default function Navbar() {
             onClick={toggleSound}
             onMouseEnter={() => sound.playHover()}
             title={soundEnabled ? "Mute interactive audio" : "Enable tactile synthesized sound"}
+            aria-pressed={soundEnabled}
+            aria-label={soundEnabled ? "Mute interactive sound effects" : "Enable tactile synthesized sound effects"}
             className="flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border-default)] hover:border-[var(--color-accent)]/60 text-2xs font-mono tracking-mono-sm uppercase text-[var(--text-secondary)] hover:text-white transition-colors duration-[var(--dur-base)] cursor-pointer ml-2"
-            aria-label="Toggle Sound"
           >
             <span className={`w-1.5 h-1.5 rounded-full ${soundEnabled ? 'bg-[var(--color-status-success)] shadow-[0_0_6px_var(--color-status-success)]' : 'bg-white/20'}`} />
             <span>{soundEnabled ? 'SFX ON' : 'SFX OFF'}</span>
@@ -266,8 +268,9 @@ export default function Navbar() {
         <div className="md:hidden flex items-center gap-3">
           <button
             onClick={toggleSound}
+            aria-pressed={soundEnabled}
+            aria-label={soundEnabled ? "Mute interactive sound effects" : "Enable tactile synthesized sound effects"}
             className="text-2xs font-mono tracking-wider px-2.5 py-1 rounded border border-[var(--border-default)] bg-black/40 text-[var(--text-secondary)]"
-            aria-label="Toggle Sound"
           >
             {soundEnabled ? 'SFX: ON' : 'SFX: OFF'}
           </button>

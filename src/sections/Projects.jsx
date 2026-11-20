@@ -108,10 +108,17 @@ function TiltProjectCard({ proj, isEven }) {
             </div>
 
             {/* Interactive View Modes: Telemetry / Architecture / CLI */}
-            <div className="flex items-center gap-1 bg-black/40 p-1 rounded-[var(--radius-md)] border border-[var(--border-subtle)]">
+            <div
+              role="tablist"
+              aria-label="Project card display modes"
+              className="flex items-center gap-1 bg-black/40 p-1 rounded-[var(--radius-md)] border border-[var(--border-subtle)]"
+            >
               {['telemetry', 'arch', 'terminal'].map((mode) => (
                 <button
                   key={mode}
+                  role="tab"
+                  aria-selected={activeTab === mode}
+                  aria-label={`Switch to ${mode} mode`}
                   onClick={() => {
                     sound.playClick();
                     setActiveTab(mode);
@@ -195,6 +202,7 @@ function TiltProjectCard({ proj, isEven }) {
                   <button
                     key={cmd}
                     onClick={() => runCommand(cmd)}
+                    aria-label={`Run terminal ${cmd} command`}
                     className="text-2xs px-2 py-0.5 rounded-[var(--radius-sm)] bg-white/10 hover:bg-[var(--color-accent)] hover:text-black transition-colors duration-[var(--dur-base)] cursor-pointer"
                   >
                     {cmd}
@@ -252,12 +260,13 @@ function TiltProjectCard({ proj, isEven }) {
             href={proj.github}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`View source code for ${proj.name} on GitHub (opens in new tab)`}
             onMouseEnter={() => sound.playHover()}
             onClick={() => sound.playClick()}
             className="text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)] flex items-center gap-1.5"
           >
             <span>SOURCE CODE</span>
-            <span>↗</span>
+            <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
