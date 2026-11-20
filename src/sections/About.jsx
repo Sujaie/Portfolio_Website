@@ -78,6 +78,23 @@ export default function About() {
         />
         {/* Subtle noise layer */}
         <div className="absolute inset-0 bg-noise opacity-40" />
+
+        {/* Boundary Transition Layers: Seamless vertical gradient horizons */}
+        {/* Top Boundary Transition: Soft fade from base canvas into chromatic atmosphere */}
+        <div
+          className="absolute top-0 left-0 right-0 h-28 md:h-40 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to bottom, var(--bg-base) 0%, rgba(5, 6, 9, 0.6) 40%, transparent 100%)',
+          }}
+        />
+
+        {/* Bottom Boundary Transition: Soft fade from chromatic atmosphere back to base canvas */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-32 md:h-48 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to top, var(--bg-base) 0%, rgba(5, 6, 9, 0.6) 40%, transparent 100%)',
+          }}
+        />
       </div>
 
       <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-[var(--grid-gap-lg)] items-center">
@@ -111,7 +128,7 @@ export default function About() {
             {about.highlights.map((item) => (
               <span
                 key={item}
-                className="text-xs font-mono tracking-mono-sm uppercase px-3 py-1.5 rounded-full bg-white/5 border border-[var(--border-default)] text-[var(--text-primary)]"
+                className="text-xs font-mono tracking-mono-sm uppercase px-3 py-1.5 rounded-full bg-[var(--about-pill-bg)] border border-[var(--border-default)] text-[var(--text-primary)]"
               >
                 {item}
               </span>
@@ -121,7 +138,7 @@ export default function About() {
 
         {/* RIGHT COLUMN: INTERACTIVE DARK SHOWCASE PANEL */}
         <div className="lg:col-span-7">
-          <div className="relative rounded-[var(--radius-xl)] bg-[var(--bg-raised)]/90 border border-[var(--border-default)] shadow-[var(--shadow-card)] backdrop-blur-2xl p-[var(--card-padding)] flex flex-col justify-between min-h-[500px]">
+          <div className="relative rounded-[var(--radius-xl)] bg-[var(--about-card-bg)] border border-[var(--border-default)] shadow-[var(--shadow-card)] backdrop-blur-2xl p-[var(--card-padding)] flex flex-col justify-between min-h-[500px]">
             
             {/* Top Bar: Categories & Controls */}
             <div className="flex items-center justify-between pb-6 border-b border-[var(--border-default)] gap-2">
@@ -141,7 +158,7 @@ export default function About() {
                     className={`text-2xs tracking-mono-md font-mono uppercase px-3 py-1.5 rounded-full transition-all duration-[var(--dur-slow)] cursor-pointer ${
                       idx === activeIndex
                         ? 'bg-[var(--color-accent)] text-black font-semibold shadow-[var(--glow-gold-md)]'
-                        : 'text-[var(--text-secondary)] hover:text-white bg-white/5 hover:bg-white/10'
+                        : 'text-[var(--text-secondary)] hover:text-white bg-[var(--about-pill-bg)] hover:bg-[var(--about-pill-bg-hover)]'
                     }`}
                   >
                     {item.category}
@@ -183,9 +200,9 @@ export default function About() {
                 {/* Mock Browser Header */}
                 <div className="flex items-center justify-between border-b border-[var(--border-default)] pb-2">
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[var(--window-dot-red)]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[var(--window-dot-yellow)]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[var(--window-dot-green)]" />
                   </div>
                   <span className="text-2xs tracking-wider text-[var(--text-secondary)] font-mono">
                     {currentItem.title.toLowerCase().replace(/\s+/g, '-')}.local
@@ -198,15 +215,15 @@ export default function About() {
 
                 {/* Mock UI Canvas / Telemetry Grid */}
                 <div className="grid grid-cols-3 gap-3 my-auto py-2">
-                  <div className="p-3 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-subtle)]">
+                  <div className="p-3 rounded-[var(--radius-md)] bg-[var(--about-pill-bg)] border border-[var(--border-subtle)]">
                     <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Engine State</div>
                     <div className="text-sm font-semibold text-[var(--color-data)] mt-1 font-mono">OPTIMIZED</div>
                   </div>
-                  <div className="p-3 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-subtle)]">
+                  <div className="p-3 rounded-[var(--radius-md)] bg-[var(--about-pill-bg)] border border-[var(--border-subtle)]">
                     <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Throughput</div>
                     <div className="text-sm font-semibold text-[var(--color-accent)] mt-1 font-mono">{currentItem.metrics.split('•')[0]}</div>
                   </div>
-                  <div className="p-3 rounded-[var(--radius-md)] bg-white/5 border border-[var(--border-subtle)]">
+                  <div className="p-3 rounded-[var(--radius-md)] bg-[var(--about-pill-bg)] border border-[var(--border-subtle)]">
                     <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase">Latency</div>
                     <div className="text-sm font-semibold text-white mt-1 font-mono">{currentItem.metrics.split('•')[1] || 'Sub-ms'}</div>
                   </div>
@@ -244,7 +261,7 @@ export default function About() {
                 {currentItem.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-2xs tracking-mono-sm font-mono px-2.5 py-1 rounded-[var(--radius-sm)] bg-black/50 text-[var(--text-primary)] border border-[var(--border-default)]"
+                    className="text-2xs tracking-mono-sm font-mono px-2.5 py-1 rounded-[var(--radius-sm)] bg-[var(--about-tag-bg)] text-[var(--text-primary)] border border-[var(--border-default)]"
                   >
                     {tag}
                   </span>

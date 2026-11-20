@@ -100,7 +100,7 @@
   --hero-ambient-blue: var(--blue-600);
   --hero-ambient-cyan: var(--teal-400);
 
-  /* About Section Mesh Gradient Illumination */
+  /* About Section Mesh Gradient Illumination & Palette */
   --about-glow-magenta: var(--magenta-600);
   --about-glow-purple: var(--purple-600);
   --about-glow-teal: var(--teal-400);
@@ -108,6 +108,10 @@
   --about-glow-yellow: var(--gold-300);
   --about-glow-gold: var(--gold-500);
   --about-glow-orange: var(--orange-500);
+  --about-card-bg: rgba(8, 13, 20, 0.90);
+  --about-pill-bg: rgba(255, 255, 255, 0.05);
+  --about-pill-bg-hover: rgba(255, 255, 255, 0.10);
+  --about-tag-bg: rgba(0, 0, 0, 0.50);
 
   /* Work / Projects Atmosphere & Sheen */
   --work-ambient-blue: var(--blue-600);
