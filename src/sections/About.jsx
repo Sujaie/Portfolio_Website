@@ -54,47 +54,15 @@ export default function About() {
       id="about"
       className="relative w-full py-[var(--section-py)] px-[var(--page-gutter)] overflow-hidden bg-[var(--bg-base)] border-t border-[var(--border-subtle)]"
     >
-      {/* VIBRANT MESH GRADIENT ATMOSPHERE (Preserving Section-Specific Identity) */}
+      {/* SUBTLE ATMOSPHERIC DEPTH (Aligned with Base Canvas) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ transform: 'translateZ(0)' }}>
-        {/* Magenta & Purple illumination (upper-left) */}
+        {/* Low-opacity ambient glow matching global palette */}
         <div
-          className="absolute -top-[12%] -left-[10%] w-[600px] md:w-[850px] h-[600px] md:h-[850px] rounded-full blur-[140px] opacity-40 animate-pulse-subtle"
-          style={{ background: 'radial-gradient(circle, var(--about-glow-magenta) 0%, var(--about-glow-purple) 50%, transparent 75%)' }}
-        />
-        {/* Vibrant Cyan/Teal illumination (upper-right) */}
-        <div
-          className="absolute -top-[15%] right-[-5%] w-[650px] md:w-[900px] h-[650px] md:h-[900px] rounded-full blur-[150px] opacity-35"
-          style={{ background: 'radial-gradient(circle, var(--about-glow-teal) 0%, var(--about-glow-deep-teal) 55%, transparent 75%)' }}
-        />
-        {/* Yellow/Gold illumination (lower-left) */}
-        <div
-          className="absolute bottom-[-10%] left-[12%] w-[500px] md:w-[750px] h-[500px] md:h-[750px] rounded-full blur-[140px] opacity-30"
-          style={{ background: 'radial-gradient(circle, var(--about-glow-yellow) 0%, var(--about-glow-gold) 45%, transparent 75%)' }}
-        />
-        {/* Red/Orange illumination (bottom-right) */}
-        <div
-          className="absolute -bottom-[15%] right-[8%] w-[550px] md:w-[800px] h-[550px] md:h-[800px] rounded-full blur-[140px] opacity-30"
-          style={{ background: 'radial-gradient(circle, var(--about-glow-orange) 0%, var(--about-glow-magenta) 50%, transparent 75%)' }}
+          className="absolute top-1/4 -right-1/4 w-[650px] md:w-[900px] h-[650px] md:h-[900px] rounded-full blur-[140px] opacity-20 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, var(--ambient-blue) 0%, var(--ambient-navy) 60%, transparent 80%)' }}
         />
         {/* Subtle noise layer */}
-        <div className="absolute inset-0 bg-noise opacity-40" />
-
-        {/* Boundary Transition Layers: Seamless vertical gradient horizons */}
-        {/* Top Boundary Transition: Soft fade from base canvas into chromatic atmosphere */}
-        <div
-          className="absolute top-0 left-0 right-0 h-28 md:h-40 pointer-events-none"
-          style={{
-            background: 'linear-gradient(to bottom, var(--bg-base) 0%, rgba(5, 6, 9, 0.6) 40%, transparent 100%)',
-          }}
-        />
-
-        {/* Bottom Boundary Transition: Soft fade from chromatic atmosphere back to base canvas */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-32 md:h-48 pointer-events-none"
-          style={{
-            background: 'linear-gradient(to top, var(--bg-base) 0%, rgba(5, 6, 9, 0.6) 40%, transparent 100%)',
-          }}
-        />
+        <div className="absolute inset-0 bg-noise opacity-30" />
       </div>
 
       <div className="relative z-10 max-w-[var(--content-max-width)] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-[var(--grid-gap-lg)] items-center">
@@ -138,7 +106,7 @@ export default function About() {
 
         {/* RIGHT COLUMN: INTERACTIVE DARK SHOWCASE PANEL */}
         <div className="lg:col-span-7">
-          <div className="relative rounded-[var(--radius-xl)] bg-[var(--about-card-bg)] border border-[var(--border-default)] shadow-[var(--shadow-card)] backdrop-blur-2xl p-[var(--card-padding)] flex flex-col justify-between min-h-[500px]">
+          <div className="relative rounded-[var(--radius-xl)] bg-[var(--about-card-bg)] border border-[var(--border-subtle)] shadow-[var(--shadow-card)] backdrop-blur-2xl p-[var(--card-padding)] flex flex-col justify-between min-h-[500px]">
             
             {/* Top Bar: Categories & Controls */}
             <div className="flex items-center justify-between pb-6 border-b border-[var(--border-default)] gap-2">

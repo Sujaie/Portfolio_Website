@@ -1,9 +1,6 @@
 /* src/styles/global.css */
 @import "tailwindcss";
-@import "./tokens/colors.css";
-@import "./tokens/typography.css";
-@import "./tokens/spacing.css";
-@import "./tokens/primitives.css";
+@import "./tokens.css";
 
 @theme {
   /* Colors */
@@ -31,10 +28,6 @@
   --color-secondary-text: var(--text-secondary);
   --color-warm-accent: var(--color-accent);
   --color-cyan-glow: var(--color-data);
-  --color-blue-glow: var(--blue-600);
-  --color-magenta-glow: var(--magenta-600);
-  --color-yellow-glow: var(--gold-300);
-  --color-orange-glow: var(--orange-500);
 
   /* Typography Font Families */
   --font-sans: var(--font-sans);
@@ -175,7 +168,7 @@ textarea:focus-visible,
 .layout-container {
   position: relative;
   z-index: 10;
-  max-width: var(--content-max-width);
+  max-width: var(--content-max);
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -192,4 +185,3 @@ textarea:focus-visible,
   border-top: 1px solid var(--border-subtle);
   overflow: hidden;
 }
-

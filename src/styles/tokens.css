@@ -1,0 +1,267 @@
+/* src/styles/tokens.css
+   AUTHORITATIVE DESIGN TOKENS — SUJAIE / DEV "CORE LOOK"
+   Single source of truth for colors, depth planes, typography, spacing, layout, and motion.
+*/
+
+:root {
+  /* ==========================================================================
+     1. COLOR PRIMITIVES (Look Bible Specification)
+     ========================================================================== */
+
+  /* Inks (Canvas, Surfaces & Elevation) */
+  --ink-950: #04070b;  /* Base canvas */
+  --ink-900: #070c12;  /* Plane 1: elevated cards */
+  --ink-850: #091018;  /* Plane 1.5: telemetry beds */
+  --ink-800: #0c131b;  /* Plane 2: nested cards & modals */
+  --ink-700: #121b25;  /* Plane 3: popovers, floating menus */
+  --ink-600: #1b2633;  /* Plane 4: preview containers */
+  --ink-500: #263545;  /* Plane 5: highest surface elevation */
+  --ink-scrollbar: #121b25;
+  --ink-scrollbar-hover: #1b2633;
+
+  /* Teals & Cyans (Telemetry, Data Accents & Technical Signal) */
+  --teal-300: #4ee2e8;
+  --teal-400: #1fc2c9;  /* Primary technical accent */
+  --teal-500: #159ea4;
+  --teal-600: #0d787d;
+  --teal-900: #063133;
+
+  /* Golds & Ambers (Warm Focal Accent, Badges & Interactive Highlights) */
+  --gold-300: #fad47e;
+  --gold-400: #f4be54;  /* Hover state */
+  --gold-500: #e8a823;  /* Primary warm architectural accent */
+  --gold-600: #b88114;
+
+  /* Papers & Greys (Typography & Metadata) */
+  --paper-50:  #f6f3ee;  /* Primary editorial white */
+  --paper-100: #ffffff;  /* High contrast emphasis */
+  --grey-300:  #b5bcc6;  /* Secondary text (≥ 7:1 against base canvas) */
+  --grey-400:  #949ea9;  /* Muted metadata (≥ 5:1 against base canvas) */
+  --grey-500:  #7d8793;  /* Borders, muted labels */
+  --grey-700:  #3d4752;  /* Deep muted dividers */
+
+  /* Status Colors */
+  --status-success: #34d399;
+  --status-warning: #f59e0b;
+  --status-error:   #ef4444;
+
+  /* Window / Terminal Dots */
+  --window-dot-red:    rgba(239, 68, 68, 0.75);
+  --window-dot-yellow: rgba(234, 179, 8, 0.75);
+  --window-dot-green:  rgba(34, 197, 94, 0.75);
+
+  /* ==========================================================================
+     2. THE SIX DEPTH PLANES (Surface Architecture)
+     ========================================================================== */
+  --plane-0: var(--ink-950);  /* Canvas: base layer under all content */
+  --plane-1: var(--ink-900);  /* Substrate: sections, recessed areas, cards */
+  --plane-2: var(--ink-800);  /* Panel: standard cards, carousel, timeline beds */
+  --plane-3: var(--ink-700);  /* Raised: active cards, hovered items, terminal */
+  --plane-4: var(--ink-600);  /* Popover: dropdowns, tooltips, toasts */
+  --plane-5: var(--ink-500);  /* Overlay: modal dialogs, lightbox */
+
+  /* ==========================================================================
+     3. SEMANTIC TOKENS
+     ========================================================================== */
+  --bg-base:        var(--plane-0);
+  --bg-raised:      var(--plane-1);
+  --surface-1:      var(--plane-1);
+  --surface-2:      var(--plane-2);
+  --surface-3:      var(--plane-3);
+  --surface-navy:   var(--ink-800);
+  --surface-card-start: var(--ink-800);
+  --surface-card-end:   var(--ink-900);
+  --surface-preview-start: var(--ink-800);
+  --surface-preview-end:   var(--ink-900);
+
+  /* Typography Roles */
+  --text-primary:   var(--paper-50);
+  --text-secondary: var(--grey-300);
+  --text-muted:     var(--grey-400);
+  --text-emphasis:  var(--paper-100);
+
+  /* Interactive Accents & Focus */
+  --color-accent:         var(--gold-500);
+  --color-accent-hover:   var(--gold-400);
+  --color-data:           var(--teal-400);
+  --color-highlight:      var(--teal-400);
+  --color-focus:          var(--teal-400);
+  --color-status-success: var(--status-success);
+
+  /* Borders & Dividers */
+  --border-subtle:   rgba(255, 255, 255, 0.06);
+  --border-default:  rgba(255, 255, 255, 0.10);
+  --border-strong:   rgba(255, 255, 255, 0.16);
+  --border-elevated: rgba(255, 255, 255, 0.22);
+  --border-accent:   var(--gold-500);
+  --border-highlight: var(--teal-400);
+
+  /* Luminous Glows */
+  --glow-gold-sm: 0 0 8px rgba(232, 168, 35, 0.40);
+  --glow-gold-md: 0 0 16px rgba(232, 168, 35, 0.35);
+  --glow-gold-lg: 0 0 32px rgba(232, 168, 35, 0.25);
+  --glow-cyan-sm: 0 0 8px rgba(31, 194, 201, 0.40);
+  --glow-cyan-md: 0 0 18px rgba(31, 194, 201, 0.30);
+  --glow-cyan-lg: 0 20px 50px rgba(31, 194, 201, 0.15);
+
+  /* Elevation Shadows */
+  --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.50);
+  --shadow-card:   0 20px 50px -10px rgba(0, 0, 0, 0.80);
+  --shadow-modal:  0 25px 50px -12px rgba(0, 0, 0, 0.85);
+
+  /* Radius Primitives */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+     4. TYPOGRAPHY SYSTEM
+     ========================================================================== */
+  --font-sans:  "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Bodoni Moda", "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Font Weights */
+  --font-weight-light:    300;
+  --font-weight-regular:  400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+
+  /* Fluid Font Sizes (Clamped for smooth multi-viewport scaling) */
+  --text-2xs: 0.6875rem;     /* 11px - Micro telemetry, pills */
+  --text-xs: 0.75rem;        /* 12px - Nav items, monospaced kickers */
+  --text-caption: 0.8125rem; /* 13px - Brand monogram, secondary labels */
+  --text-sm: clamp(0.8125rem, 0.2vw + 0.775rem, 0.875rem);   /* 13px -> 14px */
+  --text-base: clamp(0.9375rem, 0.25vw + 0.875rem, 1.0625rem); /* 15px -> 17px - Comfortable editorial body */
+  --text-lg: clamp(1rem, 0.5vw + 0.9rem, 1.125rem);           /* 16px -> 18px */
+  --text-xl: clamp(1.25rem, 0.8vw + 1rem, 1.5rem);            /* 20px -> 24px - Roles */
+  --text-2xl: clamp(1.5rem, 1.2vw + 1.2rem, 2rem);            /* 24px -> 32px */
+  --text-3xl: clamp(1.75rem, 1.8vw + 1.3rem, 2.5rem);          /* 28px -> 40px - Project titles */
+  --text-num-display: clamp(1.875rem, 2.2vw + 1.2rem, 2.5rem); /* 30px -> 40px - Indices */
+
+  /* Section Headings */
+  --text-section-lead: clamp(1.75rem, 3vw, 2.5rem);           /* 28px -> 40px - About lead */
+  --text-section-heading: clamp(2rem, 4.5vw, 3.5rem);         /* 32px -> 56px - Main headings */
+
+  /* Hero & Oversized Editorial Display */
+  --text-hero-display: clamp(3rem, 8.5vw, 7.5rem);            /* Oversized headline */
+  --text-hero-accent: clamp(3.2rem, 9vw, 8rem);               /* Italic serif accent */
+  --text-contact-display: clamp(2.75rem, 8vw, 7rem);          /* Contact headline */
+  --text-contact-accent: clamp(3rem, 8.5vw, 7.5rem);          /* Contact serif accent */
+
+  /* Line Heights */
+  --leading-hero:        0.90;
+  --leading-hero-accent: 0.92;
+  --leading-section:     1.10;
+  --leading-section-lead: 1.22;
+  --leading-snug:        1.30;
+  --leading-normal:      1.50;
+  --leading-relaxed:     1.65;
+
+  /* Tracking (Letter Spacing) */
+  --tracking-hero:     -0.035em;
+  --tracking-section:  -0.025em;
+  --tracking-tight:    -0.015em;
+  --tracking-normal:    0em;
+  --tracking-mono-sm:   0.10em;
+  --tracking-mono-md:   0.18em;
+  --tracking-mono-lg:   0.25em;
+
+  /* ==========================================================================
+     5. LAYOUT & SPACING SYSTEM
+     ========================================================================== */
+  --content-max:        1280px;
+  --content-max-width:  var(--content-max);
+
+  --page-gutter:        clamp(1.5rem, 4vw, 3rem);
+  --section-py:         clamp(5rem, 8vw, 8rem);
+  --section-header-mb:  clamp(2.5rem, 4vw, 4rem);
+  --grid-gap-lg:        clamp(2rem, 3.5vw, 3.5rem);
+  --card-padding:       clamp(1.25rem, 2vw, 2rem);
+
+  /* Navigation Heights */
+  --nav-height-desktop: 72px;
+  --nav-height-mobile:  64px;
+  --nav-height:         var(--nav-height-desktop);
+
+  /* 4px Base Spacing Scale */
+  --space-0: 0px;
+  --space-1: 0.25rem;    /* 4px */
+  --space-2: 0.5rem;     /* 8px */
+  --space-3: 0.75rem;    /* 12px */
+  --space-4: 1rem;       /* 16px */
+  --space-5: 1.25rem;    /* 20px */
+  --space-6: 1.5rem;     /* 24px */
+  --space-8: 2rem;       /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+  --space-24: 6rem;      /* 96px */
+
+  /* ==========================================================================
+     6. MOTION TOKENS (Look Bible Timing & Easing Curves)
+     ========================================================================== */
+  --dur-instant:    80ms;
+  --dur-fast:       160ms;
+  --dur-base:       260ms;
+  --dur-slow:       440ms;
+  --dur-deliberate: 720ms;
+
+  --ease-standard:  cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter:     cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit:      cubic-bezier(0.4, 0, 1, 1);
+  --ease-overshoot: cubic-bezier(0.34, 1.3, 0.64, 1);
+
+  /* Backwards-compatible aliases */
+  --ease-out:    var(--ease-standard);
+  --ease-in-out: var(--ease-standard);
+  --ease-in:     var(--ease-exit);
+
+  /* Transitions */
+  --transition-colors:    color var(--dur-base) var(--ease-standard), background-color var(--dur-base) var(--ease-standard), border-color var(--dur-base) var(--ease-standard);
+  --transition-opacity:   opacity var(--dur-base) var(--ease-standard);
+  --transition-transform: transform var(--dur-fast) var(--ease-standard);
+  --transition-all:       all var(--dur-slow) var(--ease-standard);
+
+  /* Ambient Wells */
+  --ambient-navy: var(--ink-800);
+  --ambient-blue: #123258;
+  --ambient-cyan: rgba(31, 194, 201, 0.12);
+  --hero-ambient-navy: var(--ink-800);
+  --hero-ambient-blue: #123258;
+  --hero-ambient-cyan: var(--teal-400);
+  --work-ambient-blue: #123258;
+  --work-ambient-navy: var(--ink-800);
+  --work-card-sheen:   rgba(31, 194, 201, 0.16);
+  --contact-spotlight-cyan: var(--teal-400);
+  --contact-spotlight-blue: #123258;
+
+  /* About section harmonized with depth planes (chromatic gradients removed) */
+  --about-card-bg:       var(--plane-2);
+  --about-pill-bg:       rgba(255, 255, 255, 0.05);
+  --about-pill-bg-hover: rgba(255, 255, 255, 0.09);
+  --about-tag-bg:        var(--plane-1);
+}
+
+/* ==========================================================================
+   7. REDUCED MOTION ACCESSIBILITY (WCAG 2.2 Compliant)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant:    0.01ms;
+    --dur-fast:       0.01ms;
+    --dur-base:       0.01ms;
+    --dur-slow:       0.01ms;
+    --dur-deliberate: 0.01ms;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
