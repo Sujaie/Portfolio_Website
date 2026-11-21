@@ -20,8 +20,56 @@ import { useReducedMotion } from '../hooks/useReducedMotion.js';
  * - Disabled on touch/mobile devices ((hover: none) and (pointer: coarse)).
  * - Strict prefers-reduced-motion compliance.
  */
+/**
+ * Precompute the photorealistic spherical lens displacement map (synchronous Data URL)
+ * Generates an exact radial spherical convex refraction texture.
+ */
+function createLensDisplacementMap(radius) {
+  if (typeof document === 'undefined') return '';
+  const size = radius * 2;
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return '';
+
+  const imgData = ctx.createImageData(size, size);
+  const data = imgData.data;
+
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      const idx = (y * size + x) * 4;
+      const dx = x - radius;
+      const dy = y - radius;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const d = dist / radius;
+
+      if (d >= 1) {
+        // Outside lens: neutral grey (128) = zero displacement
+        data[idx] = 128;
+        data[idx + 1] = 128;
+        data[idx + 2] = 128;
+        data[idx + 3] = 255;
+      } else {
+        // High-definition spherical convex curvature:
+        // Radial sine profile that bows outward and produces authentic physical dome refraction
+        const angle = Math.atan2(dy, dx);
+        const amount = Math.sin(d * Math.PI * 0.95) * (1 - 0.25 * d);
+        data[idx] = Math.round(128 + 127 * (-Math.cos(angle) * amount));
+        data[idx + 1] = Math.round(128 + 127 * (-Math.sin(angle) * amount));
+        data[idx + 2] = 128;
+        data[idx + 3] = 255;
+      }
+    }
+  }
+
+  ctx.putImageData(imgData, 0, 0);
+  return canvas.toDataURL();
+}
+
 export default function GlobalCursorMagnifier() {
   const lensRef = useRef(null);
+  const orbRef = useRef(null);
   const contentMirrorRef = useRef(null);
   const headerMirrorRef = useRef(null);
   const rimRef = useRef(null);
@@ -29,59 +77,12 @@ export default function GlobalCursorMagnifier() {
 
   const [isTouch, setIsTouch] = useState(false);
   const prefersReduced = useReducedMotion();
-  const [distortionMapUrl, setDistortionMapUrl] = useState('');
 
-  const LENS_RADIUS = 60; // 120px circular optical aperture
+  const LENS_RADIUS = 65; // 130px circular optical aperture
   const MAGNIFY = 1.35; // 1.35x crisp optical magnification
 
-  // Generate photorealistic spherical convex lens displacement map on mount
-  useEffect(() => {
-    const size = LENS_RADIUS * 2;
-    const canvas = document.createElement('canvas');
-    canvas.width = size;
-    canvas.height = size;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const imgData = ctx.createImageData(size, size);
-    const data = imgData.data;
-    const cx = LENS_RADIUS;
-    const cy = LENS_RADIUS;
-    const R = LENS_RADIUS;
-
-    for (let y = 0; y < size; y++) {
-      for (let x = 0; x < size; x++) {
-        const idx = (y * size + x) * 4;
-        const dx = x - cx;
-        const dy = y - cy;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const d = dist / R;
-
-        if (d >= 1) {
-          // Outside lens: neutral grey = zero displacement
-          data[idx] = 128;
-          data[idx + 1] = 128;
-          data[idx + 2] = 128;
-          data[idx + 3] = 255;
-        } else {
-          // Spherical lens displacement profile:
-          // Smooth radial curve that bulges mid-radius and tapers seamlessly to zero at rim
-          const angle = Math.atan2(dy, dx);
-          const amount = Math.sin(d * Math.PI * 0.95) * Math.sqrt(1 - d * 0.4);
-          const shiftX = -Math.cos(angle) * amount;
-          const shiftY = -Math.sin(angle) * amount;
-
-          data[idx] = Math.round(128 + 127 * shiftX);
-          data[idx + 1] = Math.round(128 + 127 * shiftY);
-          data[idx + 2] = 128;
-          data[idx + 3] = 255;
-        }
-      }
-    }
-
-    ctx.putImageData(imgData, 0, 0);
-    setDistortionMapUrl(canvas.toDataURL());
-  }, [LENS_RADIUS]);
+  // Synchronously initialize the displacement map so <feImage> is present on frame 0
+  const [distortionMapUrl] = useState(() => createLensDisplacementMap(LENS_RADIUS));
 
   useEffect(() => {
 
@@ -306,34 +307,17 @@ export default function GlobalCursorMagnifier() {
     }
 
     function render() {
-      const ease = prefersReduced ? 1 : 0.32;
-      const dx = mouseX - currentX;
-      const dy = mouseY - currentY;
-      const distSq = dx * dx + dy * dy;
-
-      if (distSq > 0.05) {
-        currentX += dx * ease;
-        currentY += dy * ease;
-        idleCounter = 0;
-      } else {
-        currentX = mouseX;
-        currentY = mouseY;
-        idleCounter++;
-      }
+      // Direct 1:1 hardware cursor tracking: zero lag, zero rubber-banding, zero jitter
+      currentX = mouseX;
+      currentY = mouseY;
 
       const scrollX = window.scrollX || window.pageXOffset || 0;
       const scrollY = window.scrollY || window.pageYOffset || 0;
       const scrollDelta = Math.abs(scrollY - lastScrollY) + Math.abs(scrollX - lastScrollX);
 
-      // 1. Move circular lens shell
+      // 1. Move circular lens shell (Locked directly to mouse pointer with ZERO transform transition)
       if (lensRef.current) {
-        let scale = 1;
-        if (isPressed) {
-          scale = 0.92;
-        } else if (isHovered) {
-          scale = 1.28;
-        }
-        lensRef.current.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(${scale})`;
+        lensRef.current.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
       }
 
       // 2. Optical Magnification of scrollable main content (Exact zero-offset center alignment)
@@ -358,11 +342,12 @@ export default function GlobalCursorMagnifier() {
       lastScrollX = scrollX;
       lastScrollY = scrollY;
 
-      // Enter 0% CPU dormancy after ~1s of cursor being stationary and scroll settled
-      if (idleCounter > 60 && distSq <= 0.05 && scrollDelta < 0.2) {
+      // Enter 0% CPU dormancy when stationary
+      if (idleCounter > 15 && scrollDelta < 0.2) {
         isRunning = false;
         rafId = null;
       } else {
+        idleCounter++;
         rafId = requestAnimationFrame(render);
       }
     }
@@ -376,6 +361,9 @@ export default function GlobalCursorMagnifier() {
     const updateHoverState = (hovered) => {
       if (hovered === isHovered) return;
       isHovered = hovered;
+      if (orbRef.current && !isPressed) {
+        orbRef.current.style.transform = isHovered ? 'scale(1.25)' : 'scale(1)';
+      }
       if (!rimRef.current) return;
 
       if (isHovered) {
@@ -428,11 +416,13 @@ export default function GlobalCursorMagnifier() {
 
     const handlePointerDown = () => {
       isPressed = true;
+      if (orbRef.current) orbRef.current.style.transform = 'scale(0.92)';
       wakeLoop();
     };
 
     const handlePointerUp = () => {
       isPressed = false;
+      if (orbRef.current) orbRef.current.style.transform = isHovered ? 'scale(1.25)' : 'scale(1)';
       wakeLoop();
     };
 
@@ -508,18 +498,16 @@ export default function GlobalCursorMagnifier() {
       >
         <defs>
           <filter id="cursor-lens-distortion" x="0%" y="0%" width="100%" height="100%">
-            {distortionMapUrl && (
-              <feImage
-                href={distortionMapUrl}
-                xlinkHref={distortionMapUrl}
-                preserveAspectRatio="none"
-                result="lensMap"
-              />
-            )}
+            <feImage
+              href={distortionMapUrl}
+              xlinkHref={distortionMapUrl}
+              preserveAspectRatio="none"
+              result="lensMap"
+            />
             <feDisplacementMap
               in="SourceGraphic"
               in2="lensMap"
-              scale="28"
+              scale="68"
               xChannelSelector="R"
               yChannelSelector="G"
             />
@@ -532,14 +520,17 @@ export default function GlobalCursorMagnifier() {
         ref={lensRef}
         aria-hidden="true"
         inert={true}
-        className="fixed top-0 left-0 pointer-events-none select-none z-[9999] opacity-0 will-change-transform transition-[opacity,transform] duration-[var(--dur-fast)] ease-[var(--ease-standard)]"
+        className="fixed top-0 left-0 pointer-events-none select-none z-[9999] opacity-0 will-change-transform transition-opacity duration-150 ease-out"
         style={{
           width: `${LENS_RADIUS * 2}px`,
           height: `${LENS_RADIUS * 2}px`,
           transform: 'translate3d(-1000px, -1000px, 0) translate(-50%, -50%)',
         }}
       >
-        <div className="relative w-full h-full rounded-full overflow-hidden bg-[#050810] shadow-[inset_0_0_24px_rgba(5,8,16,0.95)]">
+        <div
+          ref={orbRef}
+          className="relative w-full h-full rounded-full overflow-hidden bg-[#050810] shadow-[inset_0_0_24px_rgba(5,8,16,0.95)] transition-transform duration-200 ease-out"
+        >
           {/* Layer 1: Spherical Optical Distortion Stage (GPU Accelerated SVG feDisplacementMap) */}
           <div
             className="absolute inset-0 pointer-events-none select-none"
