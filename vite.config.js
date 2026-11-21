@@ -5,7 +5,22 @@ export default defineConfig({
   plugins: [react()],
   server: {
     open: true,
-    // expose on all interfaces for reliability
     host: true,
+  },
+  build: {
+    target: 'esnext',
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+            return 'vendor-react';
+          }
+          if (id.includes('node_modules/gsap') || id.includes('node_modules/@gsap')) {
+            return 'vendor-gsap';
+          }
+        },
+      },
+    },
   },
 });

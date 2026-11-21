@@ -1,7 +1,19 @@
+# Dependencies
 node_modules
+.pnpm-store
+
+# Production build output
 dist
-.DS_Store
-*.local
+
+# Temporary and test artifacts
 test-results/
+playwright-report/
+*.log
 debug.log
 
+# System & environment files
+.DS_Store
+Thumbs.db
+*.local
+.env.local
+.env.*.local
