@@ -28,6 +28,13 @@ test.describe('Global Optical Cursor Instrument Glass Orb Verification', () => {
     });
     expect(transform).toContain('translate3d');
 
+    // 4b. Verify true 1.35x optical magnification transform is applied inside the lens
+    const mirrorTransform = await page.evaluate(() => {
+      const mirror = document.querySelector('#cursor-lens-shell [style*="scale(1.35)"]');
+      return mirror ? mirror.getAttribute('style') : '';
+    });
+    expect(mirrorTransform).toContain('scale(1.35)');
+
     // 5. Verify optical filter has contrast and brightness enhancement
     const filterStyle = await page.evaluate(() => {
       const filterEl = document.getElementById('cursor-optical-filter');
