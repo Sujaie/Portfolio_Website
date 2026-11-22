@@ -153,7 +153,7 @@ export default function AtmosphericBackground() {
           ========================================================================= */}
 
       {/* SECTION 1: HERO (#home) — Visual Intensity B+
-          Dominant electric teal lower-left, cyan/blue near typography, subtle soft indigo undertone */}
+          Luminous central blue/cyan aura behind headline, electric teal lower-left, subtle soft indigo undertone */}
       <div
         id="atmosphere-home"
         data-atmosphere="home"
@@ -161,11 +161,19 @@ export default function AtmosphericBackground() {
         className="absolute inset-0 transition-opacity duration-300 pointer-events-none will-change-[opacity]"
         style={{ opacity: 1 }}
       >
+        {/* Central Luminous Deep Cyan/Blue Aura (Centered directly behind headline as in reference video) */}
+        <div
+          className="absolute top-[38%] left-[45%] -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[950px] md:w-[1200px] h-[550px] sm:h-[750px] md:h-[900px] rounded-full blur-[140px] md:blur-[180px] pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(31, 194, 201, 0.24) 0%, rgba(13, 35, 68, 0.32) 45%, rgba(5, 8, 16, 0.45) 70%, transparent 85%)',
+          }}
+        />
+
         {/* Primary Electric Teal Field (Lower-Left / Lower-Center) */}
         <div
           className="absolute bottom-[2%] left-[-5%] sm:left-[5%] md:left-[12%] w-[550px] sm:w-[750px] md:w-[950px] h-[500px] sm:h-[650px] md:h-[850px] rounded-full blur-[140px] md:blur-[180px] pointer-events-none"
           style={{
-            background: 'radial-gradient(circle, rgba(53, 214, 223, 0.22) 0%, rgba(31, 194, 201, 0.12) 45%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(53, 214, 223, 0.20) 0%, rgba(31, 194, 201, 0.10) 45%, transparent 70%)',
           }}
         />
 
@@ -335,10 +343,10 @@ export default function AtmosphericBackground() {
         }}
       />
 
-      {/* LAYER 5: FINE GRAIN (Subtle Static SVG Fractal Noise) */}
+      {/* LAYER 5: FINE GRAIN (Tactile Velvety Film Grain) */}
       <div
         id="atmosphere-grain"
-        className="absolute inset-0 bg-noise opacity-[0.032] pointer-events-none"
+        className="absolute inset-0 bg-noise opacity-[0.052] pointer-events-none"
       />
 
       {/* LAYER 6: TECHNICAL GRID (Whisper-Quiet Coordinate Mesh) */}

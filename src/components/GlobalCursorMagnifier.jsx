@@ -78,7 +78,7 @@ export default function GlobalCursorMagnifier() {
   const [isTouch, setIsTouch] = useState(false);
   const prefersReduced = useReducedMotion();
 
-  const LENS_RADIUS = 65; // 130px circular optical aperture
+  const LENS_RADIUS = 85; // 170px prominent optical glass bubble
   const MAGNIFY = 1.35; // 1.35x crisp optical magnification
 
   // Synchronously initialize the displacement map so <feImage> is present on frame 0
@@ -362,26 +362,20 @@ export default function GlobalCursorMagnifier() {
       if (hovered === isHovered) return;
       isHovered = hovered;
       if (orbRef.current && !isPressed) {
-        orbRef.current.style.transform = isHovered ? 'scale(1.25)' : 'scale(1)';
+        orbRef.current.style.transform = isHovered ? 'scale(1.18)' : 'scale(1)';
       }
       if (!rimRef.current) return;
 
       if (isHovered) {
         // Champagne Gold focal state
-        rimRef.current.style.borderColor = 'rgba(240, 189, 88, 0.90)';
+        rimRef.current.style.borderColor = 'rgba(240, 189, 88, 0.85)';
         rimRef.current.style.boxShadow =
-          '0 0 24px rgba(240, 189, 88, 0.40), inset 0 0 12px rgba(255, 255, 255, 0.16)';
-        if (reticleRef.current) {
-          reticleRef.current.style.borderColor = 'rgba(240, 189, 88, 0.65)';
-        }
+          '0 0 28px rgba(240, 189, 88, 0.35), inset 0 0 16px rgba(255, 255, 255, 0.16)';
       } else {
-        // Electric Teal baseline state
-        rimRef.current.style.borderColor = 'rgba(53, 214, 223, 0.65)';
+        // Pure Translucent Glass Bubble state
+        rimRef.current.style.borderColor = 'rgba(255, 255, 255, 0.25)';
         rimRef.current.style.boxShadow =
-          '0 0 16px rgba(53, 214, 223, 0.28), inset 0 0 10px rgba(255, 255, 255, 0.12)';
-        if (reticleRef.current) {
-          reticleRef.current.style.borderColor = 'rgba(53, 214, 223, 0.35)';
-        }
+          '0 0 24px rgba(53, 214, 223, 0.20), inset 0 0 14px rgba(255, 255, 255, 0.12)';
       }
       wakeLoop();
     };
@@ -490,27 +484,89 @@ export default function GlobalCursorMagnifier() {
 
   return (
     <>
-      {/* SVG Filter for Photorealistic GPU Spherical Lens Curvature & Barrel Distortion */}
+      {/* SVG Filter for Authentic Prismatic Chromatic Aberration & Spherical Convex Lens Curvature */}
       <svg
         aria-hidden="true"
         className="fixed top-0 left-0 w-0 h-0 pointer-events-none opacity-0"
         style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}
       >
         <defs>
-          <filter id="cursor-lens-distortion" x="0%" y="0%" width="100%" height="100%">
+          <filter id="cursor-lens-distortion" x="-20%" y="-20%" width="140%" height="140%">
             <feImage
               href={distortionMapUrl}
               xlinkHref={distortionMapUrl}
               preserveAspectRatio="none"
               result="lensMap"
             />
-            <feDisplacementMap
+            {/* Red Channel — dispersed outward with warm amber/red refraction */}
+            <feColorMatrix
               in="SourceGraphic"
+              type="matrix"
+              values="1 0 0 0 0
+                      0 0 0 0 0
+                      0 0 0 0 0
+                      0 0 0 1 0"
+              result="redChan"
+            />
+            <feDisplacementMap
+              in="redChan"
               in2="lensMap"
-              scale="68"
+              scale="60"
               xChannelSelector="R"
               yChannelSelector="G"
+              result="dispRed"
             />
+            <feOffset in="dispRed" dx="-1.2" dy="-0.8" result="offsetRed" />
+
+            {/* Green Channel — baseline structural anchor */}
+            <feColorMatrix
+              in="SourceGraphic"
+              type="matrix"
+              values="0 0 0 0 0
+                      0 1 0 0 0
+                      0 0 0 0 0
+                      0 0 0 1 0"
+              result="greenChan"
+            />
+            <feDisplacementMap
+              in="greenChan"
+              in2="lensMap"
+              scale="52"
+              xChannelSelector="R"
+              yChannelSelector="G"
+              result="dispGreen"
+            />
+
+            {/* Blue Channel — dispersed outward with cool electric cyan refraction */}
+            <feColorMatrix
+              in="SourceGraphic"
+              type="matrix"
+              values="0 0 0 0 0
+                      0 0 0 0 0
+                      0 0 1 0 0
+                      0 0 0 1 0"
+              result="blueChan"
+            />
+            <feDisplacementMap
+              in="blueChan"
+              in2="lensMap"
+              scale="44"
+              xChannelSelector="R"
+              yChannelSelector="G"
+              result="dispBlue"
+            />
+            <feOffset in="dispBlue" dx="1.2" dy="0.8" result="offsetBlue" />
+
+            {/* Recombine RGB Spectrum */}
+            <feBlend mode="screen" in="offsetRed" in2="dispGreen" result="rg" />
+            <feBlend mode="screen" in="rg" in2="offsetBlue" result="chromaticText" />
+
+            {/* Optical liquid glass diffusion bloom */}
+            <feGaussianBlur in="chromaticText" stdDeviation="0.6" result="glow" />
+            <feMerge>
+              <feMergeNode in="glow" />
+              <feMergeNode in="chromaticText" />
+            </feMerge>
           </filter>
         </defs>
       </svg>
@@ -531,14 +587,14 @@ export default function GlobalCursorMagnifier() {
           ref={orbRef}
           className="relative w-full h-full rounded-full overflow-hidden bg-[#050810] shadow-[inset_0_0_24px_rgba(5,8,16,0.95)] transition-transform duration-200 ease-out"
         >
-          {/* Layer 1: Spherical Optical Distortion Stage (GPU Accelerated SVG feDisplacementMap) */}
+          {/* Layer 1: Spherical Optical Distortion Stage with Chromatic Aberration */}
           <div
             className="absolute inset-0 pointer-events-none select-none"
             style={{
               filter: distortionMapUrl ? 'url(#cursor-lens-distortion)' : 'none',
             }}
           >
-            {/* Scrollable Main Page Surface (Scaled 1.35x, with radial spherical lens curvature) */}
+            {/* Scrollable Main Page Surface (Scaled 1.35x, with prismatic liquid refraction) */}
             <div
               ref={contentMirrorRef}
               aria-hidden="true"
@@ -568,33 +624,16 @@ export default function GlobalCursorMagnifier() {
               backdropFilter: 'contrast(1.15) brightness(1.08)',
               WebkitBackdropFilter: 'contrast(1.15) brightness(1.08)',
               background:
-                'radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.16) 0%, rgba(53, 214, 223, 0.04) 45%, rgba(5, 8, 16, 0.35) 80%, transparent 100%)',
-              boxShadow: 'inset 0 0 16px rgba(5, 8, 16, 0.85), inset 0 0 6px rgba(53, 214, 223, 0.25)',
+                'radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.16) 0%, rgba(53, 214, 223, 0.04) 40%, transparent 68%)',
+              boxShadow: 'inset 0 0 16px rgba(5, 8, 16, 0.85), inset 0 0 8px rgba(255, 255, 255, 0.08)',
             }}
           />
 
-          {/* Layer 3: Delicate Instrument Crosshair Reticle (North, South, East, West tick marks) */}
-          <div
-            ref={reticleRef}
-            className="absolute inset-[3px] rounded-full pointer-events-none border border-dashed border-[rgba(53,214,223,0.30)] transition-colors duration-150"
-          >
-            {/* North Tick */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-[6px] bg-[rgba(53,214,223,0.7)]" />
-            {/* South Tick */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1px] h-[6px] bg-[rgba(53,214,223,0.7)]" />
-            {/* West Tick */}
-            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[6px] h-[1px] bg-[rgba(53,214,223,0.7)]" />
-            {/* East Tick */}
-            <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[6px] h-[1px] bg-[rgba(53,214,223,0.7)]" />
-            {/* Precision Center Dot */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[3px] h-[3px] rounded-full bg-[rgba(53,214,223,0.8)] shadow-[0_0_4px_rgba(53,214,223,0.8)]" />
-          </div>
-
-          {/* Layer 4: Luminous Outer Rim (Electric Teal idle / Champagne Gold interactive hover) */}
+          {/* Layer 3: Pure Translucent Glass Bubble Rim (Ethereal Liquid Droplet / Soap Bubble) */}
           <div
             id="cursor-lens-rim"
             ref={rimRef}
-            className="absolute inset-0 rounded-full border-[1.5px] border-[rgba(53,214,223,0.65)] shadow-[0_0_16px_rgba(53,214,223,0.28),inset_0_0_10px_rgba(255,255,255,0.12)] transition-colors duration-150"
+            className="absolute inset-0 rounded-full border-[1.2px] border-[rgba(255,255,255,0.22)] shadow-[0_0_24px_rgba(53,214,223,0.18),inset_0_0_12px_rgba(255,255,255,0.10)] transition-colors duration-150"
           />
         </div>
       </div>
