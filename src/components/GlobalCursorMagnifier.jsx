@@ -370,12 +370,12 @@ export default function GlobalCursorMagnifier() {
         // Champagne Gold focal state
         rimRef.current.style.borderColor = 'rgba(240, 189, 88, 0.85)';
         rimRef.current.style.boxShadow =
-          '0 0 28px rgba(240, 189, 88, 0.35), inset 0 0 16px rgba(255, 255, 255, 0.16)';
+          '0 0 28px rgba(240, 189, 88, 0.40), inset 0 0 16px rgba(255, 255, 255, 0.16)';
       } else {
-        // Pure Translucent Glass Bubble state
-        rimRef.current.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+        // Electric Teal baseline state
+        rimRef.current.style.borderColor = 'rgba(53, 214, 223, 0.55)';
         rimRef.current.style.boxShadow =
-          '0 0 24px rgba(53, 214, 223, 0.20), inset 0 0 14px rgba(255, 255, 255, 0.12)';
+          '0 0 20px rgba(53, 214, 223, 0.28), inset 0 0 12px rgba(255, 255, 255, 0.12)';
       }
       wakeLoop();
     };
@@ -484,7 +484,7 @@ export default function GlobalCursorMagnifier() {
 
   return (
     <>
-      {/* SVG Filter for Authentic Prismatic Chromatic Aberration & Spherical Convex Lens Curvature */}
+      {/* SVG Filter for Palette V2 Ambient Technical Noir Prismatic Chromatic Aberration (Electric Teal & Champagne Gold) */}
       <svg
         aria-hidden="true"
         className="fixed top-0 left-0 w-0 h-0 pointer-events-none opacity-0"
@@ -498,74 +498,65 @@ export default function GlobalCursorMagnifier() {
               preserveAspectRatio="none"
               result="lensMap"
             />
-            {/* Red Channel — dispersed outward with warm amber/red refraction */}
+            {/* 1. Champagne Gold Spectrum Component (#F0BD58 -> 0.94, 0.74, 0.35) */}
             <feColorMatrix
               in="SourceGraphic"
               type="matrix"
-              values="1 0 0 0 0
-                      0 0 0 0 0
-                      0 0 0 0 0
+              values="0.94 0 0 0 0
+                      0 0.74 0 0 0
+                      0 0 0.35 0 0
                       0 0 0 1 0"
-              result="redChan"
+              result="goldChan"
             />
             <feDisplacementMap
-              in="redChan"
+              in="goldChan"
               in2="lensMap"
-              scale="60"
+              scale="58"
               xChannelSelector="R"
               yChannelSelector="G"
-              result="dispRed"
+              result="dispGold"
             />
-            <feOffset in="dispRed" dx="-1.2" dy="-0.8" result="offsetRed" />
+            <feOffset in="dispGold" dx="-1.2" dy="-0.8" result="offsetGold" />
 
-            {/* Green Channel — baseline structural anchor */}
+            {/* 2. Electric Teal Spectrum Component (#35D6DF -> 0.21, 0.84, 0.88) */}
             <feColorMatrix
               in="SourceGraphic"
               type="matrix"
-              values="0 0 0 0 0
-                      0 1 0 0 0
-                      0 0 0 0 0
+              values="0.21 0 0 0 0
+                      0 0.84 0 0 0
+                      0 0 0.88 0 0
                       0 0 0 1 0"
-              result="greenChan"
+              result="tealChan"
             />
             <feDisplacementMap
-              in="greenChan"
-              in2="lensMap"
-              scale="52"
-              xChannelSelector="R"
-              yChannelSelector="G"
-              result="dispGreen"
-            />
-
-            {/* Blue Channel — dispersed outward with cool electric cyan refraction */}
-            <feColorMatrix
-              in="SourceGraphic"
-              type="matrix"
-              values="0 0 0 0 0
-                      0 0 0 0 0
-                      0 0 1 0 0
-                      0 0 0 1 0"
-              result="blueChan"
-            />
-            <feDisplacementMap
-              in="blueChan"
+              in="tealChan"
               in2="lensMap"
               scale="44"
               xChannelSelector="R"
               yChannelSelector="G"
-              result="dispBlue"
+              result="dispTeal"
             />
-            <feOffset in="dispBlue" dx="1.2" dy="0.8" result="offsetBlue" />
+            <feOffset in="dispTeal" dx="1.2" dy="0.8" result="offsetTeal" />
 
-            {/* Recombine RGB Spectrum */}
-            <feBlend mode="screen" in="offsetRed" in2="dispGreen" result="rg" />
-            <feBlend mode="screen" in="rg" in2="offsetBlue" result="chromaticText" />
+            {/* 3. Core Baseline Structural Anchor (Pure crisp text center) */}
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="lensMap"
+              scale="50"
+              xChannelSelector="R"
+              yChannelSelector="G"
+              result="dispBase"
+            />
 
-            {/* Optical liquid glass diffusion bloom */}
-            <feGaussianBlur in="chromaticText" stdDeviation="0.6" result="glow" />
+            {/* 4. Screen Recombination: Gold + Teal + Base = Crisp White center, Gold & Teal at perimeter */}
+            <feBlend mode="screen" in="offsetGold" in2="offsetTeal" result="tealGold" />
+            <feBlend mode="screen" in="tealGold" in2="dispBase" result="recombined" />
+
+            {/* 5. Optical liquid glass bloom/diffusion */}
+            <feGaussianBlur in="recombined" stdDeviation="0.45" result="bloom" />
             <feMerge>
-              <feMergeNode in="glow" />
-              <feMergeNode in="chromaticText" />
+              <feMergeNode in="bloom" />
+              <feMergeNode in="recombined" />
             </feMerge>
           </filter>
         </defs>
@@ -629,11 +620,11 @@ export default function GlobalCursorMagnifier() {
             }}
           />
 
-          {/* Layer 3: Pure Translucent Glass Bubble Rim (Ethereal Liquid Droplet / Soap Bubble) */}
+          {/* Layer 3: Pure Translucent Glass Bubble Rim (Electric Teal idle / Champagne Gold interactive hover) */}
           <div
             id="cursor-lens-rim"
             ref={rimRef}
-            className="absolute inset-0 rounded-full border-[1.2px] border-[rgba(255,255,255,0.22)] shadow-[0_0_24px_rgba(53,214,223,0.18),inset_0_0_12px_rgba(255,255,255,0.10)] transition-colors duration-150"
+            className="absolute inset-0 rounded-full border-[1.2px] border-[rgba(53,214,223,0.55)] shadow-[0_0_20px_rgba(53,214,223,0.28),inset_0_0_12px_rgba(255,255,255,0.12)] transition-colors duration-150"
           />
         </div>
       </div>
