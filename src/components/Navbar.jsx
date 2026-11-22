@@ -65,7 +65,7 @@ export default function Navbar() {
     for (let i = 0; i < sections.length; i++) {
       const el = document.getElementById(sections[i]);
       if (el) {
-        const top = el.offsetTop;
+        const top = el.getBoundingClientRect().top + scrollY;
         if (focalY >= top) {
           dominantSection = sections[i];
         } else {
@@ -92,6 +92,17 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', determineActiveSection, { passive: true });
+
+    // Handle initial hash on page load if present (e.g. #experience)
+    if (window.location.hash) {
+      const hashTarget = window.location.hash.slice(1);
+      const targetEl = document.getElementById(hashTarget);
+      if (targetEl) {
+        const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'), 10) || 72;
+        const targetPos = Math.max(0, targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight);
+        window.scrollTo({ top: targetPos, behavior: 'instant' });
+      }
+    }
 
     determineActiveSection();
 

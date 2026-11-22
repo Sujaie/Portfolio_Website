@@ -308,6 +308,22 @@ export default function GlobalCursorMagnifier() {
       });
     }
 
+    // Observe mutations on fixed navbar (active section transitions, sliding indicator repositioning)
+    const headerSource = document.getElementById('main-navbar');
+    let headerObserver = null;
+    let lastActiveSection = headerSource?.getAttribute('data-active-section') || 'home';
+    if (headerSource && window.MutationObserver) {
+      headerObserver = new MutationObserver(() => {
+        syncHeaderMirror();
+      });
+      headerObserver.observe(headerSource, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-active-section', 'aria-current'],
+      });
+    }
+
     function render() {
       // Direct 1:1 hardware cursor tracking: zero lag, zero rubber-banding, zero jitter
       currentX = mouseX;
@@ -332,6 +348,11 @@ export default function GlobalCursorMagnifier() {
       // 3. Optical Magnification of fixed header navbar (When cursor touches top region)
       if (headerMirrorRef.current) {
         if (currentY <= 120) {
+          const currentActive = headerSource?.getAttribute('data-active-section');
+          if (currentActive && currentActive !== lastActiveSection) {
+            lastActiveSection = currentActive;
+            syncHeaderMirror();
+          }
           headerMirrorRef.current.style.display = 'block';
           const hTransX = LENS_RADIUS - MAGNIFY * currentX;
           const hTransY = LENS_RADIUS - MAGNIFY * currentY;
@@ -476,6 +497,7 @@ export default function GlobalCursorMagnifier() {
       document.removeEventListener('mouseleave', handlePointerLeave);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (mutationObserver) mutationObserver.disconnect();
+      if (headerObserver) headerObserver.disconnect();
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, [prefersReduced]);
