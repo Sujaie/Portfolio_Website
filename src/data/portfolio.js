@@ -179,10 +179,10 @@ export const portfolioData = {
   ],
 
   contact: {
-    badge: "LET'S TALK CODE, HACKS & OPPORTUNITIES.",
-    headline: "LET'S BUILD",
-    headlineItalic: "SOMETHING",
-    headlineEnd: "INTERESTING.",
+    badge: "LET'S TALK. CODE, HACKS & OPPORTUNITIES.",
+    headline: "READY TO",
+    headlineItalic: "CONTRIBUTE.",
+    headlineEnd: "READY TO LEARN.",
     email: "sujaie2008@gmail.com",
     github: "https://github.com/Sujaie",
     linkedin: "https://www.linkedin.com/in/sujaie-babu-a00298383/",

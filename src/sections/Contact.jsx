@@ -136,7 +136,7 @@ export default function Contact() {
         {/* Label */}
         <div className="inline-flex items-center gap-3 text-xs tracking-mono-lg font-mono font-semibold text-[var(--color-accent)] uppercase mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shadow-[var(--glow-gold-sm)] shrink-0" />
-          <span className="leading-relaxed">{contact.badge || "LET'S TALK CODE, HACKS & OPPORTUNITIES."}</span>
+          <span className="leading-relaxed">{contact.badge || "LET'S TALK. CODE, HACKS & OPPORTUNITIES."}</span>
         </div>
 
         {/* Oversized Converging Headline */}
