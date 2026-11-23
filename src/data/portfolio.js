@@ -3,7 +3,7 @@ export const portfolioData = {
     name: "Sujaie",
     title: "Software Engineer",
     location: "Salem, INDIA",
-    focus: "SOFTWARE ENGINEERING",
+    focus: "FULL-STACK DOMAIN",
     interests: "AI / ML / CREATIVE TECHNOLOGY",
     monogram: "S / DEV",
     availability: "OPEN FOR OPPORTUNITIES",
@@ -16,7 +16,7 @@ export const portfolioData = {
     headlinePart2: "APPLICATIONS",
     metadata: [
       { label: "LOCATION", value: "Salem, INDIA" },
-      { label: "FOCUS", value: "SOFTWARE ENGINEERING" },
+      { label: "FOCUS", value: "FULL-STACK DOMAIN" },
       { label: "INTERESTS", value: "AI / ML / CREATIVE TECH" },
     ]
   },
@@ -24,11 +24,15 @@ export const portfolioData = {
   about: {
     badge: "A LITTLE ABOUT ME",
     lead: "I'm Sujaie.",
+    headlineAccent: "Building useful",
+    headlineRest: "things with code & curiosity.",
     paragraphs: [
-      "I build thoughtful digital experiences, explore artificial intelligence, and enjoy turning ambitious concepts into resilient, functional products.",
-      "Bridging the balance between rigorous systems engineering and art-directed frontends, my work thrives where creative interaction design intersects with scalable backend architecture."
+      "I'm a Computer Science undergrad at Sri Venkateswara College of Engineering, Chennai, who enjoys building AI-powered applications from idea to working product.",
+      "At Smart India Hackathon 2026, I led my team's ideation and planning for ArtiNova, an AI-powered platform for artisans, and we built a working app that made it to the internal finals. Outside code, I'm a Leading Cadet in the NCC Navy wing, which taught me discipline, teamwork and how to lead under pressure.",
+      "I'm looking for internships and projects where I can contribute, learn from experienced engineers, and keep building."
     ],
-    highlights: ["Interactive Systems", "Deep Learning & LLMs", "Cloud Architecture"]
+    highlightsTitle: "interest in",
+    highlights: ["AI-POWERED APPS", "FULL-STACK", "Deep Learning & LLMs"]
   },
 
   showcase: [

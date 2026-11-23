@@ -184,6 +184,7 @@ export default function GlobalCursorMagnifier() {
         'hero-meta-item',
         'hero-explore',
         'about-paragraph',
+        'about-highlight-title',
         'about-highlight-pill',
         'about-lead-text',
         'skill-card',

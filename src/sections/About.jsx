@@ -48,6 +48,15 @@ export default function About() {
               0.3
             );
 
+            if (editorialRef.current?.querySelector('.about-highlight-title')) {
+              tl.fromTo(
+                '.about-highlight-title',
+                { opacity: 0, y: 5 },
+                { opacity: 1, y: 0, duration: 0.4 },
+                0.55
+              );
+            }
+
             tl.fromTo(
               '.about-highlight-pill',
               { opacity: 0, scale: 0.95 },
@@ -142,8 +151,9 @@ export default function About() {
           <h2 className="about-lead-text text-section-lead font-light tracking-tight text-[var(--text-primary)] mb-6 leading-section-lead">
             {about.lead} <br />
             <span className="font-serif italic text-[var(--color-accent)]">
-              Crafting systems
-            </span> with intention & intelligence.
+              {about.headlineAccent || "Building useful"}
+            </span>{' '}
+            {about.headlineRest || "things with code & curiosity."}
           </h2>
 
           {/* Body paragraphs */}
@@ -154,15 +164,23 @@ export default function About() {
           </div>
 
           {/* Technical focus pills */}
-          <div className="mt-8 pt-8 border-t border-[var(--border-default)] flex flex-wrap gap-2">
-            {about.highlights.map((item) => (
-              <span
-                key={item}
-                className="about-highlight-pill text-xs font-mono tracking-mono-sm uppercase px-3 py-1.5 rounded-full bg-[var(--about-pill-bg)] border border-[var(--border-default)] text-[var(--text-primary)]"
-              >
-                {item}
-              </span>
-            ))}
+          <div className="mt-8 pt-6 border-t border-[var(--border-default)] flex flex-col gap-3">
+            {about.highlightsTitle && (
+              <div className="about-highlight-title inline-flex items-center gap-2 text-2xs font-mono tracking-mono-lg text-[var(--text-secondary)] uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />
+                <span>{about.highlightsTitle}</span>
+              </div>
+            )}
+            <div className="flex flex-wrap gap-2">
+              {about.highlights.map((item) => (
+                <span
+                  key={item}
+                  className="about-highlight-pill text-xs font-mono tracking-mono-sm uppercase px-3 py-1.5 rounded-full bg-[var(--about-pill-bg)] border border-[var(--border-default)] text-[var(--text-primary)]"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
