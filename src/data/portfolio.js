@@ -2,7 +2,7 @@ export const portfolioData = {
   personal: {
     name: "Sujaie",
     title: "Software Engineer",
-    location: "INDIA",
+    location: "Salem, INDIA",
     focus: "SOFTWARE ENGINEERING",
     interests: "AI / ML / CREATIVE TECHNOLOGY",
     monogram: "S / DEV",
@@ -10,12 +10,12 @@ export const portfolioData = {
   },
 
   hero: {
-    introLabel: "HELLO, I'M A SOFTWARE ENGINEER",
-    headlinePart1: "CREATIVE",
-    headlineAccent: "SOFTWARE",
-    headlinePart2: "DEVELOPER",
+    introLabel: "HELLO, I'M SUJAIE · CS UNDERGRAD",
+    headlinePart1: "BUILDING",
+    headlineAccent: "INTELLIGENT",
+    headlinePart2: "APPLICATIONS",
     metadata: [
-      { label: "LOCATION", value: "INDIA" },
+      { label: "LOCATION", value: "Salem, INDIA" },
       { label: "FOCUS", value: "SOFTWARE ENGINEERING" },
       { label: "INTERESTS", value: "AI / ML / CREATIVE TECH" },
     ]
