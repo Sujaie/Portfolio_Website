@@ -200,25 +200,93 @@ export const portfolioData = {
 
   experience: [
     {
-      period: "2024 — PRESENT",
-      role: "Software Engineering & AI Researcher",
-      organization: "Independent Lab / Academic Research",
-      description: "Architecting autonomous LLM frameworks, high-speed vector retrieval pipelines, and interactive web tools for developer productivity.",
-      tag: "CORE INITIATIVE"
+      period: "2025 — PRESENT",
+      role: "Web Developer Intern",
+      organization: "StanVentures",
+      tag: "PROFESSIONAL",
+      highlight: "primary",
+      description: "Developing my personal portfolio website while gaining hands-on experience in frontend development, component-based architecture, and building interactive web experiences.",
+      tags: ["Frontend Development", "React", "UI Components", "Web Development"],
+      verification: [
+        {
+          label: "WORK UNDERTAKEN",
+          items: [
+            "Developed my personal portfolio website",
+            "Gained practical experience in frontend development & component-based architecture",
+            "Learned how frontend components interact to create a complete web application",
+            "Explored interactive interfaces and frontend implementation"
+          ]
+        },
+        {
+          label: "PROJECT SCOPE & OBJECTIVE",
+          items: [
+            "Project: Personal Developer Portfolio",
+            "Description: Designed and developed to showcase projects, technical interests, skills, and development journey",
+            "Evidence: Repository & live demo links will be added upon deployment"
+          ]
+        }
+      ]
     },
     {
-      period: "2023 — 2024",
-      role: "Full-Stack Development Intern",
-      organization: "Technology Innovation Center",
-      description: "Spearheaded frontend redesign for cloud analytics dashboards, decreasing first-contentful paint by 65% and deploying real-time WebSocket feeds.",
-      tag: "INTERNSHIP"
+      period: "SIH 2026",
+      role: "AI/ML Contributor",
+      organization: "Smart India Hackathon — Internal Selection",
+      achievement: "SIH Internal Finalist",
+      problemStatement: "SIH26090",
+      project: "AI-Powered Artisan Commerce Platform",
+      tag: "COMPETITION",
+      highlight: "secondary",
+      description: "Developed an AI-powered artisan commerce platform for SIH26090, combining accessible digital commerce with AI-driven product enhancement, multilingual voice cataloguing, and intelligent pricing recommendations.",
+      tags: ["AI / ML", "Image Enhancement", "Voice-Based Cataloguing", "Multilingual AI", "Pricing Recommendations", "Team Coordination"],
+      verification: [
+        {
+          label: "MY CONTRIBUTIONS",
+          items: [
+            "Led team ideation and problem analysis",
+            "Contributed to feature planning and coordination",
+            "Contributed to AI-driven image enhancement",
+            "Worked on multilingual voice-based product cataloguing",
+            "Contributed to ML-based pricing recommendations"
+          ]
+        },
+        {
+          label: "PROJECT OBJECTIVE & PROBLEM",
+          items: [
+            "Problem Statement: SIH26090",
+            "Project: AI-Powered Artisan Commerce Platform (ArtiNova)",
+            "Achievement: SIH Internal Finalist",
+            "Objective: Empowering artisans with accessible digital commerce tools through AI-assisted product enhancement, multilingual accessibility, and intelligent pricing recommendations"
+          ]
+        }
+      ]
     },
     {
-      period: "2023",
-      role: "Hackathon Winner & Tech Lead",
-      organization: "National Innovation Challenge",
-      description: "Built and pitched an edge-computing emergency dispatch routing engine; awarded 1st place among 120 participating teams.",
-      tag: "HONOR"
+      period: "CADET · ONGOING",
+      role: "Naval Wing Cadet",
+      organization: "National Cadet Corps (NCC)",
+      tag: "LEADERSHIP & SERVICE",
+      highlight: "standard",
+      description: "Active NCC Naval Wing cadet participating in training and camps that foster discipline, teamwork, leadership, responsibility, and personal development.",
+      tags: ["NCC Naval Wing", "CATC", "NTAC", "Discipline", "Teamwork"],
+      verification: [
+        {
+          label: "EXPERIENCES & CAMPS",
+          items: [
+            "CATC (Combined Annual Training Camp, Chennai) participation",
+            "NTAC (Naval Technical Attachment Camp, INS Shivaji) participation",
+            "Naval Wing training and cadet activities"
+          ]
+        },
+        {
+          label: "DEVELOPMENT & VALUES",
+          items: [
+            "Discipline and responsibility",
+            "Teamwork and adaptability",
+            "Leadership and participation",
+            "Structured training and practical experiences"
+          ]
+        }
+      ]
     }
   ],
 

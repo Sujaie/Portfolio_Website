@@ -107,7 +107,7 @@ test.describe('Gate 5 Signatures Suite: Work, Skills & Experience', () => {
     await toggleBtn.click();
     await page.waitForTimeout(300);
     await expect(toggleBtn).toHaveAttribute('aria-expanded', 'true');
-    await expect(items.first().locator('text=Architecture Scope')).toBeVisible();
+    await expect(items.first().locator('text=WORK UNDERTAKEN')).toBeVisible();
 
     // Collapse
     await toggleBtn.click();
