@@ -179,6 +179,7 @@ export const portfolioData = {
   ],
 
   contact: {
+    badge: "LET'S TALK CODE, HACKS & OPPORTUNITIES.",
     headline: "LET'S BUILD",
     headlineItalic: "SOMETHING",
     headlineEnd: "INTERESTING.",
