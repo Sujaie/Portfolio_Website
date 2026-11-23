@@ -99,14 +99,14 @@ export default function Experience() {
           <div>
             <div className="flex items-center gap-3 text-xs tracking-mono-lg font-mono font-semibold text-[var(--color-data)] uppercase mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-data)] shadow-[var(--glow-cyan-sm)]" />
-              <span>CAREER & CHRONOLOGY</span>
+              <span>BUILDS, TEAMS & LEARNING.</span>
             </div>
             <h2 className="text-section-heading font-light text-[var(--text-primary)] tracking-section leading-section">
-              EXPERIENCE & <span className="font-serif italic text-[var(--color-accent)]">IMPACT</span>
+              CODE, CADET & <span className="font-serif italic text-[var(--color-accent)]">COMPETITION</span>
             </h2>
           </div>
           <span className="text-sm tracking-mono-md uppercase text-[var(--text-secondary)] pb-2 font-mono">
-            CHRONOLOGICAL TRAJECTORY
+            STILL EARLY. MOVING FAST.
           </span>
         </div>
 
