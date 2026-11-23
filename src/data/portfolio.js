@@ -200,7 +200,7 @@ export const portfolioData = {
 
   experience: [
     {
-      period: "2025 — PRESENT",
+      period: "2026",
       role: "Web Developer Intern",
       organization: "StanVentures",
       tag: "PROFESSIONAL",
