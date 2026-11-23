@@ -202,6 +202,22 @@ export const HOOD_TYPOGRAPHY = [
   { role: 'MONO', family: 'JetBrains Mono', fontClass: 'font-mono' },
 ];
 
+// Helper: Format proof text with gold-accented dot separators
+function formatProofText(text) {
+  if (!text || !text.includes('·')) return text;
+  const parts = text.split('·');
+  return parts.map((part, index) => (
+    <React.Fragment key={index}>
+      {index > 0 && (
+        <span className="text-[var(--color-accent)]/50 mx-1.5 font-sans select-none" aria-hidden="true">
+          ·
+        </span>
+      )}
+      <span>{part.trim()}</span>
+    </React.Fragment>
+  ));
+}
+
 // =========================================================================
 // Helper: 3-Pip Tier Labels
 // Group A: 3 = COMFORTABLE, 2 = BUILDING WITH, 1 = LEARNING
@@ -627,39 +643,39 @@ export default function Skills() {
               {BEYOND_STACK_ROWS.map((row) => (
                 <div
                   key={row.id}
-                  className="beyond-stack-row p-5 sm:p-6 md:p-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-8 hover:bg-white/[0.02] transition-colors duration-[var(--dur-base)]"
+                  className="beyond-stack-row group/row py-3.5 px-5 sm:py-4 sm:px-6 md:py-5 md:px-8 flex flex-col md:flex-row md:items-start gap-3.5 md:gap-8 hover:bg-white/[0.02] transition-colors duration-[var(--dur-base)]"
                 >
                   {/* Left Column (Fixed ~200px) */}
                   <div className="w-full md:w-[200px] shrink-0 flex items-center md:items-start gap-2.5 pt-0.5">
                     <div className="p-1.5 rounded-[var(--radius-sm)] bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 text-[var(--color-accent)] shrink-0">
                       {row.icon === 'compass' && (
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-label="Leading icon">
+                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-label="Leading icon">
                           <circle cx="12" cy="12" r="10" />
                           <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" fillOpacity="0.2" />
                         </svg>
                       )}
                       {row.icon === 'megaphone' && (
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-label="Communicating icon">
+                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-label="Communicating icon">
                           <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
                           <path d="m3 11 18-5v12L3 13v-2z" />
                           <path d="M11.6 16.8 14 21" />
                         </svg>
                       )}
                       {row.icon === 'anchor' && (
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-label="Persevering icon">
+                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-label="Persevering icon">
                           <circle cx="12" cy="5" r="3" />
                           <line x1="12" y1="22" x2="12" y2="8" />
                           <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
                         </svg>
                       )}
                     </div>
-                    <h3 className="font-mono text-sm tracking-mono-md text-[var(--text-primary)] font-semibold uppercase">
+                    <h3 className="font-mono text-[13px] tracking-[0.15em] text-[var(--color-accent)] font-semibold uppercase pt-0.5">
                       {row.title}
                     </h3>
                   </div>
 
-                  {/* Right Column: Chips + Proof Line */}
-                  <div className="flex-1 flex flex-col gap-3">
+                  {/* Right Column: Chips + Quiet Proof Line */}
+                  <div className="flex-1 flex flex-col gap-2.5">
                     <div className="flex flex-wrap items-center gap-2">
                       {row.chips.map((chip) => (
                         <span
@@ -672,12 +688,16 @@ export default function Skills() {
                       ))}
                     </div>
 
-                    <div className="flex flex-wrap items-baseline gap-2 pt-0.5">
-                      <span className="text-3xs font-mono text-[var(--color-accent)] font-semibold tracking-mono-sm uppercase px-1.5 py-0.5 rounded bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20">
-                        PROOF
+                    {/* Proof Line */}
+                    <div className="flex items-baseline gap-2 text-[13px] font-sans font-normal text-[var(--text-secondary)]/80 group-hover/row:text-[var(--text-primary)]/90 transition-colors duration-[var(--dur-base)] leading-relaxed">
+                      <span
+                        className="text-[var(--color-accent)]/60 group-hover/row:text-[var(--color-accent)]/90 transition-colors duration-[var(--dur-base)] select-none text-sm shrink-0"
+                        aria-hidden="true"
+                      >
+                        ↳
                       </span>
-                      <span className="text-xs text-[var(--text-muted)] font-light leading-relaxed">
-                        {row.proof}
+                      <span className="tracking-normal break-words">
+                        {formatProofText(row.proof)}
                       </span>
                     </div>
                   </div>
