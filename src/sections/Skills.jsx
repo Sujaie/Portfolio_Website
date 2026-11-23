@@ -184,22 +184,22 @@ export const CERTIFICATES = [
 // =========================================================================
 export const HOOD_PACKAGES = [
   { name: 'react', version: '^19.3.1', role: 'UI library' },
-  { name: 'vite', version: '^8.3.8', role: 'Build tool and dev server' },
+  { name: 'vite', version: '^8.3.8', role: 'Build tool' },
   { name: 'tailwindcss', version: '^4.3.5', role: 'Styling' },
   { name: 'gsap', version: '^3.15.1', role: 'Animation' },
 ];
 
 export const HOOD_PALETTE = [
-  { name: 'NAVY', hex: '#050810', label: 'Canvas' },
-  { name: 'GOLD', hex: '#f0bd58', label: 'Accent' },
-  { name: 'TEAL', hex: '#35d6df', label: 'Data' },
-  { name: 'TEXT', hex: '#f6f3ee', label: 'Paper' },
+  { name: 'Navy', hex: '#050810' },
+  { name: 'Gold', hex: '#f0bd58' },
+  { name: 'Teal', hex: '#35d6df' },
+  { name: 'Text', hex: '#f6f3ee' },
 ];
 
 export const HOOD_TYPOGRAPHY = [
-  { role: 'HEADINGS', family: 'Inter', fontClass: 'font-sans' },
-  { role: 'ACCENTS', family: 'Bodoni Moda', fontClass: 'font-serif italic' },
-  { role: 'MONO', family: 'JetBrains Mono', fontClass: 'font-mono' },
+  { role: 'headings', family: 'Inter', fontClass: 'font-sans' },
+  { role: 'accents', family: 'Bodoni Moda', fontClass: 'font-serif italic' },
+  { role: 'code', family: 'JetBrains Mono', fontClass: 'font-mono' },
 ];
 
 // Helper: Format proof text with gold-accented dot separators
@@ -304,11 +304,11 @@ export default function Skills() {
               '-=0.3'
             );
 
-            // 5. Under the Hood rows type in / reveal with 80ms stagger
+            // 5. Under the Hood rows subtle reveal (60ms stagger, 8px slide)
             tl.fromTo(
               '.under-hood-row',
-              { opacity: 0, x: -10 },
-              { opacity: 1, x: 0, duration: 0.35, stagger: 0.08 },
+              { opacity: 0, x: -8 },
+              { opacity: 1, x: 0, duration: 0.3, stagger: 0.06 },
               '-=0.2'
             );
 
@@ -762,45 +762,52 @@ export default function Skills() {
           </div>
 
           {/* Terminal Window Card */}
-          <div className="hood-card rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--surface-preview-start)] to-[var(--surface-preview-end)] border border-[var(--border-default)] p-4 sm:p-6 md:p-8 hover:border-[var(--color-data)]/50 hover:shadow-[var(--glow-cyan-sm)] transition-all duration-[var(--dur-base)] shadow-[var(--shadow-card)]">
+          <div className="hood-card rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--surface-preview-start)] to-[var(--surface-preview-end)] border border-[var(--border-default)] p-4 sm:p-5 md:p-6 hover:border-[var(--color-data)]/50 hover:shadow-[var(--glow-cyan-sm)] transition-all duration-[var(--dur-base)] shadow-[var(--shadow-card)]">
             
             {/* Terminal Header Bar */}
-            <div className="flex items-center justify-between border-b border-[var(--border-default)] pb-3 mb-6">
+            <div className="flex items-center justify-between border-b border-white/[0.06] pb-3 mb-5">
               <div className="flex items-center gap-1.5 shrink-0">
                 <span className="w-2.5 h-2.5 rounded-full bg-[var(--window-dot-red)]" />
                 <span className="w-2.5 h-2.5 rounded-full bg-[var(--window-dot-yellow)]" />
                 <span className="w-2.5 h-2.5 rounded-full bg-[var(--window-dot-green)]" />
               </div>
-              <span className="font-mono text-2xs text-[var(--text-secondary)] tracking-mono-md uppercase text-center px-2 truncate font-semibold">
+              <span className="font-mono text-2xs text-[var(--text-secondary)] tracking-mono-md uppercase text-center px-2 truncate font-normal">
                 package.json
               </span>
-              <span className="text-2xs font-mono text-emerald-400 font-semibold tracking-mono-sm uppercase flex items-center gap-1.5 shrink-0">
-                <span className={`w-1.5 h-1.5 rounded-full bg-emerald-400 ${prefersReduced ? '' : 'animate-pulse'} shadow-[0_0_8px_rgba(52,211,153,0.7)]`} />
+              <span className="text-2xs font-mono text-[var(--text-secondary)] tracking-mono-sm uppercase flex items-center gap-1.5 shrink-0">
+                <span
+                  className={`w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] ${
+                    prefersReduced ? '' : 'animate-pulse'
+                  } shadow-[var(--glow-gold-sm)]`}
+                />
                 LIVE
               </span>
             </div>
 
             {/* Two-Column Grid: Left Dependencies, Right Palette & Typography */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
               
               {/* Left Column: Real Installed Packages */}
-              <div className="lg:col-span-7 flex flex-col justify-between h-full space-y-2">
-                <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase tracking-mono-md mb-2 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-data)]" />
-                  <span>CORE RUNTIME & BUILD DEPENDENCIES</span>
-                </div>
+              <div className="md:col-span-7">
+                <h4 className="text-[11px] font-mono uppercase tracking-[0.12em] text-[var(--text-secondary)]/55 mb-2 font-normal">
+                  DEPENDENCIES
+                </h4>
 
                 <div className="divide-y divide-white/[0.04]">
                   {HOOD_PACKAGES.map((pkg) => (
                     <div
                       key={pkg.name}
-                      className="under-hood-row py-3 flex items-center justify-between gap-3 text-xs font-mono hover:bg-white/[0.02] px-2 -mx-2 rounded transition-colors"
+                      className="under-hood-row flex items-center justify-between gap-3 h-8 px-1.5 -mx-1.5 rounded hover:bg-white/[0.02] transition-colors"
                     >
-                      <div className="flex items-baseline gap-2.5 truncate">
-                        <span className="text-[var(--text-primary)] font-medium">{pkg.name}</span>
-                        <span className="text-[var(--text-muted)] text-2xs">{pkg.version}</span>
+                      <div className="flex items-baseline gap-2 truncate">
+                        <span className="text-[14px] font-mono text-[var(--text-primary)] font-normal">
+                          {pkg.name}
+                        </span>
+                        <span className="text-[12px] font-mono text-[var(--text-muted)]">
+                          {pkg.version}
+                        </span>
                       </div>
-                      <span className="text-[var(--color-accent)] text-2xs uppercase tracking-mono-sm shrink-0 font-medium">
+                      <span className="text-[12px] text-[var(--text-secondary)]/70 font-normal shrink-0">
                         {pkg.role}
                       </span>
                     </div>
@@ -808,33 +815,27 @@ export default function Skills() {
                 </div>
               </div>
 
-              {/* Right Column: Mini Panels (Palette & Type) */}
-              <div className="lg:col-span-5 flex flex-col gap-4">
+              {/* Right Column: Palette & Type (No tiles, hairline dividers) */}
+              <div className="md:col-span-5 flex flex-col gap-4">
                 
-                {/* (a) Palette Panel */}
-                <div className="p-4 rounded-[var(--radius-lg)] bg-black/40 border border-[var(--border-subtle)]">
-                  <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase tracking-mono-md mb-3 flex items-center justify-between">
-                    <span className="flex items-center gap-1.5 text-[var(--color-accent)] font-semibold">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />
-                      PALETTE
-                    </span>
-                    <span className="text-3xs font-mono text-[var(--text-muted)]">tokens.css</span>
-                  </div>
-                  <div className="grid grid-cols-4 gap-2">
+                {/* (a) Palette */}
+                <div>
+                  <h4 className="text-[11px] font-mono uppercase tracking-[0.12em] text-[var(--text-secondary)]/55 mb-2.5 font-normal">
+                    PALETTE
+                  </h4>
+                  <div className="flex items-center gap-4 sm:gap-5 flex-wrap">
                     {HOOD_PALETTE.map((swatch) => (
                       <div
                         key={swatch.name}
-                        className="flex flex-col gap-1 items-center p-2 rounded bg-white/[0.02] border border-white/[0.05]"
+                        title={swatch.name}
+                        className="flex items-center gap-2 group/swatch cursor-default"
                       >
                         <span
-                          className="w-full h-6 rounded-[var(--radius-sm)] border border-white/10 shadow-inner"
+                          className="w-5 h-5 rounded-[4px] shrink-0 border border-white/15"
                           style={{ backgroundColor: swatch.hex }}
-                          aria-hidden="true"
+                          aria-label={swatch.name}
                         />
-                        <span className="text-3xs font-mono text-[var(--text-muted)] uppercase tracking-mono-sm mt-0.5">
-                          {swatch.name}
-                        </span>
-                        <span className="text-3xs font-mono text-[var(--text-secondary)] font-medium">
+                        <span className="text-[12px] font-mono text-[var(--text-muted)] group-hover/swatch:text-[var(--text-secondary)] transition-colors">
                           {swatch.hex}
                         </span>
                       </div>
@@ -842,32 +843,32 @@ export default function Skills() {
                   </div>
                 </div>
 
-                {/* (b) Type Panel */}
-                <div className="p-4 rounded-[var(--radius-lg)] bg-black/40 border border-[var(--border-subtle)]">
-                  <div className="text-2xs font-mono text-[var(--text-secondary)] uppercase tracking-mono-md mb-3 flex items-center justify-between">
-                    <span className="flex items-center gap-1.5 text-[var(--color-data)] font-semibold">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-data)]" />
-                      TYPE
-                    </span>
-                    <span className="text-3xs font-mono text-[var(--text-muted)]">Fluid Scales</span>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2">
+                {/* (b) Type (Hairline separator above) */}
+                <div className="border-t border-white/[0.04] pt-3.5 mt-1">
+                  <h4 className="text-[11px] font-mono uppercase tracking-[0.12em] text-[var(--text-secondary)]/55 mb-2 font-normal">
+                    TYPE
+                  </h4>
+                  <div className="space-y-1.5">
                     {HOOD_TYPOGRAPHY.map((type) => (
                       <div
                         key={type.role}
-                        className="flex flex-col gap-1 p-2 rounded bg-white/[0.02] border border-white/[0.05] text-center"
+                        className="flex items-center gap-2.5 min-h-[26px]"
                       >
                         <span
-                          className={`text-xl leading-tight py-0.5 text-[var(--text-primary)] ${type.fontClass}`}
+                          className={`w-5 text-center text-[15px] leading-none text-[var(--text-primary)] shrink-0 select-none ${type.fontClass}`}
+                          aria-hidden="true"
                         >
                           Aa
                         </span>
-                        <span className="text-3xs font-mono text-[var(--color-accent)] uppercase font-semibold">
-                          {type.role}
-                        </span>
-                        <span className="text-3xs font-mono text-[var(--text-muted)] truncate" title={type.family}>
-                          {type.family}
-                        </span>
+                        <div className="text-[13px] leading-tight flex items-center gap-1.5 flex-wrap">
+                          <span className="text-[var(--text-primary)] font-normal">
+                            {type.family}
+                          </span>
+                          <span className="text-[var(--text-muted)] select-none">·</span>
+                          <span className="text-[var(--text-secondary)]/70 font-normal">
+                            {type.role}
+                          </span>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -878,19 +879,19 @@ export default function Skills() {
             </div>
 
             {/* Footer row inside card */}
-            <div className="mt-8 pt-4 border-t border-[var(--border-default)] flex items-center justify-between text-2xs font-mono">
-              <span className="text-[var(--text-muted)] font-mono">
-                CWD: ./Portfolio_vibecoded
+            <div className="mt-5 pt-3.5 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono">
+              <span className="text-[12px] font-mono text-[var(--text-muted)]">
+                ~/sujaie-dev
               </span>
               {/* TODO: add repo URL */}
               <a
                 href="#"
                 onClick={() => sound.playClick()}
                 onMouseEnter={() => sound.playHover()}
-                className="inline-flex items-center gap-1.5 text-[var(--color-accent)] hover:text-white transition-colors uppercase font-medium group"
+                className="inline-flex items-center gap-1 text-[12px] font-mono text-[var(--color-accent)] hover:underline transition-colors font-normal"
               >
-                <span>VIEW SOURCE</span>
-                <span className="group-hover:translate-x-0.5 transition-transform">↗</span>
+                <span>View source</span>
+                <span aria-hidden="true">↗</span>
               </a>
             </div>
 
