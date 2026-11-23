@@ -2,11 +2,10 @@ export const portfolioData = {
   personal: {
     name: "Sujaie",
     title: "Software Engineer",
-    location: "Salem, INDIA",
-    focus: "FULL-STACK DOMAIN",
-    interests: "AI / ML / CREATIVE TECHNOLOGY",
+    basedIn: "Chennai, India",
+    focus: "AI-Powered Apps · Full-Stack",
     monogram: "S / DEV",
-    availability: "OPEN FOR OPPORTUNITIES",
+    availability: "Open to opportunities",
   },
 
   hero: {
@@ -15,9 +14,9 @@ export const portfolioData = {
     headlineAccent: "INTELLIGENT",
     headlinePart2: "APPLICATIONS",
     metadata: [
-      { label: "LOCATION", value: "Salem, INDIA" },
-      { label: "FOCUS", value: "FULL-STACK DOMAIN" },
-      { label: "INTERESTS", value: "AI / ML / CREATIVE TECH" },
+      { label: "STATUS", value: "Open to opportunities" },
+      { label: "FOCUS", value: "AI-Powered Apps · Full-Stack" },
+      { label: "BASED IN", value: "Chennai, India" },
     ]
   },
 
@@ -228,7 +227,6 @@ export const portfolioData = {
     email: "sujaie2008@gmail.com",
     github: "https://github.com/Sujaie",
     linkedin: "https://www.linkedin.com/in/sujaie-babu-a00298383/",
-    instagram: "https://www.instagram.com/anonymous.__.113?evlk=MWo0dWdlODN6a3p6Ng==",
-    location: "Available Worldwide (Remote)"
+    instagram: "https://www.instagram.com/anonymous.__.113?evlk=MWo0dWdlODN6a3p6Ng=="
   }
 };

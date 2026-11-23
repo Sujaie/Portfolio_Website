@@ -115,14 +115,22 @@ export default function Hero() {
 
       {/* BOTTOM: METADATA BLOCKS & SCROLL INDICATOR */}
       <div className="relative z-20 max-w-[var(--content-max-width)] w-full mx-auto flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 pt-6 border-t border-[var(--border-default)]">
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-12 lg:gap-16">
           {hero.metadata.map((item) => (
             <div key={item.label} className="hero-meta-item flex flex-col gap-1">
               <span className="text-2xs tracking-mono-lg text-[var(--text-secondary)] font-mono font-medium uppercase">
                 {item.label}
               </span>
-              <span className="text-sm tracking-wider text-[var(--text-primary)] font-light">
-                {item.value}
+              <span className="text-sm tracking-wider text-[var(--text-primary)] font-light inline-flex items-center gap-2">
+                {item.label === 'STATUS' && (
+                  <span
+                    className={`w-2 h-2 rounded-full bg-emerald-400 shrink-0 ${
+                      prefersReduced ? '' : 'animate-pulse'
+                    } shadow-[0_0_8px_rgba(52,211,153,0.7)]`}
+                    aria-hidden="true"
+                  />
+                )}
+                <span>{item.value}</span>
               </span>
             </div>
           ))}

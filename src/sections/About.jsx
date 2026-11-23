@@ -734,43 +734,6 @@ export default function About() {
               </a>
             </div>
 
-            {/* Left Column Quick-Facts Row */}
-            <div className="mt-4 pt-4 border-t border-[var(--border-default)] grid grid-cols-2 gap-y-3 gap-x-4">
-              <div className="flex flex-col gap-0.5">
-                <span className="text-2xs font-mono tracking-mono-lg text-[var(--text-secondary)] uppercase">
-                  BASED IN
-                </span>
-                <span className="text-xs text-[var(--text-primary)] font-light">
-                  Chennai, India
-                </span>
-              </div>
-              <div className="flex flex-col gap-0.5">
-                <span className="text-2xs font-mono tracking-mono-lg text-[var(--text-secondary)] uppercase">
-                  EDUCATION
-                </span>
-                <span className="text-xs text-[var(--text-primary)] font-light">
-                  B.E. CSE · 2025–29
-                </span>
-              </div>
-              <div className="flex flex-col gap-0.5">
-                <span className="text-2xs font-mono tracking-mono-lg text-[var(--text-secondary)] uppercase">
-                  FOCUS
-                </span>
-                <span className="text-xs text-[var(--text-primary)] font-light">
-                  AI-Powered Apps
-                </span>
-              </div>
-              <div className="flex flex-col gap-0.5">
-                <span className="text-2xs font-mono tracking-mono-lg text-[var(--text-secondary)] uppercase">
-                  STATUS
-                </span>
-                <span className="text-xs text-[var(--text-primary)] font-medium inline-flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
-                  Open to Internships
-                </span>
-              </div>
-            </div>
-
           </div>
         </div>
 

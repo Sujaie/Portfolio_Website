@@ -4,17 +4,34 @@ import { portfolioData } from '../data/portfolio.js';
 import { sound } from '../utils/sound.js';
 import { useReducedMotion } from '../hooks/useReducedMotion.js';
 
+function getISTTime() {
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Kolkata',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  });
+  return `${formatter.format(new Date())} IST`;
+}
+
 export default function Contact() {
   const { contact } = portfolioData;
   const [copied, setCopied] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [sentSuccess, setSentSuccess] = useState(false);
+  const [localTime, setLocalTime] = useState(() => getISTTime());
 
   const emailMagneticRef = useRef(null);
   const modalRef = useRef(null);
   const triggerButtonRef = useRef(null);
   const prefersReduced = useReducedMotion();
+
+  useEffect(() => {
+    const updateTime = () => setLocalTime(getISTTime());
+    const interval = setInterval(updateTime, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Accessibility: Focus trap & focus restoration for modal dialogue
   useEffect(() => {
@@ -140,7 +157,7 @@ export default function Contact() {
         </div>
 
         {/* Oversized Converging Headline */}
-        <div className="space-y-1 mb-16 select-text">
+        <div className="space-y-1 mb-12 select-text">
           <h2 className="text-contact-display font-light leading-hero tracking-hero text-[var(--text-primary)]">
             {contact.headline}
           </h2>
@@ -152,6 +169,17 @@ export default function Contact() {
               {contact.headlineEnd}
             </span>
           </div>
+        </div>
+
+        {/* Live IST Status Line */}
+        <div className="mb-8 inline-flex items-center gap-2.5 text-2xs font-mono tracking-mono-lg text-[var(--text-secondary)] uppercase">
+          <span
+            className={`w-1.5 h-1.5 rounded-full bg-[var(--color-data)] shrink-0 ${
+              prefersReduced ? '' : 'animate-pulse'
+            } shadow-[var(--glow-cyan-sm)]`}
+            aria-hidden="true"
+          />
+          <span>LOCAL TIME · {localTime}</span>
         </div>
 
         {/* Contact Links & Actions */}
