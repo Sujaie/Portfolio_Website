@@ -111,23 +111,23 @@ export default function Experience() {
         </div>
 
         {/* Timeline Container with Continuous Vertical Spine */}
-        <div className="relative pl-6 md:pl-10">
+        <div className="relative pl-5 md:pl-8">
           
-          {/* Base Vertical Timeline Spine Track */}
+          {/* Base Vertical Timeline Spine Track (1px hairline) */}
           <div
-            className="absolute left-[11px] md:left-[19px] top-6 bottom-6 w-[2px] bg-[var(--border-default)]"
+            className="absolute left-[9px] md:left-[15px] top-6 bottom-6 w-[1px] bg-white/[0.08]"
             aria-hidden="true"
           >
-            {/* Luminous Animated Scroll-Drawn Progress Line */}
+            {/* Animated Scroll-Drawn Progress Line (subtle gradient, no harsh glow) */}
             <div
               ref={lineRef}
-              className="w-full bg-gradient-to-b from-[var(--color-accent)] via-[var(--color-data)] to-[var(--color-accent)] shadow-[var(--glow-gold-sm)] transition-[height] duration-150 ease-out"
+              className="w-full bg-gradient-to-b from-[var(--color-accent)]/60 via-[var(--color-data)]/50 to-[var(--color-accent)]/60 transition-[height] duration-150 ease-out"
               style={{ height: '0%' }}
             />
           </div>
 
-          {/* Timeline Items Stack */}
-          <div className="space-y-12 md:space-y-16">
+          {/* Timeline Items Stack (compact vertical rhythm) */}
+          <div className="space-y-5 md:space-y-6">
             {experience.map((item, idx) => {
               const isIgnited = activeNodes[idx];
               const isExpanded = expandedIndex === idx;
@@ -137,146 +137,132 @@ export default function Experience() {
               return (
                 <div
                   key={idx}
-                  className={`timeline-item relative rounded-[var(--radius-xl)] bg-[var(--surface-card-start)]/60 border p-6 md:p-8 transition-all duration-[var(--dur-base)] ease-[var(--ease-standard)] shadow-[var(--shadow-card)] ${
+                  className={`timeline-item relative rounded-[var(--radius-lg)] bg-[var(--surface-card-start)]/40 border py-4 px-4 sm:py-5 sm:px-6 transition-all duration-[var(--dur-base)] ease-[var(--ease-standard)] shadow-[var(--shadow-card)] ${
                     isIgnited
                       ? isPrimary
-                        ? 'border-[var(--color-accent)]/50 shadow-[var(--glow-gold-sm)]'
+                        ? 'border-[var(--color-accent)]/30 hover:border-[var(--color-accent)]/50 shadow-[0_2px_12px_rgba(240,189,88,0.06)]'
                         : isSecondary
-                        ? 'border-[var(--color-data)]/40 shadow-[var(--glow-cyan-sm)]'
-                        : 'border-[var(--border-default)]'
+                        ? 'border-[var(--color-data)]/25 hover:border-[var(--color-data)]/40 shadow-[0_2px_12px_rgba(53,214,223,0.04)]'
+                        : 'border-[var(--border-subtle)] hover:border-white/10'
                       : isPrimary
-                      ? 'border-[var(--color-accent)]/20 opacity-80'
-                      : 'border-[var(--border-subtle)] opacity-70'
+                      ? 'border-[var(--color-accent)]/15 opacity-75'
+                      : 'border-[var(--border-subtle)]/60 opacity-60'
                   }`}
                 >
-                  {/* Milestone Node on the Spine */}
+                  {/* Refined Small Milestone Node on Spine (aligned with content top) */}
                   <div
                     aria-hidden="true"
-                    className={`absolute -left-[30px] md:-left-[37px] top-8 w-4 h-4 rounded-full border-2 transition-all duration-[var(--dur-slow)] flex items-center justify-center ${
+                    className={`absolute -left-[22px] md:-left-[28px] top-6 w-3 h-3 rounded-full border transition-all duration-[var(--dur-slow)] flex items-center justify-center ${
                       isIgnited
                         ? isPrimary
-                          ? 'bg-[var(--color-accent)] border-[var(--color-accent)] shadow-[var(--glow-gold-md)] scale-125'
+                          ? 'bg-[var(--color-accent)] border-[var(--color-accent)] shadow-[0_0_6px_rgba(240,189,88,0.35)]'
                           : isSecondary
-                          ? 'bg-[var(--color-data)] border-[var(--color-data)] shadow-[var(--glow-cyan-sm)] scale-110'
-                          : 'bg-[var(--surface-3)] border-[var(--border-elevated)] scale-100'
-                        : 'bg-[var(--bg-base)] border-[var(--border-elevated)]'
+                          ? 'bg-[var(--color-data)] border-[var(--color-data)] shadow-[0_0_6px_rgba(53,214,223,0.3)]'
+                          : 'bg-[var(--surface-3)] border-white/20'
+                        : 'bg-[var(--bg-base)] border-white/10'
                     }`}
                   >
                     {isIgnited && (
                       <span
-                        className={`w-1.5 h-1.5 rounded-full ${
-                          isPrimary || isSecondary ? 'bg-black' : 'bg-[var(--text-muted)]'
+                        className={`w-1 h-1 rounded-full ${
+                          isPrimary || isSecondary ? 'bg-black' : 'bg-white/40'
                         }`}
                       />
                     )}
                   </div>
 
-                  {/* 3-Column Editorial Grid: Mono Years Left, Role Center, Outcome Right */}
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-baseline">
+                  {/* 3-Column Editorial Grid: Date Left, Role Center, Story & Tags Right */}
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-5 items-start">
                     
-                    {/* Column 1: Monospaced Period & Tag */}
-                    <div className="md:col-span-3 flex flex-row md:flex-col justify-between md:justify-start gap-2">
+                    {/* Column 1: Monospaced Period & Category (subtle metadata) */}
+                    <div className="md:col-span-2 flex flex-row md:flex-col justify-between md:justify-start gap-1 pt-0.5">
                       <span
-                        className={`text-sm font-mono tracking-widest font-semibold ${
+                        className={`text-xs font-mono tracking-wider font-medium ${
                           isIgnited
                             ? isPrimary
-                              ? 'text-[var(--color-accent)]'
+                              ? 'text-[var(--color-accent)]/90'
                               : isSecondary
-                              ? 'text-[var(--color-data)]'
-                              : 'text-[var(--text-primary)]'
-                            : 'text-[var(--text-secondary)]'
+                              ? 'text-[var(--color-data)]/90'
+                              : 'text-[var(--text-secondary)]'
+                            : 'text-[var(--text-muted)]'
                         }`}
                       >
                         {item.period}
                       </span>
-                      <span
-                        className={`text-2xs font-mono tracking-widest uppercase ${
-                          isPrimary
-                            ? 'text-[var(--color-accent)] font-semibold'
-                            : isSecondary
-                            ? 'text-[var(--color-data)] font-semibold'
-                            : 'text-[var(--text-muted)]'
-                        }`}
-                      >
+                      <span className="text-[10px] font-mono tracking-widest text-[var(--text-muted)] uppercase">
                         [{item.tag}]
                       </span>
                     </div>
 
-                    {/* Column 2: Role & Organization */}
+                    {/* Column 2: Role (Primary) & Organization (Secondary) */}
                     <div className="md:col-span-4">
-                      <h3 className="text-xl font-light text-[var(--text-primary)]">
+                      <h3 className="text-base sm:text-[17px] font-normal text-[var(--text-primary)] leading-snug">
                         {item.role}
                       </h3>
-                      <div className="text-sm tracking-wider uppercase text-[var(--color-data)] font-medium mt-1 font-mono">
+                      <div className="text-xs font-mono text-[var(--text-secondary)] uppercase tracking-wider mt-1">
                         {item.organization}
                       </div>
                       {item.achievement && (
-                        <div className="text-xs font-mono text-[var(--color-accent)] font-medium mt-1">
-                          {item.achievement}
+                        <div className="text-[11px] font-mono text-[var(--color-accent)]/90 mt-1 flex items-center gap-1 font-medium">
+                          <span className="w-1 h-1 rounded-full bg-[var(--color-accent)]/80" />
+                          <span>{item.achievement}</span>
                         </div>
                       )}
                     </div>
 
-                    {/* Column 3: Outcome, Tags & Action Toggle */}
-                    <div className="md:col-span-5 flex flex-col justify-between gap-4">
-                      <p className="text-base text-[var(--text-secondary)] font-light leading-relaxed">
+                    {/* Column 3: Concise Story, Limited Tags & Quiet Action Link */}
+                    <div className="md:col-span-6 flex flex-col justify-between gap-2.5">
+                      <p className="text-[13px] sm:text-sm text-[var(--text-secondary)] font-light leading-relaxed">
                         {item.description}
                       </p>
 
-                      {/* Technical / Domain Tags */}
-                      {item.tags && item.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 pt-1">
-                          {item.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="text-3xs font-mono tracking-mono-sm uppercase px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[var(--text-secondary)]"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
+                      <div className="flex flex-wrap items-center justify-between gap-2 pt-0.5">
+                        {/* 2-3 Compact Tags */}
+                        {item.tags && item.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-1.5">
+                            {item.tags.map((tag) => (
+                              <span
+                                key={tag}
+                                className="text-[10px] font-mono tracking-mono-sm px-2 py-0.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-[var(--text-secondary)]/80"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
 
-                      <div className="pt-2">
+                        {/* Quiet Details Toggle */}
                         <button
                           onClick={() => toggleExpand(idx)}
                           aria-expanded={isExpanded}
                           aria-controls={`exp-detail-${idx}`}
-                          className="text-2xs font-mono tracking-mono-sm uppercase text-[var(--color-accent)] hover:text-white transition-colors cursor-pointer flex items-center gap-1.5"
+                          className="text-[11px] font-mono tracking-mono-sm uppercase text-[var(--color-accent)]/80 hover:text-[var(--color-accent)] transition-colors cursor-pointer inline-flex items-center gap-1 ml-auto self-center"
                         >
-                          <span>{isExpanded ? '[-] COLLAPSE VERIFICATION' : '[+] INSPECT VERIFICATION'}</span>
+                          <span>{isExpanded ? '[-] COLLAPSE' : '[+] VIEW DETAILS'}</span>
                         </button>
                       </div>
                     </div>
                   </div>
 
-                  {/* Expandable Key Deliverables & Architecture Verification */}
+                  {/* Expandable Key Deliverables & Case-Study Verification (Compact) */}
                   {isExpanded && item.verification && (
                     <div
                       id={`exp-detail-${idx}`}
-                      className="mt-6 pt-6 border-t border-[var(--border-default)] grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs text-[var(--text-secondary)]"
+                      className="mt-4 pt-4 border-t border-white/[0.06] grid grid-cols-1 md:grid-cols-2 gap-3 font-mono text-xs text-[var(--text-secondary)]"
                     >
                       {item.verification.map((vBlock, vIdx) => (
                         <div
                           key={vIdx}
-                          className="p-4 rounded-[var(--radius-md)] bg-black/40 border border-[var(--border-subtle)] flex flex-col justify-start gap-2.5"
+                          className="p-3 sm:p-3.5 rounded-[var(--radius-md)] bg-black/30 border border-white/[0.06] flex flex-col justify-start gap-2"
                         >
-                          <span
-                            className={`text-2xs uppercase block font-semibold tracking-mono-sm ${
-                              vIdx === 0
-                                ? isPrimary
-                                  ? 'text-[var(--color-accent)]'
-                                  : 'text-[var(--color-data)]'
-                                : 'text-[var(--text-secondary)]'
-                            }`}
-                          >
+                          <span className="text-[10px] uppercase font-mono tracking-[0.12em] text-[var(--text-secondary)]/70 font-medium">
                             {vBlock.label}:
                           </span>
-                          <ul className="space-y-1.5 text-[var(--text-primary)] font-sans text-xs font-light">
+                          <ul className="space-y-1 text-[var(--text-primary)]/90 font-sans text-xs font-light">
                             {vBlock.items.map((bullet, bIdx) => (
                               <li key={bIdx} className="flex items-start gap-2">
                                 <span
-                                  className="text-[var(--color-accent)]/60 text-2xs select-none pt-0.5"
+                                  className="text-[var(--color-accent)]/50 text-[11px] select-none pt-0.5"
                                   aria-hidden="true"
                                 >
                                   ↳

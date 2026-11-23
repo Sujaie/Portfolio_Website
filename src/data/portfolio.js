@@ -205,8 +205,8 @@ export const portfolioData = {
       organization: "StanVentures",
       tag: "PROFESSIONAL",
       highlight: "primary",
-      description: "Developing my personal portfolio website while gaining hands-on experience in frontend development, component-based architecture, and building interactive web experiences.",
-      tags: ["Frontend Development", "React", "UI Components", "Web Development"],
+      description: "Developing my personal portfolio while gaining hands-on experience in frontend development and component-based architecture.",
+      tags: ["React", "Frontend Development"],
       verification: [
         {
           label: "WORK UNDERTAKEN",
@@ -236,8 +236,8 @@ export const portfolioData = {
       project: "AI-Powered Artisan Commerce Platform",
       tag: "COMPETITION",
       highlight: "secondary",
-      description: "Developed an AI-powered artisan commerce platform for SIH26090, combining accessible digital commerce with AI-driven product enhancement, multilingual voice cataloguing, and intelligent pricing recommendations.",
-      tags: ["AI / ML", "Image Enhancement", "Voice-Based Cataloguing", "Multilingual AI", "Pricing Recommendations", "Team Coordination"],
+      description: "Contributed to an AI-powered artisan commerce platform featuring image enhancement, multilingual voice cataloguing, and intelligent pricing recommendations.",
+      tags: ["AI / ML", "SIH Internal Finalist"],
       verification: [
         {
           label: "MY CONTRIBUTIONS",
@@ -266,8 +266,8 @@ export const portfolioData = {
       organization: "National Cadet Corps (NCC)",
       tag: "LEADERSHIP & SERVICE",
       highlight: "standard",
-      description: "Active NCC Naval Wing cadet participating in training and camps that foster discipline, teamwork, leadership, responsibility, and personal development.",
-      tags: ["NCC Naval Wing", "CATC", "NTAC", "Discipline", "Teamwork"],
+      description: "Participating in Naval Wing training and camps that foster discipline, teamwork, leadership, and responsibility.",
+      tags: ["NCC Naval Wing", "CATC", "NTAC"],
       verification: [
         {
           label: "EXPERIENCES & CAMPS",
