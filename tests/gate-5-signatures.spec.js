@@ -31,18 +31,18 @@ test.describe('Gate 5 Signatures Suite: Work, Skills & Experience', () => {
     await tabs.nth(1).click();
     await page.waitForTimeout(400);
     await expect(tabs.nth(1)).toHaveAttribute('aria-selected', 'true');
-    await expect(firstCard.locator('text=SYSTEM TOPOLOGY')).toBeVisible();
+    await expect(firstCard.locator('text=ARCHITECTURE')).toBeVisible();
 
     // Switch to Terminal tab
     await tabs.nth(2).click();
     await page.waitForTimeout(400);
     await expect(tabs.nth(2)).toHaveAttribute('aria-selected', 'true');
 
-    // Run terminal command 'ping'
-    const pingBtn = firstCard.locator('button:has-text("ping")');
-    await pingBtn.click();
-    await page.waitForTimeout(300);
-    await expect(firstCard.locator('text=icmp_seq=1')).toBeVisible();
+    // Run terminal command 'role'
+    const roleBtn = firstCard.locator('button:has-text("role")');
+    await roleBtn.click();
+    await page.waitForTimeout(500);
+    await expect(firstCard.locator('[role="tabpanel"]').locator('text=Led ideation')).toBeVisible();
   });
 
   test('skills-constellation-hover-and-meters', async ({ page }) => {

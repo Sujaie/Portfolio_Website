@@ -122,33 +122,33 @@ export const portfolioData = {
   projects: [
     {
       num: "01",
-      name: "Autonomous Agent Fleet",
-      role: "Lead Systems Architect & Core Developer",
-      description: "Orchestration platform for cooperative LLM swarms executing multi-step research, code verification, and real-time environment synthesis.",
-      impact: "Reduced multi-agent debugging cycles by 40% with streaming trace visualizers and checkpoint rewind.",
-      stack: ["Python", "Ollama", "FastAPI", "React", "Redis"],
-      github: "https://github.com/sujaie/agent-fleet",
-      demo: "https://agent-fleet.demo"
+      name: "ArtiNova",
+      role: "Team Lead & AI Developer",
+      description: "An AI commerce platform that turns a product photo and a few spoken words into a polished, priced online listing, in the artisan's own language.",
+      impact: "Led the team from problem statement to a working app that reached the internal finals of SIH 2026, and contributed to image enhancement, voice cataloguing and pricing features.",
+      stack: ["Flutter", "FastAPI", "PostgreSQL", "Ollama"],
+      github: "",
+      demo: ""
     },
     {
       num: "02",
-      name: "PulseStream Telemetry Engine",
-      role: "Full-Stack Engineer",
-      description: "High-performance timeseries event ingestion architecture delivering sub-second anomaly detection graphs for mission-critical services.",
-      impact: "Processes over 5M events per second with instant live charting and edge alerting.",
-      stack: ["Go", "Kafka", "TimescaleDB", "React", "Tailwind"],
-      github: "https://github.com/sujaie/pulsestream",
-      demo: "https://pulsestream.demo"
+      name: "Fashion Sizing API",
+      role: "Team Project · MakeAthon 2026",
+      description: "A two-model API that extracts body measurements from photos, maps them to brand-specific size charts, and uses a review classifier to improve fit recommendations.",
+      impact: "An API combining body measurement extraction with brand size-chart mapping and a review-based fit classifier to recommend accurate clothing sizes.",
+      stack: ["Python", "PyTorch", "HuggingFace", "API"],
+      github: "",
+      demo: ""
     },
     {
       num: "03",
-      name: "Krypton WebAssembly IDE",
-      role: "Frontend Architect",
-      description: "In-browser lightweight C/C++ compiler and runtime debugger powered by WebAssembly, Monaco Editor, and virtualized memory visualization.",
-      impact: "Zero-install compilation sandbox used by over 10,000 students and hobbyists.",
-      stack: ["TypeScript", "WebAssembly", "Clang/LLVM", "React"],
-      github: "https://github.com/sujaie/krypton-ide",
-      demo: "https://krypton-ide.demo"
+      name: "DevAtlas",
+      role: "Solo Builder · In Progress",
+      description: "A React-based tool that helps developers find their way around unfamiliar code repositories faster.",
+      impact: "Designing and building the project independently, from the interface to the navigation logic.",
+      stack: ["React", "JavaScript"],
+      github: "",
+      demo: ""
     }
   ],
 
