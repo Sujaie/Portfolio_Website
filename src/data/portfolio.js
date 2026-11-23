@@ -32,53 +32,91 @@ export const portfolioData = {
       "I'm looking for internships and projects where I can contribute, learn from experienced engineers, and keep building."
     ],
     highlightsTitle: "interest in",
-    highlights: ["AI-POWERED APPS", "FULL-STACK", "Deep Learning & LLMs"]
+    highlights: ["AI-POWERED APPS", "FULL-STACK", "TEAM LEADERSHIP"]
   },
 
   showcase: [
     {
-      id: "ai-synth",
-      category: "AI & MACHINE LEARNING",
-      title: "NeuralCanvas Studio",
-      tagline: "Multimodal Generative Workspace",
-      description: "Low-latency streaming platform for vision-language generation with local-first inference pipelines and interactive canvas manipulation.",
-      metrics: "60 FPS Canvas • <180ms Latency",
-      tags: ["Python", "FastAPI", "WebSockets", "PyTorch", "React"],
-      previewType: "neural_app",
-      links: { github: "https://github.com/sujaie", demo: "#" }
+      id: "builder",
+      category: "BUILDER",
+      filename: "artinova.pipeline",
+      status: "● SIH 2026 · INTERNAL FINALIST",
+      title: "ArtiNova",
+      subtitle: "AI Commerce Platform for Artisans",
+      description: "Turns a product photo and a few spoken words into a polished, priced online listing, in the artisan's own language. Built for SIH 2026, where we made it to the internal finals.",
+      stats: [
+        { label: "ROLE", value: "Team Lead", isNumeric: false },
+        { label: "AI FEATURES", value: 5, isNumeric: true },
+        { label: "STATUS", value: "Working App", isNumeric: false }
+      ],
+      featureChips: [
+        "Image Enhancement",
+        "Multilingual Voice Cataloguing",
+        "Smart Cataloguing",
+        "Price Recommendations",
+        "Market Recommendations"
+      ],
+      tags: ["Flutter", "FastAPI", "PostgreSQL", "Ollama"],
+      links: {
+        primary: { label: "VIEW PROJECT →", href: "#work" },
+        // TODO: add repo URL
+        secondary: { label: "GITHUB ↗", href: "#" }
+      }
     },
     {
-      id: "hyper-cloud",
-      category: "WEB APPLICATIONS",
-      title: "OmniCompute Orchestrator",
-      tagline: "Real-time Distributed Task Manager",
-      description: "High-throughput workload scheduling dashboard handling container clusters, dynamic telemetry visualizations, and micro-benchmarking.",
-      metrics: "100k+ RPS Monitored • Sub-ms Jitter",
-      tags: ["React 19", "Tailwind CSS", "Go", "gRPC", "Docker"],
-      previewType: "dashboard_app",
-      links: { github: "https://github.com/sujaie", demo: "#" }
+      id: "leader",
+      category: "LEADER",
+      filename: "leadership.log",
+      status: "● ACTIVE",
+      title: "Leading in Code and in Uniform",
+      subtitle: "SIH Team · NCC Navy Wing",
+      description: "I led ideation, problem analysis and planning for my SIH team, and serve as a Leading Cadet in the NCC Navy wing, with camps at INS Shivaji, Mumbai and CATC, Chennai.",
+      stats: [
+        { label: "NCC RANK", value: "Leading Cadet", isNumeric: false },
+        { label: "CAMPS", value: "NTAC + CATC", isNumeric: false },
+        { label: "TEAM ROLE", value: "SIH Lead", isNumeric: false }
+      ],
+      tags: ["Teamwork", "Discipline", "Planning", "Public Speaking"],
+      links: {
+        primary: { label: "SEE EXPERIENCE →", href: "#experience" }
+      }
     },
     {
-      id: "vector-flow",
-      category: "DEVELOPER TOOLS",
-      title: "AuraDB Vector Explorer",
-      tagline: "High-Dimensional Spatial Debugger",
-      description: "Visual embedding cluster inspector providing interactive 3D t-SNE / UMAP projections, semantic cosine distance charts, and query profiling.",
-      metrics: "768-Dim Spatial Index • Zero Latency",
-      tags: ["TypeScript", "WebGL", "Three.js", "Anime.js", "PostgreSQL"],
-      previewType: "vector_app",
-      links: { github: "https://github.com/sujaie", demo: "#" }
+      id: "learner",
+      category: "LEARNER",
+      filename: "learning.log",
+      status: "● IN PROGRESS",
+      title: "Always Building the Next Thing",
+      subtitle: "B.E. CSE · SVCE Chennai · 2025–29",
+      description: "Certified in C (Infosys Springboard), MongoDB and Python fundamentals. Right now I'm building DevAtlas, a React-based tool that helps developers navigate and understand unfamiliar code repositories faster.",
+      stats: [
+        { label: "SEMESTER", value: "4 of 8", isNumeric: false },
+        { label: "CERTIFICATES", value: 3, isNumeric: true },
+        { label: "BUILDING NOW", value: "DevAtlas", isNumeric: false }
+      ],
+      tags: ["Data Structures", "DBMS", "OOP", "Data Mining"],
+      links: {
+        // TODO: add certificates URL
+        primary: { label: "VIEW CERTIFICATES →", href: "#" }
+      }
     },
     {
-      id: "creative-core",
-      category: "CREATIVE DEVELOPMENT",
-      title: "Vesper Sound Architecture",
-      tagline: "Algorithmic Audio-Reactive Synthesis",
-      description: "Real-time browser-based WebAudio synthesiser coupled with dynamic GLSL shaders generating evolving generative compositions.",
-      metrics: "48kHz Stereo DSP • WebGL Shaders",
-      tags: ["WebAudio API", "GLSL", "React", "Anime.js"],
-      previewType: "audio_app",
-      links: { github: "https://github.com/sujaie", demo: "#" }
+      id: "beyond-code",
+      category: "BEYOND CODE",
+      filename: "off-duty.log",
+      status: "● ONLINE",
+      title: "Not Just a Screen Person",
+      subtitle: "Speaking · Events · Running",
+      description: "I enjoy speaking on stage, organising and hosting cultural events, and endurance running, with marathon-event distances up to 10 km.",
+      stats: [
+        { label: "STAGE", value: "Speaker & Host", isNumeric: false },
+        { label: "EVENTS", value: "Cultural Organiser", isNumeric: false },
+        { label: "ENDURANCE", value: "Up to 10 km", isNumeric: false }
+      ],
+      tags: ["Public Speaking", "Event Management", "Running"],
+      links: {
+        primary: { label: "LET'S TALK →", href: "#contact" }
+      }
     }
   ],
 
