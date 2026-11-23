@@ -182,10 +182,10 @@ export const portfolioData = {
     headline: "LET'S BUILD",
     headlineItalic: "SOMETHING",
     headlineEnd: "INTERESTING.",
-    email: "sujaie.dev@gmail.com",
-    github: "https://github.com/sujaie",
-    linkedin: "https://linkedin.com/in/sujaie",
-    twitter: "https://twitter.com/sujaie",
+    email: "sujaie2008@gmail.com",
+    github: "https://github.com/Sujaie",
+    linkedin: "https://www.linkedin.com/in/sujaie-babu-a00298383/",
+    instagram: "https://www.instagram.com/anonymous.__.113?evlk=MWo0dWdlODN6a3p6Ng==",
     location: "Available Worldwide (Remote)"
   }
 };

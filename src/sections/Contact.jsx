@@ -234,15 +234,15 @@ export default function Contact() {
               LINKEDIN ↗
             </a>
             <a
-              href={contact.twitter}
+              href={contact.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Twitter profile (opens in new tab)"
+              aria-label="Instagram profile (opens in new tab)"
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
               className="text-[var(--text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)]"
             >
-              TWITTER ↗
+              INSTAGRAM ↗
             </a>
           </div>
 
