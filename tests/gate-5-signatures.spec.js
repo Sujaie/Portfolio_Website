@@ -77,7 +77,7 @@ test.describe('Gate 5 Signatures Suite: Work, Skills & Experience', () => {
     // Check Exploring row at bottom
     const exploringRow = page.locator('.skills-exploring-row');
     await expect(exploringRow).toBeVisible();
-    await expect(exploringRow.locator('text=WebGPU Computes')).toBeVisible();
+    await expect(exploringRow.locator('text=RAG & VECTOR SEARCH')).toBeVisible();
   });
 
   test('experience-trajectory-milestone-nodes-and-accordion', async ({ page }) => {

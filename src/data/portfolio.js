@@ -153,45 +153,48 @@ export const portfolioData = {
   ],
 
   skills: {
-    "PROGRAMMING": [
-      { name: "TypeScript / JavaScript", level: "Advanced" },
-      { name: "Python", level: "Advanced" },
-      { name: "Go", level: "Proficient" },
-      { name: "C++ / Rust", level: "Familiar" },
-      { name: "SQL", level: "Advanced" },
+    "LANGUAGES": [
+      { name: "Python", pips: 3, tier: "COMFORTABLE" },
+      { name: "JavaScript", pips: 3, tier: "COMFORTABLE" },
+      { name: "SQL", pips: 3, tier: "COMFORTABLE" },
+      { name: "C", pips: 2, tier: "BUILDING WITH" },
+      { name: "C++", pips: 2, tier: "BUILDING WITH" }
     ],
-    "FRONTEND DEVELOPMENT": [
-      { name: "React 19 & Next.js", level: "Advanced" },
-      { name: "Tailwind CSS & PostCSS", level: "Advanced" },
-      { name: "Anime.js & Motion Graphics", level: "Advanced" },
-      { name: "Web Audio & WebGL", level: "Proficient" },
-      { name: "Vite & Modern Toolchains", level: "Advanced" },
+    "FRONTEND & MOBILE": [
+      { name: "HTML & CSS", pips: 3, tier: "COMFORTABLE" },
+      { name: "Tailwind CSS", pips: 3, tier: "COMFORTABLE" },
+      { name: "React.js", pips: 3, tier: "COMFORTABLE" },
+      { name: "Flutter", pips: 2, tier: "BUILDING WITH" },
+      { name: "Dart", pips: 2, tier: "BUILDING WITH" }
     ],
-    "BACKEND DEVELOPMENT": [
-      { name: "Node.js & Express", level: "Advanced" },
-      { name: "FastAPI & Flask", level: "Advanced" },
-      { name: "REST & gRPC / WebSockets", level: "Advanced" },
-      { name: "Microservices Architecture", level: "Proficient" },
-      { name: "Distributed Systems", level: "Proficient" },
+    "BACKEND & APIs": [
+      { name: "FastAPI", pips: 2, tier: "BUILDING WITH" },
+      { name: "REST APIs", pips: 2, tier: "BUILDING WITH" }
     ],
     "AI / MACHINE LEARNING": [
-      { name: "PyTorch & Transformers", level: "Proficient" },
-      { name: "Local LLMs (Ollama, vLLM)", level: "Advanced" },
-      { name: "Vector Search & RAG (pgvector, Qdrant)", level: "Advanced" },
-      { name: "Multimodal AI & Diffusion", level: "Proficient" },
-      { name: "Model Quantization & Routing", level: "Proficient" },
+      { name: "NumPy & Pandas", pips: 3, tier: "HANDS-ON" },
+      { name: "HuggingFace", pips: 2, tier: "PROJECT-USED" },
+      { name: "PyTorch", pips: 2, tier: "PROJECT-USED" },
+      { name: "Ollama / Local LLMs", pips: 2, tier: "PROJECT-USED" },
+      { name: "LiveKit", pips: 1, tier: "EXPLORING" }
     ],
-    "DATABASES & CACHE": [
-      { name: "PostgreSQL & pgvector", level: "Advanced" },
-      { name: "Redis & Pub/Sub", level: "Advanced" },
-      { name: "SQLite", level: "Advanced" },
-      { name: "MongoDB", level: "Proficient" },
+    "DATABASES": [
+      { name: "MySQL", pips: 3, tier: "HANDS-ON" },
+      { name: "PostgreSQL", pips: 2, tier: "PROJECT-USED" },
+      { name: "MongoDB", pips: 1, tier: "EXPLORING" }
     ],
-    "DEVELOPER TOOLS": [
-      { name: "Docker & Containerization", level: "Advanced" },
-      { name: "Git & GitHub CI/CD", level: "Advanced" },
-      { name: "Linux / Shell Scripting", level: "Advanced" },
-      { name: "Vite, UV & PNPM", level: "Advanced" },
+    "CS FOUNDATIONS": [
+      { name: "OOP", pips: 3, tier: "SOLID" },
+      { name: "DBMS", pips: 3, tier: "SOLID" },
+      { name: "File Handling", pips: 3, tier: "SOLID" },
+      { name: "Data Structures", pips: 2, tier: "GROWING" },
+      { name: "Data Mining", pips: 2, tier: "GROWING" },
+      { name: "8086 Microprocessors", pips: 2, tier: "GROWING" }
+    ],
+    "TOOLS & DESIGN": [
+      { name: "Git", pips: 1, tier: "BEGINNER" },
+      { name: "GitHub", pips: 1, tier: "BEGINNER" },
+      { name: "Figma", pips: 1, tier: "BEGINNER" }
     ]
   },
 
