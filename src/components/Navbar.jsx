@@ -229,10 +229,10 @@ export default function Navbar() {
           aria-label="Sujaie Developer Portfolio Home"
           onClick={(e) => scrollToSection(e, '#home')}
           onMouseEnter={() => sound.playHover()}
-          className="flex items-center gap-3 text-caption tracking-mono-lg font-mono uppercase font-semibold text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)] cursor-pointer"
+          className="flex items-center gap-2.5 text-caption tracking-mono-sm font-mono font-semibold text-[var(--text-primary)] hover:text-[var(--color-accent)] transition-colors duration-[var(--dur-base)] cursor-pointer"
         >
           <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] shadow-[var(--glow-gold-sm)]" />
-          <span>SUJAIE / DEV</span>
+          <span>Sujaie B</span>
         </a>
 
         {/* Desktop Navigation with Single Sliding Indicator */}

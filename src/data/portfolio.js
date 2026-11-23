@@ -4,7 +4,7 @@ export const portfolioData = {
     title: "Software Engineer",
     basedIn: "Chennai, India",
     focus: "AI-Powered Apps · Full-Stack",
-    monogram: "S / DEV",
+    monogram: "Sujaie B",
     availability: "Open to opportunities",
   },
 
