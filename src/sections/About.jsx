@@ -14,7 +14,7 @@ export const ABOUT_TABS = [
     label: 'BUILDER',
     terminal: {
       filename: 'artinova.pipeline',
-      status: '● SIH 2026 · INTERNAL FINALIST',
+      status: 'SIH 2026 · INTERNAL FINALIST',
     },
     stats: [
       { label: 'ROLE', value: 'Team Lead', isNumeric: false },
@@ -44,7 +44,7 @@ export const ABOUT_TABS = [
     label: 'LEADER',
     terminal: {
       filename: 'leadership.log',
-      status: '● ACTIVE',
+      status: 'ACTIVE',
     },
     stats: [
       { label: 'NCC RANK', value: 'Leading Cadet', isNumeric: false },
@@ -65,7 +65,7 @@ export const ABOUT_TABS = [
     label: 'LEARNER',
     terminal: {
       filename: 'learning.log',
-      status: '● IN PROGRESS',
+      status: 'IN PROGRESS',
     },
     stats: [
       { label: 'SEMESTER', value: '4 of 8', isNumeric: false },
@@ -87,7 +87,7 @@ export const ABOUT_TABS = [
     label: 'BEYOND CODE',
     terminal: {
       filename: 'off-duty.log',
-      status: '● ONLINE',
+      status: 'ONLINE',
     },
     stats: [
       { label: 'STAGE', value: 'Speaker & Host', isNumeric: false },
@@ -165,67 +165,118 @@ function PipelineVisual({ prefersReduced }) {
 }
 
 /* =========================================================================
-   MINI VISUAL 2: Two-Lane Timeline (Tab 2: LEADER)
-   CODE lane: SIH 2026
-   UNIFORM lane: NTAC at INS Shivaji (Mumbai), CATC (Chennai)
-   Dots appear sequentially and pulse softly.
+   MINI VISUAL 2: Two-Lane Visual (Tab 2: LEADER)
+   Row 1: CODE | "SIH 2026 · Team Lead"
+   Row 2: UNIFORM | "NTAC · INS Shivaji", "CATC · Chennai"
+   Labels fixed 88px width, aligned left. 1px line behind pills.
+   Pills have solid background matching card so line never cuts through text.
+   Rows flex-wrap on narrow screens with no clipping or fixed height.
    ========================================================================= */
 function TimelineVisual({ prefersReduced }) {
-  const [revealed, setRevealed] = useState(prefersReduced ? [true, true, true] : [false, false, false]);
+  const [pillStates, setPillStates] = useState(
+    prefersReduced
+      ? [{ visible: true, pulse: false }, { visible: true, pulse: false }, { visible: true, pulse: false }]
+      : [{ visible: false, pulse: false }, { visible: false, pulse: false }, { visible: false, pulse: false }]
+  );
 
   useEffect(() => {
     if (prefersReduced) return;
-    const t1 = setTimeout(() => setRevealed([true, false, false]), 100);
-    const t2 = setTimeout(() => setRevealed([true, true, false]), 350);
-    const t3 = setTimeout(() => setRevealed([true, true, true]), 600);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-    };
+
+    const timers = [
+      setTimeout(() => {
+        setPillStates((prev) => [{ visible: true, pulse: true }, prev[1], prev[2]]);
+      }, 50),
+      setTimeout(() => {
+        setPillStates((prev) => [prev[0], { visible: true, pulse: true }, prev[2]]);
+      }, 200),
+      setTimeout(() => {
+        setPillStates((prev) => [prev[0], prev[1], { visible: true, pulse: true }]);
+      }, 350),
+      setTimeout(() => {
+        setPillStates([
+          { visible: true, pulse: false },
+          { visible: true, pulse: false },
+          { visible: true, pulse: false },
+        ]);
+      }, 1000),
+    ];
+
+    return () => timers.forEach(clearTimeout);
   }, [prefersReduced]);
 
   return (
-    <div className="w-full py-2.5 px-3 rounded-[var(--radius-md)] bg-black/40 border border-[var(--border-subtle)] my-3 space-y-2.5">
-      {/* CODE Lane */}
-      <div className="flex items-center gap-3">
-        <span className="text-2xs font-mono font-semibold px-2 py-0.5 rounded bg-[var(--color-data)]/10 border border-[var(--color-data)]/30 text-[var(--color-data)] w-16 text-center uppercase tracking-wider shrink-0">
-          CODE
-        </span>
-        <div className="relative flex-1 h-[1px] bg-[var(--border-default)] flex items-center">
-          <div
-            className={`flex items-center gap-1.5 bg-[var(--surface-2)] border border-[var(--color-data)]/40 px-2 py-0.5 rounded-full text-2xs font-mono text-white transition-all duration-300 ml-4 sm:ml-8 ${
-              revealed[0] ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
-            }`}
-          >
-            <span className={`w-1.5 h-1.5 rounded-full bg-[var(--color-data)] ${prefersReduced ? '' : 'animate-ping'}`} />
-            <span>SIH 2026 · Team Lead</span>
-          </div>
+    <div className="w-full py-[14px] px-3 sm:px-4 rounded-[var(--radius-md)] bg-black/40 border border-[var(--border-subtle)] my-2 flex flex-col gap-[10px]">
+      {/* Row 1: CODE */}
+      <div className="relative flex flex-wrap items-center gap-3 min-h-[44px]">
+        {/* 1px dim line running behind row pills */}
+        <div
+          aria-hidden="true"
+          className="absolute left-[88px] right-0 top-[22px] -translate-y-1/2 h-[1px] bg-[var(--border-default)] pointer-events-none z-0"
+        />
+
+        {/* Label: Fixed width 88px, text-left */}
+        <div className="relative z-10 w-[88px] shrink-0 text-left">
+          <span className="inline-block w-full px-2.5 py-1.5 rounded-[var(--radius-sm)] bg-[var(--surface-2)] border border-[var(--color-data)]/30 text-[var(--color-data)] text-2xs font-mono font-semibold uppercase tracking-wider text-left">
+            CODE
+          </span>
+        </div>
+
+        {/* Pill: SIH 2026 · Team Lead */}
+        <div
+          className={`relative z-10 whitespace-nowrap py-1.5 px-3 rounded-full bg-[var(--surface-2)] border border-[var(--color-data)]/40 text-2xs font-mono text-[var(--text-primary)] transition-all duration-300 flex items-center gap-2 ${
+            pillStates[0].visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[6px]'
+          } ${
+            pillStates[0].pulse && !prefersReduced
+              ? 'shadow-[0_0_12px_rgba(53,214,223,0.4)] scale-[1.02] border-[var(--color-data)]'
+              : 'scale-100'
+          }`}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-data)] shrink-0" />
+          <span>SIH 2026 · Team Lead</span>
         </div>
       </div>
 
-      {/* UNIFORM Lane */}
-      <div className="flex items-center gap-3">
-        <span className="text-2xs font-mono font-semibold px-2 py-0.5 rounded bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30 text-[var(--color-accent)] w-16 text-center uppercase tracking-wider shrink-0">
-          UNIFORM
-        </span>
-        <div className="relative flex-1 h-[1px] bg-[var(--border-default)] flex items-center justify-between sm:justify-start sm:gap-4 overflow-hidden">
-          <div
-            className={`flex items-center gap-1.5 bg-[var(--surface-2)] border border-[var(--color-accent)]/40 px-2 py-0.5 rounded-full text-2xs font-mono text-white transition-all duration-300 ${
-              revealed[1] ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
-            }`}
-          >
-            <span className={`w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] ${prefersReduced ? '' : 'animate-pulse'}`} />
-            <span className="truncate max-w-[120px] sm:max-w-none">NTAC · INS Shivaji</span>
-          </div>
-          <div
-            className={`flex items-center gap-1.5 bg-[var(--surface-2)] border border-[var(--color-accent)]/40 px-2 py-0.5 rounded-full text-2xs font-mono text-white transition-all duration-300 ${
-              revealed[2] ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
-            }`}
-          >
-            <span className={`w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] ${prefersReduced ? '' : 'animate-pulse'}`} />
-            <span>CATC · Chennai</span>
-          </div>
+      {/* Row 2: UNIFORM */}
+      <div className="relative flex flex-wrap items-center gap-3 min-h-[44px]">
+        {/* 1px dim line running behind row pills */}
+        <div
+          aria-hidden="true"
+          className="absolute left-[88px] right-0 top-[22px] -translate-y-1/2 h-[1px] bg-[var(--border-default)] pointer-events-none z-0"
+        />
+
+        {/* Label: Fixed width 88px, text-left */}
+        <div className="relative z-10 w-[88px] shrink-0 text-left">
+          <span className="inline-block w-full px-2.5 py-1.5 rounded-[var(--radius-sm)] bg-[var(--surface-2)] border border-[var(--color-accent)]/30 text-[var(--color-accent)] text-2xs font-mono font-semibold uppercase tracking-wider text-left">
+            UNIFORM
+          </span>
+        </div>
+
+        {/* Pill 1: NTAC · INS Shivaji */}
+        <div
+          className={`relative z-10 whitespace-nowrap py-1.5 px-3 rounded-full bg-[var(--surface-2)] border border-[var(--color-accent)]/40 text-2xs font-mono text-[var(--text-primary)] transition-all duration-300 flex items-center gap-2 ${
+            pillStates[1].visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[6px]'
+          } ${
+            pillStates[1].pulse && !prefersReduced
+              ? 'shadow-[0_0_12px_rgba(240,189,88,0.4)] scale-[1.02] border-[var(--color-accent)]'
+              : 'scale-100'
+          }`}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shrink-0" />
+          <span>NTAC · INS Shivaji</span>
+        </div>
+
+        {/* Pill 2: CATC · Chennai */}
+        <div
+          className={`relative z-10 whitespace-nowrap py-1.5 px-3 rounded-full bg-[var(--surface-2)] border border-[var(--color-accent)]/40 text-2xs font-mono text-[var(--text-primary)] transition-all duration-300 flex items-center gap-2 ${
+            pillStates[2].visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[6px]'
+          } ${
+            pillStates[2].pulse && !prefersReduced
+              ? 'shadow-[0_0_12px_rgba(240,189,88,0.4)] scale-[1.02] border-[var(--color-accent)]'
+              : 'scale-100'
+          }`}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shrink-0" />
+          <span>CATC · Chennai</span>
         </div>
       </div>
     </div>
@@ -828,8 +879,10 @@ export default function About() {
                   </div>
 
                   <span className="text-2xs text-[var(--color-status-success)] font-mono flex items-center gap-1.5 shrink-0">
-                    <span className={`w-1.5 h-1.5 rounded-full bg-[var(--color-status-success)] ${prefersReduced ? '' : 'animate-ping'}`} />
-                    <span className="truncate max-w-[120px] sm:max-w-none">{currentTab.terminal.status}</span>
+                    <span className={`w-1.5 h-1.5 rounded-full bg-[var(--color-status-success)] ${prefersReduced ? '' : 'animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.7)]'}`} />
+                    <span className="truncate max-w-[140px] sm:max-w-none">
+                      {currentTab.terminal.status.replace(/^[●•]\s*/, '')}
+                    </span>
                   </span>
                 </div>
 
